@@ -1,36 +1,9 @@
 <?php
 include './cms/require.php';
-require_once './cms/core/database.php';
-require_once './cms/utils/validator.php';
-
-class Login extends Database
-{
-    public function Login($data): null|string
-    {
-        $username = trim($data['username']);
-        $password = (string) $data['password'];
-
-        $validationError = Validator::LoginForm($username, $password);
-        if ($validationError) {
-            return Util::Print($validationError);
-        }
-
-        $this->prepare('SELECT * FROM `users` WHERE `username` = ? LIMIT 1');
-        $this->statement->execute([$username]);
-        $user = $this->statement->fetch();
-
-        $response = $user && password_verify($password, $user->password) ? $user : false;
-        if ($response) {
-            Session::CreateUserSession($response);
-            return Util::Print('Success');
-        } else {
-            return Util::Print('Failed');
-        }
-    }
-}
+include './cms/controllers/auth.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
-    $response = (new Login())->Login($_POST);
+    $response = (new Auth())->Login($_POST);
 }
 
 Util::Header();
