@@ -15,6 +15,7 @@ class Login extends Database
 
         $response = $user && password_verify($password, $user->password) ? $user : false;
         if ($response) {
+            Session::CreateUserSession($response);
             return 'Success';
         } else {
             return 'Failed';
@@ -28,6 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 
 Util::Header();
 Util::Navbar();
+
+if (Session::Get('login')) {
+    echo 'You are logged in as '.Session::Get('username');
+} else {
+    echo 'You are not logged in';
+}
 
 ?>
 
@@ -57,6 +64,7 @@ Util::Navbar();
                             value="submit">
                             Login
                         </button>
+                        <a href="<?= (BASE_PATH); ?>logout.php" class="btn btn-outline-primary btn-block">Logout</a>
                     </form>
                 </div>
             </div>
