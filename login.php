@@ -1,6 +1,7 @@
 <?php
 include './cms/require.php';
-require_once __DIR__.'/cms/core/database.php';
+require_once './cms/core/database.php';
+require_once './cms/utils/validator.php';
 
 class Login extends Database
 {
@@ -8,6 +9,11 @@ class Login extends Database
     {
         $username = trim($data['username']);
         $password = (string) $data['password'];
+
+        $validationError = Validator::LoginForm($username, $password);
+        if ($validationError) {
+            return Util::Print($validationError);
+        }
 
         $this->prepare('SELECT * FROM `users` WHERE `username` = ? LIMIT 1');
         $this->statement->execute([$username]);
