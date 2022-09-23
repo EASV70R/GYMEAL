@@ -16,9 +16,9 @@ class Login extends Database
         $response = $user && password_verify($password, $user->password) ? $user : false;
         if ($response) {
             Session::CreateUserSession($response);
-            return 'Success';
+            return Util::Print('Success');
         } else {
-            return 'Failed';
+            return Util::Print('Failed');
         }
     }
 }
@@ -31,9 +31,9 @@ Util::Header();
 Util::Navbar();
 
 if (Session::Get('login')) {
-    echo 'You are logged in as '.Session::Get('username');
+    echo Util::Print('You are logged in as '.Session::Get('username'));
 } else {
-    echo 'You are not logged in';
+    echo Util::Print('You are not logged in');
 }
 
 ?>
@@ -43,7 +43,7 @@ if (Session::Get('login')) {
         <div class="col-12 mt-3 mb-2">
             <?php if (isset($response)) : ?>
             <div class="alert alert-primary" role="alert">
-                <?= $response; ?>
+                <?= Util::Print($response); ?>
             </div>
             <?php endif; ?>
         </div>

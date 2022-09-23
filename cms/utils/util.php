@@ -17,4 +17,15 @@ class Util
     {
         include(SITE_ROOT.'/includes/footer.inc.php');
     }
+    
+    public static function Redirect(string $location): void
+    {
+        header("location: ${BASE_PATH}.${location}");
+        exit;
+    }
+
+    public static function Print(string $string): string
+    {
+        return htmlspecialchars($string);
+    }
 }
