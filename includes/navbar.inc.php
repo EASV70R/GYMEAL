@@ -16,6 +16,14 @@
                 <a href="<?= (BASE_PATH); ?>index.php" class="nav-item nav-link">Home</a>
                 <a href="<?= (BASE_PATH); ?>about.php" class="nav-item nav-link">About Us</a>
             </div>
+            <div class="nav-item dropdown center">
+                <a class="btn-sm-square bg-white rounded-circle ms-3" href="">
+                    <small class="fa fa-user text-body"></small>
+                </a>
+                <div class="dropdown-menu dropdown-menu-left">
+                    <a href="<?= (BASE_PATH); ?>login.php" class="dropdown-item">Login</a>
+                </div>
+            </div>
         </div>
     </nav>
 </div>
