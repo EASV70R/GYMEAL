@@ -1,10 +1,14 @@
+<?php
+$companyData = new Company;
+?>
+
 <div class="container-fluid bg-dark footer mt-5 pt-5">
     <div class="container py-5">
         <div class="row g-5">
+            <?php foreach ($companyData->GetCompanyArray() as $row) : ?>
             <div class="col-lg-3 col-md-6">
                 <h1 class="fw-bold text-primary mb-4">F<span class="text-secondary">I</span>T</h1>
-                <p>Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet
-                    lorem sit clita</p>
+                <p><?= Util::Print($row->footerDesc); ?></p>
                 <div class="d-flex pt-2">
                     <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
                             class="fab fa-twitter"></i></a>
@@ -16,16 +20,16 @@
             </div>
             <div class="col-lg-3 col-md-6">
                 <h4 class="text-light mb-4">Address</h4>
-                <p><i class="fa fa-map-marker-alt me-3"></i>Erhvervsakademi Sydvest, Spangsbjerg Kirkevej 103, 6700
-                    Esbjerg</p>
-                <p><i class="fa fa-phone-alt me-3"></i>+45 76 13 32 00</p>
-                <p><i class="fa fa-envelope me-3"></i>easv@easv.dk</p>
+                <p><i class="fa fa-map-marker-alt me-3"></i><?= Util::Print($row->address); ?></p>
+                <p><i class="fa fa-phone-alt me-3"></i><?= Util::Print($row->phone); ?></p>
+                <p><i class="fa fa-envelope me-3"></i><?= Util::Print($row->mail); ?></p>
             </div>
             <div class="col-lg-3 col-md-6">
                 <h4 class="text-light mb-4">Quick Links</h4>
                 <a class="btn btn-link" href="">About Us</a>
                 <a class="btn btn-link" href="">Contact Us</a>
             </div>
+            <?php endforeach ?>
         </div>
     </div>
     <div class="container-fluid copyright">

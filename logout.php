@@ -1,7 +1,9 @@
 <?php
-include './cms/require.php';
-include './cms/controllers/auth.php';
+require_once './cms/require.php';
 
 Util::IsLoggedIn();
+
+require_once './cms/controllers/auth.php';
+
 (new Auth())->Logout();
 Util::Redirect('/login.php');

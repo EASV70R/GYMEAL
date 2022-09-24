@@ -57,12 +57,68 @@ class Validator
             $error = "Please enter your Phone Number.";
         } elseif (strlen($phone) < 1) {
             $error = "null.";
-        } elseif (strlen($phone) > 12) {
+        } elseif (strlen($phone) > 15) {
             $error = "Phone Number is too long.";
         } elseif (!preg_match($phoneSchema, $phone)) {
             $error = "Please enter a valid Phone Number.";
         }
         return $error ?? false;
+    }
+
+    private static function ValidateCompanyInfo(string $title,
+    string $desc,
+    string $footerDesc,
+    string $address
+    ): string|bool
+    {
+        $titleSchema = "/^[a-zA-Z0-9 ,.\/\\-_()!?]*$/";
+
+        if (empty($title) || empty($desc) || empty($footerDesc)) {
+            $error = "Please enter a title or description.";
+        } elseif (strlen($title) < 3 || strlen($desc) < 3 || strlen($footerDesc) < 3) {
+            $error = "Title or description is too short.";
+        } elseif (strlen($title) > 100 || strlen($desc) > 255 || strlen($footerDesc) > 255) {
+            $error = "Title or description is too long.";
+        } elseif (!preg_match($titleSchema, $title) || !preg_match($titleSchema, $desc) || !preg_match($titleSchema, $footerDesc)) {
+            $error = "Title or description must contain only letters and numbers.";
+        } elseif (empty($address)) {
+            $error = "Please enter your address.";
+        } elseif (strlen($address) < 3) {
+            $error = "Address is too short.";
+        } elseif (strlen($address) > 100) {
+            $error = "Address is too long.";
+        } elseif (!preg_match($titleSchema, $address)) {
+            $error = "Address must contain only letters and numbers.";
+        }
+
+        return $error ?? false;
+    }
+
+    public static function CompanyInfoForm(
+        string $title,
+        string $desc,
+        string $footerDesc,
+        string $address,
+        string $phone,
+        string $mail,
+        string $image
+    ): string|bool {
+        $validateTitle = self::ValidateCompanyInfo($title, $desc, $footerDesc, $address);
+        if ($validateTitle) {
+            return (string) $validateTitle;
+        }
+
+        $validatePhone = self::ValidatePhone($phone);
+        if ($validatePhone) {
+            return (string) $validatePhone;
+        }
+
+        $validateMail = self::ValidateEmail($mail);
+        if ($validateMail) {
+            return (string) $validateMail;
+        }
+
+        return false;
     }
 
     public static function RegisterForm(

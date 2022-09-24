@@ -1,10 +1,8 @@
 <?php
 require_once '../cms/require.php';
-require_once '../cms/controllers/auth.php';
+require_once '../cms/controllers/company.php';
 
 Util::IsAdmin();
-
-$auth = new Auth;
 
 Util::Header();
 Util::Navbar();

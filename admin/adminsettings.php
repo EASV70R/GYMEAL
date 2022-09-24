@@ -1,11 +1,19 @@
 <?php
 require_once '../cms/require.php';
+require_once '../cms/controllers/company.php';
 
 Util::IsAdmin();
 
 require_once '../cms/controllers/profile.php';
 
 $profile = new Profile;
+$companyData = new Company;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST["updateCompany"])) {
+        $error = $companyData->UpdateCompanyData($_POST);
+    }
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST["updatePassword"])) {
@@ -29,14 +37,54 @@ Util::Navbar();
             <?php endif; ?>
         </div>
         <aside class="col-lg-3 col-xl-3">
-        <nav class="nav flex-lg-column nav-pills mb-4">
+            <nav class="nav flex-lg-column nav-pills mb-4">
                 <a class="nav-link" href="<?= (BASE_PATH); ?>admin/index.php">Admin</a>
                 <a class="nav-link" href="<?= (BASE_PATH); ?>admin/invoice.php">Customer Invoices</a>
                 <a class="nav-link active" href="<?= (BASE_PATH); ?>admin/adminsettings.php">Settings</a>
                 <a class="nav-link" href="<?= (BASE_PATH); ?>logout.php">Logout</a>
             </nav>
         </aside>
-        <div class="col-lg-9  col-xl-9">
+        <div class="col-lg-9 col-xl-9">
+            <div class="card">
+                <div class="card-body">
+                <?php foreach ($companyData->GetCompanyArray() as $row) : ?>
+                    <h4 class="card-title text-center">Update Company Info</h4>
+                    <form method="POST">
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control" placeholder="Title"
+                                name="title" value="<?= Util::Print($row->title);?>" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control" placeholder="Description"
+                                name="desc" value="<?= Util::Print($row->desc);?>" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control" placeholder="Footer Description"
+                                name="footerDesc" value="<?= Util::Print($row->footerDesc);?>" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control" placeholder="Address"
+                                name="address" value="<?= Util::Print($row->address);?>" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control" placeholder="Phone"
+                                name="phone" value="<?= Util::Print($row->phone);?>" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control" placeholder="Mail"
+                                name="mail" value="<?= Util::Print($row->mail);?>" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control" placeholder="Image"
+                                name="image" value="<?= Util::Print($row->image);?>" required>
+                        </div>
+                        <button class="btn btn-outline-primary btn-block" name="updateCompany" type="submit"
+                            value="submit">Update
+                        </button>
+                    </form>
+                    <?php endforeach; ?>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title text-center">Update Password</h4>

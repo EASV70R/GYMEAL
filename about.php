@@ -1,5 +1,6 @@
 <?php
 require_once './cms/require.php';
+require_once './cms/controllers/company.php';
 
 Util::Header();
 Util::Navbar();
@@ -10,7 +11,7 @@ Util::Navbar();
             <div class="col-lg-6">
                 <div class="about-img position-relative overflow-hidden p-5 pe-0">
                     <img class="img-fluid w-100"
-                        src="<?php echo BASE_PATH ?>/assets/img/mike-von-CX0zKCHOpJo-unsplash.jpg">
+                        src="<?php echo BASE_PATH ?>/assets/img/represent.jpg">
                 </div>
             </div>
             <div class="col-lg-6">

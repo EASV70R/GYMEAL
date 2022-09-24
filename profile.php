@@ -1,6 +1,6 @@
 <?php
-
 require_once './cms/require.php';
+require_once './cms/controllers/company.php';
 
 Util::IsLoggedIn();
 
@@ -33,7 +33,7 @@ Util::Navbar();
                 <a class="nav-link" href="<?= (BASE_PATH); ?>logout.php">Logout</a>
             </nav>
         </aside>
-        <div class="col-lg-9  col-xl-9">
+        <div class="col-lg-9 col-xl-9">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title text-center">Profile</h4>

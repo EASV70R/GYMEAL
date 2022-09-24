@@ -1,8 +1,10 @@
 <?php
-include './cms/require.php';
-include './cms/controllers/auth.php';
+require_once './cms/require.php';
+require_once './cms/controllers/company.php';
 
 Util::IsLoggedIn();
+
+require_once './cms/controllers/auth.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     $response = (new Auth())->Login($_POST);

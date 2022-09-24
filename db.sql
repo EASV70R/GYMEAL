@@ -25,6 +25,10 @@ INSERT INTO `users` (`uid`, `username`, `password`, `email`, `firstName`, `lastN
 (1, 'easv', '$2y$10$uMkFYilGKgW/vETBK3cStOYjGLfywHi4UyoljFXB9NtKEdO3FFoC.', 'easv@easv.dk', 'test', 'test', '+451234567', 1, current_timestamp());
 COMMIT;
 
+INSERT INTO `users` (`uid`, `username`, `password`, `email`, `firstName`, `lastName`, `phone`, `admin`, `createdAt`) VALUES
+(2, 'easv2', '$2y$10$uMkFYilGKgW/vETBK3cStOYjGLfywHi4UyoljFXB9NtKEdO3FFoC.', 'easv@easv.dk', 'test', 'test', '+451234567', 1, current_timestamp());
+COMMIT;
+
 DROP TABLE IF EXISTS `invoices`;
 CREATE TABLE IF NOT EXISTS `invoices` (
   `invoiceId` int(11) NOT NULL AUTO_INCREMENT,
@@ -57,4 +61,22 @@ COMMIT;
 
 INSERT INTO `invoices` (`invoiceId`, `userId`, `country`, `city`, `region`, `address`, `phone`, `itemName`, `itemId`, `price`, `status`, `createdAt`) VALUES
 (4, 2, 'test2', 'test2', 1232, 'test2', '+4512345678', 'test2', 1, 120, 1, current_timestamp());
+COMMIT;
+
+DROP TABLE IF EXISTS `company`;
+CREATE TABLE IF NOT EXISTS `company` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `desc` varchar(255) NOT NULL,
+  `footerDesc` varchar(255) NOT NULL,
+  `address` varchar(100) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `mail` varchar(50) NOT NULL,
+  `image` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+COMMIT;
+
+INSERT INTO `company` (`id`, `title`, `desc`, `footerDesc`, `address`, `mail`, `phone`, `image`) VALUES
+(1, 'Meals catered to your body', 'Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet', 'Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita', 'Erhvervsakademi Sydvest, Spangsbjerg Kirkevej 103, 6700 Esbjerg', 'easv@easv.dk', '+45 76 13 32 00', 'represent.jpg');
 COMMIT;
