@@ -2,18 +2,14 @@
 include './cms/require.php';
 include './cms/controllers/auth.php';
 
+Util::IsLoggedIn();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     $response = (new Auth())->Login($_POST);
 }
 
 Util::Header();
 Util::Navbar();
-
-if (Session::Get('login')) {
-    echo Util::Print('You are logged in as '.Session::Get('username'));
-} else {
-    echo Util::Print('You are not logged in');
-}
 
 ?>
 
@@ -43,7 +39,6 @@ if (Session::Get('login')) {
                             value="submit">
                             Login
                         </button>
-                        <a href="<?= (BASE_PATH); ?>logout.php" class="btn btn-outline-primary btn-block">Logout</a>
                     </form>
                 </div>
             </div>

@@ -1,14 +1,16 @@
 <?php
 require_once './cms/require.php';
+
 Util::Header();
 Util::Navbar();
+
 ?>
 <section class="fronthead">
     <div class="container-fluid p-0 mb-5">
         <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="<?php echo BASE_PATH ?>/assets/img/s-well-CJdZ800-Fbs-unsplash.jpg"
+                    <img class="w-100" src="<?= (BASE_PATH); ?>/assets/img/s-well-CJdZ800-Fbs-unsplash.jpg"
                         alt="Image">
                     <div class="carousel-caption">
                         <div class="container">
@@ -24,7 +26,7 @@ Util::Navbar();
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="<?php echo BASE_PATH ?>/assets/img/ella-olsson-P4jRJYN33wE-unsplash.jpg"
+                    <img class="w-100" src="<?= (BASE_PATH); ?>/assets/img/ella-olsson-P4jRJYN33wE-unsplash.jpg"
                         alt="Image">
                     <div class="carousel-caption">
                         <div class="container">
@@ -57,7 +59,7 @@ Util::Navbar();
             <div class="col-lg-6">
                 <div class="about-img position-relative overflow-hidden p-5 pe-0">
                     <img class="img-fluid w-100"
-                        src="<?php echo BASE_PATH ?>/assets/img/mike-von-CX0zKCHOpJo-unsplash.jpg">
+                        src="<?= (BASE_PATH); ?>/assets/img/mike-von-CX0zKCHOpJo-unsplash.jpg">
                 </div>
             </div>
             <div class="col-lg-6">
@@ -72,4 +74,5 @@ Util::Navbar();
         </div>
     </div>
 </div>
+
 <?php Util::Footer(); ?>

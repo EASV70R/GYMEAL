@@ -17,7 +17,20 @@ class Util
     {
         include(SITE_ROOT.'/includes/footer.inc.php');
     }
-    
+
+    public static function IsLoggedIn(): void
+    {
+        if (Session::Get('login')) {
+            if (basename($_SERVER['PHP_SELF']) == 'login.php' || basename($_SERVER['PHP_SELF']) == 'register.php') {
+                self::Redirect('/index.php');
+            }
+        } else {
+            if (basename($_SERVER['PHP_SELF']) != 'login.php' && basename($_SERVER['PHP_SELF']) != 'register.php') {
+                self::Redirect('/index.php');
+            }
+        }
+    }
+
     public static function Redirect(string $location): void
     {
         header("location: ${BASE_PATH}.${location}");

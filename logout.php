@@ -1,9 +1,8 @@
 <?php
 
 include './cms/require.php';
+include './cms/controllers/auth.php';
 
-session_unset();
-$_SESSION = array();
-session_destroy();
-
+Util::IsLoggedIn();
+(new Auth())->Logout();
 Util::Redirect('/login.php');
