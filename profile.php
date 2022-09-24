@@ -66,7 +66,7 @@ Util::Navbar();
                             <hr>
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <p class="mb-0 text-muted">Shipping address</p>
+                                    <p class="mb-0 text-muted">Shipping address:</p>
                                     <p class="m-0"><?= Util::Print($row->country); ?><br>
                                     <?= Util::Print($row->city); ?> <?= Util::Print($row->region); ?>, <?= Util::Print($row->address); ?></p>
                                 </div>
