@@ -1,5 +1,4 @@
 <?php
-
 include './cms/require.php';
 include './cms/controllers/auth.php';
 

@@ -19,15 +19,20 @@
                     <!-- 
                         btn-sm-square bg-white rounded-circle ms-3
                     -->
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><small class="fa fa-user text-body"></small></a>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><small
+                            class="fa fa-user text-body"></small></a>
                     <div class="dropdown-menu dropdown-menu-left">
                         <?php if (Session::Get('login')) : ?>
-                        <p class="dropdown-item"><?= Util::Print(Session::Get('username'));?></p>
-                        <a href="<?= (BASE_PATH); ?>profile.php" class="dropdown-item">Profile</a>
-                        <a href="<?= (BASE_PATH); ?>logout.php" class="dropdown-item">Logout</a>
+                            <p class="dropdown-item"><?= Util::Print(Session::Get('username'));?></p>
+                        <?php if (Session::Get('admin')) : ?>
+                            <a href="<?= (BASE_PATH); ?>admin/index.php" class="dropdown-item">Admin</a>
                         <?php else : ?>
-                        <a href="<?= (BASE_PATH); ?>login.php" class="dropdown-item">Login</a>
-                        <a href="<?= (BASE_PATH); ?>register.php" class="dropdown-item">Register</a>
+                            <a href="<?= (BASE_PATH); ?>profile.php" class="dropdown-item">Profile</a>
+                        <?php endif; ?>
+                            <a href="<?= (BASE_PATH); ?>logout.php" class="dropdown-item">Logout</a>
+                        <?php else : ?>
+                            <a href="<?= (BASE_PATH); ?>login.php" class="dropdown-item">Login</a>
+                            <a href="<?= (BASE_PATH); ?>register.php" class="dropdown-item">Register</a>
                         <?php endif; ?>
                     </div>
                 </div>

@@ -10,21 +10,27 @@ if (!Session::Get('login')) {
 
 class Invoices
 {
-    public function GetInvoices()
+    public function GetInvoicesArray()
+    {
+        $Invoice = new Invoice();
+        return $Invoice->InvoiceArray();
+    }
+
+    public function GetUserInvoices()
     {
         $Invoice = new Invoice();
         return $Invoice->InvoiceFromCurrentUID();
     }
 
-    public function DeleteInvoice($invoiceID)
+    public function DeleteInvoice($invoiceID, $userID)
     {
         $Invoice = new Invoice();
-        return $Invoice->DeleteInvoice($invoiceID);
+        return $Invoice->DeleteInvoice($invoiceID, $userID);
     }
 
-    public function GetInvoiceStatus($invoiceID)
+    public function GetInvoiceStatus($invoiceID, $userID)
     {
         $Invoice = new Invoice();
-        return $Invoice->InvoiceStatus($invoiceID);
+        return $Invoice->InvoiceStatus($invoiceID, $userID);
     }
 }

@@ -31,6 +31,13 @@ class Util
         }
     }
 
+    public static function IsAdmin(): void
+    {
+        if (!Session::Get('login') || !Session::Get('admin')) {
+            Util::Redirect('/../index.php');
+        }
+    }
+
     public static function Redirect(string $location): void
     {
         header("location: ${BASE_PATH}.${location}");

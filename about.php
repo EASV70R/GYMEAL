@@ -1,10 +1,8 @@
 <?php
-
 require_once './cms/require.php';
 
 Util::Header();
 Util::Navbar();
-
 ?>
 <div class="container-xxl py-5">
     <div class="container">

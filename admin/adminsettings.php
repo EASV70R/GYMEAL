@@ -1,9 +1,9 @@
 <?php
-require_once './cms/require.php';
+require_once '../cms/require.php';
 
-Util::IsLoggedIn();
+Util::IsAdmin();
 
-require_once './cms/controllers/profile.php';
+require_once '../cms/controllers/profile.php';
 
 $profile = new Profile;
 
@@ -29,9 +29,10 @@ Util::Navbar();
             <?php endif; ?>
         </div>
         <aside class="col-lg-3 col-xl-3">
-            <nav class="nav flex-lg-column nav-pills mb-4">
-                <a class="nav-link" href="<?= (BASE_PATH); ?>profile.php">Account</a>
-                <a class="nav-link active" href="#">Setting</a>
+        <nav class="nav flex-lg-column nav-pills mb-4">
+                <a class="nav-link" href="<?= (BASE_PATH); ?>admin/index.php">Admin</a>
+                <a class="nav-link" href="<?= (BASE_PATH); ?>admin/invoice.php">Customer Invoices</a>
+                <a class="nav-link active" href="<?= (BASE_PATH); ?>admin/adminsettings.php">Settings</a>
                 <a class="nav-link" href="<?= (BASE_PATH); ?>logout.php">Logout</a>
             </nav>
         </aside>

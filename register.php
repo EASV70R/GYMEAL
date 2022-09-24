@@ -10,7 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 
 Util::Header();
 Util::Navbar();
-
 ?>
 
 <main class="container mt-2">

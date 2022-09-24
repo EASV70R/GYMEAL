@@ -5,6 +5,13 @@ require_once __DIR__.'/../core/database.php';
 
 class Invoice extends Database
 {
+    public function InvoiceArray()
+    {
+        $this->prepare('SELECT * FROM `invoices` ORDER BY `invoiceId` DESC');
+        $this->statement->execute();
+        return $this->statement->fetchAll();
+    }
+
     public function InvoiceFromCurrentUID()
     {
         $this->prepare('SELECT * FROM `invoices` WHERE `userId` = ? ORDER BY `invoiceId` DESC');
@@ -12,16 +19,16 @@ class Invoice extends Database
         return $this->statement->fetchAll();
     }
 
-    public function DeleteInvoice($invoiceID)
+    public function DeleteInvoice($invoiceID, $userID)
     {
         $this->prepare('DELETE FROM `invoices` WHERE `invoiceId` = ? AND `userId` = ?');
-        $this->statement->execute([$invoiceID, Session::Get('uid')]);
+        $this->statement->execute([$invoiceID, $userID]);
     }
 
-    public function InvoiceStatus($invoiceID)
+    public function InvoiceStatus($invoiceID, $userID)
     {
         $this->prepare('SELECT * FROM `invoices` WHERE `invoiceId` = ? and `userId` = ?');
-        $this->statement->execute([$invoiceID, Session::Get('uid')]);
+        $this->statement->execute([$invoiceID, $userID]);
         $result = $this->statement->fetch();
         $result->status = ((int) $result->status === 0) ? 'Not shipped' : 'Shipped';
         return $result;

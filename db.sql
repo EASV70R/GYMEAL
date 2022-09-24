@@ -50,3 +50,11 @@ COMMIT;
 INSERT INTO `invoices` (`invoiceId`, `userId`, `country`, `city`, `region`, `address`, `phone`, `itemName`, `itemId`, `price`, `status`, `createdAt`) VALUES
 (2, 1, 'test2', 'test2', 1232, 'test2', '+4512345678', 'test2', 1, 120, 1, current_timestamp());
 COMMIT;
+
+INSERT INTO `invoices` (`invoiceId`, `userId`, `country`, `city`, `region`, `address`, `phone`, `itemName`, `itemId`, `price`, `status`, `createdAt`) VALUES
+(3, 2, 'test', 'test', 1232, 'test', '+4512345678', 'test', 1, 120, 0, current_timestamp());
+COMMIT;
+
+INSERT INTO `invoices` (`invoiceId`, `userId`, `country`, `city`, `region`, `address`, `phone`, `itemName`, `itemId`, `price`, `status`, `createdAt`) VALUES
+(4, 2, 'test2', 'test2', 1232, 'test2', '+4512345678', 'test2', 1, 120, 1, current_timestamp());
+COMMIT;

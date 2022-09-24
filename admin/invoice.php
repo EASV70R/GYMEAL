@@ -1,25 +1,24 @@
 <?php
+require_once '../cms/require.php';
 
-require_once './cms/require.php';
+Util::IsAdmin();
 
-Util::IsLoggedIn();
-
-require_once './cms/controllers/invoices.php';
+require_once '../cms/controllers/invoices.php';
 
 $invoice = new Invoices;
-$invoices = $invoice->GetUserInvoices();
+$invoices = $invoice->GetInvoicesArray();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET["cancel"])) {
         $invoiceId = $_GET["invoiceId"];
-        $invoice->DeleteInvoice($invoiceId, Session::Get('uid'));
-        Util::Redirect('/profile.php');
+        $userId = $_GET["userId"];
+        $invoice->DeleteInvoice($invoiceId, $userId);
+        Util::Redirect('/invoice.php');
     }
 }
-
+// invoice.php?cancel=&invoiceId=4&userId=2
 Util::Header();
 Util::Navbar();
-
 ?>
 
 </br>
@@ -28,8 +27,9 @@ Util::Navbar();
     <div class="row justify-content-center">
         <aside class="col-lg-3 col-xl-3">
             <nav class="nav flex-lg-column nav-pills mb-4">
-                <a class="nav-link active" href="#">Account</a>
-                <a class="nav-link" href="<?= (BASE_PATH); ?>profilesettings.php">Settings</a>
+                <a class="nav-link" href="<?= (BASE_PATH); ?>admin/index.php">Admin</a>
+                <a class="nav-link active" href="<?= (BASE_PATH); ?>admin/invoice.php">Customer Invoices</a>
+                <a class="nav-link" href="<?= (BASE_PATH); ?>admin/adminsettings.php">Settings</a>
                 <a class="nav-link" href="<?= (BASE_PATH); ?>logout.php">Logout</a>
             </nav>
         </aside>
@@ -39,7 +39,8 @@ Util::Navbar();
                     <h4 class="card-title text-center">Profile</h4>
                     <figcaption class="info">
                         <h6 class="title"><?= Util::Print(Session::Get('username'));?></h6>
-                        <p>Email: <?= Util::Print(Session::Get('email'));?>, Phone: <?= Util::Print(Session::Get('phone'));?>
+                        <p>Email: <?= Util::Print(Session::Get('email'));?>, Phone:
+                            <?= Util::Print(Session::Get('phone'));?>
                             <a href="#" class="px-2"><i class="fa fa-pen"></i></a>
                         </p>
                     </figcaption>
@@ -51,16 +52,18 @@ Util::Navbar();
                             <header class="d-lg-flex">
                                 <div class="flex-grow-1">
                                     <h6 class="mb-0">Invoice ID: <?= Util::Print($row->invoiceId); ?><i class="dot"></i>
-                                    <?php if ($row->status == 0) : ?>
-                                        <span class="text-danger"><?= Util::Print($invoice->GetInvoiceStatus($row->invoiceId, $row->userId)->status); ?></span>
-                                    <?php else : ?>
-                                        <span class="text-success"><?= Util::Print($invoice->GetInvoiceStatus($row->invoiceId, $row->userId)->status); ?></span>
-                                    <?php endif; ?>
+                                        <?php if ($row->status == 0) : ?>
+                                        <span
+                                            class="text-danger"><?= Util::Print($invoice->GetInvoiceStatus($row->invoiceId, $row->userId)->status); ?></span>
+                                        <?php else : ?>
+                                        <span
+                                            class="text-success"><?= Util::Print($invoice->GetInvoiceStatus($row->invoiceId, $row->userId)->status); ?></span>
+                                        <?php endif; ?>
                                     </h6>
                                     <span class="text-muted">Date: <?= Util::Print($row->createdAt); ?></span>
                                 </div>
                                 <div>
-                                    <a href="<?= (BASE_PATH); ?>profile.php?cancel=&invoiceId=<?= Util::Print($row->invoiceId); ?>"
+                                    <a href="<?= (BASE_PATH); ?>admin/invoice.php?cancel=&invoiceId=<?= Util::Print($row->invoiceId); ?>&userId=<?= Util::Print($row->userId); ?>"
                                         class="btn btn-sm btn-outline-danger">Cancel order</a>
                                     <a href="#" class="btn btn-sm btn-primary">Track order</a>
                                 </div>
@@ -70,7 +73,8 @@ Util::Navbar();
                                 <div class="col-lg-4">
                                     <p class="mb-0 text-muted">Shipping address:</p>
                                     <p class="m-0"><?= Util::Print($row->country); ?><br>
-                                    <?= Util::Print($row->city); ?> <?= Util::Print($row->region); ?>, <?= Util::Print($row->address); ?></p>
+                                        <?= Util::Print($row->city); ?> <?= Util::Print($row->region); ?>,
+                                        <?= Util::Print($row->address); ?></p>
                                 </div>
                             </div>
                             <hr>
@@ -78,8 +82,7 @@ Util::Navbar();
                                 <li class="col-xl-4  col-lg-6">
                                     <figure class="itemside mb-3">
                                         <div class="aside">
-                                            <img width="72" height="72" src="" alt="test"
-                                                class="img-sm rounded border">
+                                            <img width="72" height="72" src="" alt="test" class="img-sm rounded border">
                                         </div>
                                         <figcaption class="info">
                                             <p class="title"><?= Util::Print($row->itemName); ?></p>

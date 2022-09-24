@@ -3,7 +3,6 @@ require_once './cms/require.php';
 
 Util::Header();
 Util::Navbar();
-
 ?>
 <section class="fronthead">
     <div class="container-fluid p-0 mb-5">

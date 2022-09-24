@@ -10,7 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 
 Util::Header();
 Util::Navbar();
-
 ?>
 
 <main class="container mt-2">
