@@ -11,7 +11,7 @@ Util::Navbar();
             <div class="col-lg-6">
                 <div class="about-img position-relative overflow-hidden p-5 pe-0">
                     <img class="img-fluid w-100"
-                        src="<?php echo BASE_PATH ?>/assets/img/represent.jpg">
+                        src="<?= (SITE_URL); ?>/assets/img/represent.jpg">
                 </div>
             </div>
             <div class="col-lg-6">

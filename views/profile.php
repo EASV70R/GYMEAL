@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET["cancel"])) {
         $invoiceId = $_GET["invoiceId"];
         $invoice->DeleteInvoice($invoiceId, Session::Get('uid'));
-        Util::Redirect('/profile.php');
+        Util::Redirect('/profile');
     }
 }
 
@@ -29,8 +29,8 @@ Util::Navbar();
         <aside class="col-lg-3 col-xl-3">
             <nav class="nav flex-lg-column nav-pills mb-4">
                 <a class="nav-link active" href="#">Account</a>
-                <a class="nav-link" href="<?= (BASE_PATH); ?>profilesettings.php">Settings</a>
-                <a class="nav-link" href="<?= (BASE_PATH); ?>logout.php">Logout</a>
+                <a class="nav-link" href="<?= (SITE_URL); ?>/profilesettings">Settings</a>
+                <a class="nav-link" href="<?= (SITE_URL); ?>/logout">Logout</a>
             </nav>
         </aside>
         <div class="col-lg-9 col-xl-9">

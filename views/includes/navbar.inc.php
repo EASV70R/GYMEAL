@@ -5,7 +5,7 @@
 
 <div class="container-fluid fixed-top px-0">
     <nav class="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-5">
-        <a href="index.php" class="navbar-brand ms-4 ms-lg-0">
+        <a href="<?= (SITE_URL); ?>/home" class="navbar-brand ms-4 ms-lg-0">
             <h1 class="fw-bold text-primary m-0">F<span class="text-secondary">I</span>T</h1>
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -13,8 +13,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="<?= (BASE_PATH); ?>index.php" class="nav-item nav-link">Home</a>
-                <a href="<?= (BASE_PATH); ?>about.php" class="nav-item nav-link">About Us</a>
+                <a href="<?= (SITE_URL); ?>/home" class="nav-item nav-link">Home</a>
+                <a href="<?= (SITE_URL); ?>/about" class="nav-item nav-link">About Us</a>
                 <div class="nav-item dropdown">
                     <!-- 
                         btn-sm-square bg-white rounded-circle ms-3
@@ -25,14 +25,14 @@
                         <?php if (Session::Get('login')) : ?>
                             <p class="dropdown-item"><?= Util::Print(Session::Get('username'));?></p>
                         <?php if (Session::Get('admin')) : ?>
-                            <a href="<?= (BASE_PATH); ?>admin/index.php" class="dropdown-item">Admin</a>
+                            <a href="<?= (SITE_URL); ?>/admin" class="dropdown-item">Admin</a>
                         <?php else : ?>
-                            <a href="<?= (BASE_PATH); ?>profile.php" class="dropdown-item">Profile</a>
+                            <a href="<?= (SITE_URL); ?>/profile" class="dropdown-item">Profile</a>
                         <?php endif; ?>
-                            <a href="<?= (BASE_PATH); ?>logout.php" class="dropdown-item">Logout</a>
+                            <a href="<?= (SITE_URL); ?>/logout" class="dropdown-item">Logout</a>
                         <?php else : ?>
-                            <a href="<?= (BASE_PATH); ?>login.php" class="dropdown-item">Login</a>
-                            <a href="<?= (BASE_PATH); ?>register.php" class="dropdown-item">Register</a>
+                            <a href="<?= (SITE_URL); ?>/login" class="dropdown-item">Login</a>
+                            <a href="<?= (SITE_URL); ?>/register" class="dropdown-item">Register</a>
                         <?php endif; ?>
                     </div>
                 </div>

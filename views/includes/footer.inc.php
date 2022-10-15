@@ -47,12 +47,12 @@ $companyData = new Company;
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="<?= (BASE_PATH); ?>vendor/lib/wow/wow.min.js"></script>
-<script src="<?= (BASE_PATH); ?>vendor/lib/easing/easing.min.js"></script>
-<script src="<?= (BASE_PATH); ?>vendor/lib/waypoints/waypoints.min.js"></script>
-<script src="<?= (BASE_PATH); ?>vendor/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="<?= (SITE_URL); ?>/vendor/lib/wow/wow.min.js"></script>
+<script src="<?= (SITE_URL); ?>/vendor/lib/easing/easing.min.js"></script>
+<script src="<?= (SITE_URL); ?>/vendor/lib/waypoints/waypoints.min.js"></script>
+<script src="<?= (SITE_URL); ?>/vendor/lib/owlcarousel/owl.carousel.min.js"></script>
 
-<script src="<?= (BASE_PATH); ?>assets/js/main.js"></script>
+<script src="<?= (SITE_URL); ?>/assets/js/main.js"></script>
 </body>
 
 </html>

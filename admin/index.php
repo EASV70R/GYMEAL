@@ -16,9 +16,9 @@ Util::Navbar();
         <aside class="col-lg-3 col-xl-3">
             <nav class="nav flex-lg-column nav-pills mb-4">
                 <a class="nav-link active" href="#">Admin</a>
-                <a class="nav-link" href="<?= (BASE_PATH); ?>admin/invoice.php">Customer Invoices</a>
-                <a class="nav-link" href="<?= (BASE_PATH); ?>admin/adminsettings.php">Settings</a>
-                <a class="nav-link" href="<?= (BASE_PATH); ?>logout.php">Logout</a>
+                <a class="nav-link" href="<?= (SITE_URL); ?>/admin/invoice">Customer Invoices</a>
+                <a class="nav-link" href="<?= (SITE_URL); ?>/admin/adminsettings">Settings</a>
+                <a class="nav-link" href="<?= (SITE_URL); ?>/logout">Logout</a>
             </nav>
         </aside>
     </div>
