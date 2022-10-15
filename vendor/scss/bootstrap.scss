@@ -1,12 +1,13 @@
 /******* Customized Bootstrap ********/
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap');
 $primary: #1584b8;
 $secondary: #be100a;
 $light: #F7F8FC;
 $dark: #111111;
-$font-family-base: 'Open Sans',
+$font-family-base: 'Roboto',
 sans-serif;
-$headings-font-family: 'Open Sans',
+$headings-font-family: 'Montserrat',
 sans-serif;
 $body-color: #555555;
 $headings-color: $dark;
