@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $invoiceId = $_GET["invoiceId"];
         $userId = $_GET["userId"];
         $invoice->DeleteInvoice($invoiceId, $userId);
-        Util::Redirect('/admin/invoice');
+        Util::Redirect('/invoice');
     }
 }
 // invoice.php?cancel=&invoiceId=4&userId=2
@@ -64,7 +64,7 @@ Util::Navbar();
                                     <span class="text-muted">Date: <?= Util::Print($row->createdAt); ?></span>
                                 </div>
                                 <div>
-                                    <a href="<?= (BASE_PATH); ?>admin/invoice.php?cancel=&invoiceId=<?= Util::Print($row->invoiceId); ?>&userId=<?= Util::Print($row->userId); ?>"
+                                    <a href="<?= (SITE_URL); ?>/admin/invoice.php?cancel=&invoiceId=<?= Util::Print($row->invoiceId); ?>&userId=<?= Util::Print($row->userId); ?>"
                                         class="btn btn-sm btn-outline-danger">Cancel order</a>
                                     <a href="#" class="btn btn-sm btn-primary">Track order</a>
                                 </div>

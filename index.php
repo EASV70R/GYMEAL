@@ -8,6 +8,7 @@ $router = new Router($request);
 $router->get('/', 'views/index');
 $router->get('home', 'views/index');
 $router->get('about', 'views/about');
+$router->get('contactus', 'views/contactus');
 $router->get('login', 'views/login');
 $router->get('register', 'views/register');
 $router->get('profile', 'views/profile');
