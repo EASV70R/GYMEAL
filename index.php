@@ -17,5 +17,7 @@ $router->get('admin', 'admin/index');
 $router->get('admin', 'admin/adminsettings');
 $router->get('admin', 'admin/invoice');
 $router->get('logout', 'views/logout');
+$router->get('404', 'views/404');
+$router->get('products', 'views/products');
 
 echo "test";
