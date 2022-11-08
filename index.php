@@ -19,5 +19,8 @@ $router->get('admin', 'admin/invoice');
 $router->get('logout', 'views/logout');
 $router->get('404', 'views/404');
 $router->get('products', 'views/products');
+$router->get('productview', 'views/productview');
+
+
 
 echo "test";
