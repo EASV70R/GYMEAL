@@ -14,6 +14,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="<?= (SITE_URL); ?>/home" class="nav-item nav-link">Home</a>
+                <a href="<?= (SITE_URL); ?>/products" class="nav-item nav-link">Products</a>
                 <a href="<?= (SITE_URL); ?>/about" class="nav-item nav-link">About Us</a>
                 <a href="<?= (SITE_URL); ?>/contactus" class="nav-item nav-link">Contact Us</a>
                 <div class="nav-item dropdown">
