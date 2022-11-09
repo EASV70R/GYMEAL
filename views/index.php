@@ -173,7 +173,7 @@ Util::Navbar();
                 </div>
             </div>
             <div class="col-lg-6">
-                <h1 class="display-5 mb-4"><?= Util::Print($row->title); ?></h1>
+                <h1 class="display-5 mb-4"><?= Util::Print($row->name); ?></h1>
                 <p class="mb-4"><?= Util::Print($row->desc); ?></p>
                 <p><i class="fa fa-check text-primary me-3"></i>Tempor erat elitr rebum at clita
                 </p>

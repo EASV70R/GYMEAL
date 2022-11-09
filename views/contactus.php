@@ -41,9 +41,9 @@ Util::Navbar();
                     <h5 class="text-white">Call Us</h5>
                     <p class="mb-5"><i class="fa fa-phone-alt me-3"></i><?= Util::Print($row->phone); ?></p>
                     <h5 class="text-white">Email Us</h5>
-                    <p class="mb-5"><i class="fa fa-envelope me-3"></i><?= Util::Print($row->mail); ?></p>
+                    <p class="mb-5"><i class="fa fa-envelope me-3"></i><?= Util::Print($row->email); ?></p>
                     <h5 class="text-white">Office Address</h5>
-                    <p class="mb-5"><i class="fa fa-map-marker-alt me-3"></i><?= Util::Print($row->address); ?></p>
+                    <p class="mb-5"><i class="fa fa-map-marker-alt me-3"></i><?= Util::Print($row->street); ?></p>
                     <h5 class="text-white">Follow Us</h5>
                     <div class="d-flex pt-2">
                         <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i

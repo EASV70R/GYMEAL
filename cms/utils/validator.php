@@ -126,20 +126,8 @@ class Validator
         string $password,
         string $confirmPassword,
         string $email,
-        string $firstName, 
-        string $lastName, 
-        string $phone
     ): string|bool{
-        $validateName = self::ValidateUsername($firstName) && self::ValidateUsername($lastName);
-        if ($validateName) {
-            return (string) $validateName;
-        }
-
-        $validateUsername = self::ValidateUsername($username);
-        if ($validateUsername) {
-            return (string) $validateUsername;
-        }
-
+    
         $validateUsername = self::ValidateUsername($username);
         if ($validateUsername) {
             return (string) $validateUsername;
@@ -153,11 +141,6 @@ class Validator
         $validateEmail = self::ValidateEmail($email);
         if ($validateEmail) {
             return (string) $validateEmail;
-        }
-
-        $validatePhone = self::ValidatePhone($phone);
-        if ($validatePhone) {
-            return (string) $validatePhone;
         }
 
         if (empty($confirmPassword) && $password != $confirmPassword) {

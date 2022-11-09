@@ -11,15 +11,12 @@ class Auth
     {
         $User = new User();
 
-        $firstName = trim($data['firstName']);
-        $lastName = trim($data['lastName']);
         $username = trim($data['username']);
         $password = (string) $data['password'];
         $confirmPassword = (string) $data['confirmPassword'];
         $email = (string) $data['email'];
-        $phone = (string) $data['phone'];
 
-        $validationError = Validator::RegisterForm($username, $password, $confirmPassword, $email, $firstName, $lastName, $phone);
+        $validationError = Validator::RegisterForm($username, $password, $confirmPassword, $email);
         if ($validationError) {
             return $validationError;
         }
@@ -35,7 +32,7 @@ class Auth
         }
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $response = $User->Register($username, $hashedPassword, $email, $firstName, $lastName, $phone);
+        $response = $User->Register($username, $hashedPassword, $email);
 
         return ($response) ? 'Registration successful.' : 'Registration failed.';
     }
@@ -54,8 +51,11 @@ class Auth
 
         $response = $User->Login($username, $password);
         if ($response) {
-            Session::CreateUserSession($response);
+            $response2 = $User->GetRole($response->uid);
+            if ($response) {
+            Session::CreateUserSession($response, $response2);  
             Util::Redirect('/');
+            }
 
         } else {
             return 'Invalid username or password.';
@@ -66,6 +66,13 @@ class Auth
     {
         session_unset();
         $_SESSION = array();
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000,
+                $params["path"], $params["domain"],
+                $params["secure"], $params["httponly"]
+            );
+        }
         session_destroy();
     }
 }

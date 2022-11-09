@@ -8,7 +8,7 @@ $companyData = new Company;
             <?php foreach ($companyData->GetCompanyArray() as $row) : ?>
             <div class="col-lg-3 col-md-6">
                 <h1 class="fw-bold text-primary mb-4">F<span class="text-secondary">I</span>T</h1>
-                <p><?= Util::Print($row->footerDesc); ?></p>
+                <p><?= Util::Print($row->smalldesc); ?></p>
                 <div class="d-flex pt-2">
                     <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
                             class="fab fa-twitter"></i></a>
@@ -20,9 +20,11 @@ $companyData = new Company;
             </div>
             <div class="col-lg-3 col-md-6">
                 <h4 class="text-light mb-4">Address</h4>
-                <p><i class="fa fa-map-marker-alt me-3"></i><?= Util::Print($row->address); ?></p>
+                <p><i class="fa fa-map-marker-alt me-3"></i><?= Util::Print($row->street); ?> - <?= Util::Print($row->city); ?> - 
+                <?= Util::Print($row->postalCode); ?> - 
+                <?= Util::Print($row->country); ?></p>
                 <p><i class="fa fa-phone-alt me-3"></i><?= Util::Print($row->phone); ?></p>
-                <p><i class="fa fa-envelope me-3"></i><?= Util::Print($row->mail); ?></p>
+                <p><i class="fa fa-envelope me-3"></i><?= Util::Print($row->email); ?></p>
             </div>
             <div class="col-lg-3 col-md-6">
                 <h4 class="text-light mb-4">Quick Links</h4>

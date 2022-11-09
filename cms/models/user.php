@@ -7,23 +7,30 @@ class User extends Database
 {
     public function GetUsername($username): bool|stdClass
     {
-        $this->prepare('SELECT * FROM `users` WHERE `username` = ? LIMIT 1');
+        $this->prepare('SELECT * FROM `user` WHERE `username` = ? LIMIT 1');
         $this->statement->execute([$username]);
         return $this->statement->fetch();
     }
 
     public function GetEmail($email): bool|stdClass
     {
-        $this->prepare('SELECT * FROM `users` WHERE `email` = ? LIMIT 1');
+        $this->prepare('SELECT * FROM `user` WHERE `email` = ? LIMIT 1');
         $this->statement->execute([$email]);
         return $this->statement->fetch();
     }
 
-    public function Register($username, $hashedPassword, $email, $firstName, $lastName, $phone): bool
+    public function GetRole($userrole): bool|stdClass
     {
-        $this->prepare('INSERT INTO `users` (`username`, `password`, `email`, `firstName`, `lastName`, `phone`) VALUES (?, ?, ?, ?, ?, ?)');
+        $this->prepare('SELECT roleid FROM `userrole` WHERE `uid` = ?');
+        $this->statement->execute([$userrole]);
+        return $this->statement->fetch();
+    }
+
+    public function Register($username, $hashedPassword, $email): bool
+    {
+        $this->prepare('INSERT INTO `user` (`username`, `password`, `email`) VALUES (?, ?, ?)');
      
-        if ($this->statement->execute([$username, $hashedPassword, $email, $firstName, $lastName, $phone]))
+        if ($this->statement->execute([$username, $hashedPassword, $email]))
         {
             return true;
         } else {
@@ -42,7 +49,7 @@ class User extends Database
         $row = $this->GetUsername($username);
 
         if (password_verify($currentPassword, $row->password)) {
-            $this->prepare('UPDATE `users` SET `password` = ? WHERE `username` = ?');
+            $this->prepare('UPDATE `user` SET `password` = ? WHERE `username` = ?');
             $this->statement->execute([$hashedPassword, $username]);
             return 'Password changed successfully.';
         } else {

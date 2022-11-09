@@ -27,15 +27,7 @@ Util::Navbar();
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title text-center">Register</h4>
-                    <form method="POST" action="<?= Util::Print($_SERVER['PHP_SELF']); ?>">
-                        <div class="form-group">
-                            <input type="text" class="form-control form-control-sm" placeholder="First Name"
-                                name="firstName" minlength="3" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control form-control-sm" placeholder="Last Name"
-                                name="lastName" minlength="3" required>
-                        </div>
+                    <form method="POST" action="<?= Util::Print($_SERVER['REQUEST_URI']); ?>">
                         <div class="form-group">
                             <input type="text" class="form-control form-control-sm" placeholder="Username"
                                 name="username" minlength="3" required>
@@ -51,10 +43,6 @@ Util::Navbar();
                         <div class="form-group">
                             <input type="text" class="form-control form-control-sm" placeholder="email" name="email"
                                 required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control form-control-sm" placeholder="Phone number"
-                                name="phone" minlength="12" value="+45" required>
                         </div>
                         <button class="btn btn-outline-primary btn-block" name="register" id="submit" type="submit"
                             value="submit">

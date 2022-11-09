@@ -16,18 +16,21 @@ class Company
         $Company = new CompanyData();
         $title = (string) $data['title'];
         $desc = (string) $data['desc'];
-        $footerDesc = (string) $data['footerDesc'];
-        $address = (string) $data['address'];
-        $phone = (string) $data['phone'];
-        $mail = (string) $data['mail'];
+        $smalldesc = (string) $data['smalldesc'];
         $image = (string) $data['image'];
 
-        $validationError = Validator::CompanyInfoForm($title, $desc, $footerDesc, $address, $phone, $mail, $image);
+       /* $validationError = Validator::CompanyInfoForm($title, $desc, $footerDesc, $address, $phone, $mail, $image);
         if ($validationError) {
             return $validationError;
-        }
+        }*/
 
-        $response = $Company->UpdateCompanyData($title, $desc, $footerDesc, $address, $phone, $mail, $image);
+        $response = $Company->UpdateCompanyData($title, $desc, $smalldesc, $image);
         return ($response) ? 'Success' : 'Error';
+    }
+
+    public function GetCompanyAddress($companyId)
+    {
+        $Company = new CompanyData();
+        return $Company->GetCompanyAddress($companyId);
     }
 }

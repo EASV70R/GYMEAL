@@ -52,7 +52,7 @@ Util::Navbar();
                     <form method="POST">
                         <div class="form-group">
                             <input type="text" class="form-control form-control" placeholder="Title"
-                                name="title" value="<?= Util::Print($row->title);?>" required>
+                                name="title" value="<?= Util::Print($row->name);?>" required>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control form-control" placeholder="Description"
@@ -60,11 +60,11 @@ Util::Navbar();
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control form-control" placeholder="Footer Description"
-                                name="footerDesc" value="<?= Util::Print($row->footerDesc);?>" required>
+                                name="footerDesc" value="<?= Util::Print($row->smalldesc);?>" required>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control form-control" placeholder="Address"
-                                name="address" value="<?= Util::Print($row->address);?>" required>
+                                name="address" value="<?= Util::Print($row->street);?>" required>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control form-control" placeholder="Phone"
@@ -72,7 +72,7 @@ Util::Navbar();
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control form-control" placeholder="Mail"
-                                name="mail" value="<?= Util::Print($row->mail);?>" required>
+                                name="mail" value="<?= Util::Print($row->email);?>" required>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control form-control" placeholder="Image"
