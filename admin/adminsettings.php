@@ -60,7 +60,7 @@ Util::Navbar();
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control form-control" placeholder="Footer Description"
-                                name="footerDesc" value="<?= Util::Print($row->smalldesc);?>" required>
+                                name="smalldesc" value="<?= Util::Print($row->smalldesc);?>" required>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control form-control" placeholder="Address"
@@ -72,7 +72,7 @@ Util::Navbar();
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control form-control" placeholder="Mail"
-                                name="mail" value="<?= Util::Print($row->email);?>" required>
+                                name="email" value="<?= Util::Print($row->email);?>" required>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control form-control" placeholder="Image"

@@ -12,10 +12,10 @@ class CompanyData extends Database
         return $this->statement->fetchAll();
     }
 
-    public function UpdateCompanyData($title, $desc, $footerDesc, $address, $phone, $mail, $image): bool
+    public function UpdateCompanyData($title, $email, $phone, $desc, $smalldesc, $address, $image): bool
     {
-        $this->prepare('UPDATE `company` SET `title` = ?, `desc` = ?, `smalldesc` = ? `image` = ? WHERE `companyId` = 1');
-        if ($this->statement->execute([$title, $desc, $footerDesc, $address, $phone, $mail, $image]))
+        $this->prepare('UPDATE `company` SET `name` = ?, `email` = ?, `phone` = ?, `desc` = ?, `smalldesc` = ?, `image` = ? WHERE `companyId` = 1');
+        if ($this->statement->execute([$title, $email, $phone, $desc, $smalldesc, $image]))
         {
             return true;
         } else {
