@@ -18,6 +18,7 @@ $router->get('profilesettings', 'views/profilesettings');
 $router->get('admin', 'admin/index');
 $router->get('admin', 'admin/settings');
 $router->get('admin', 'admin/invoice');
+$router->get('admin', 'admin/productlist');
 $router->get('admin', 'admin/blog');
 $router->get('logout', 'views/logout');
 $router->get('404', 'views/404');

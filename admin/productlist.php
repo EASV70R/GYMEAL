@@ -6,8 +6,9 @@ Util::IsAdmin();
 
 require_once '../cms/controllers/products.php';
 
-$products = new products;
-$products = $products->GetProductsArray();
+$product = new products;
+var_dump($product->GetProductStatus(1));
+$products = $product->GetProductArray();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET["cancel"])) {
@@ -53,31 +54,23 @@ Util::Navbar();
                             <header class="d-lg-flex">
                                 <div class="flex-grow-1">
                                     <h6 class="mb-0">Product ID: <?= Util::Print($row->productId); ?><i class="dot"></i>
-                                        <?php if ($row->quantity == 0) : ?>
+                                    <?php if ($row->quantity == 0) : ?>
                                         <span
-                                            class="text-danger"><?= Util::Print($invoice->GetInvoiceStatus($row->invoiceId, $row->userId)->status); ?></span>
+                                            class="text-danger"><?= Util::Print($product->GetProductStatus($row->productId)->quantity); ?></span>
                                         <?php else : ?>
                                         <span
-                                            class="text-success"><?= Util::Print($invoice->GetInvoiceStatus($row->invoiceId, $row->userId)->status); ?></span>
+                                            class="text-success"><?= Util::Print($product->GetProductStatus($row->productId)->quantity); ?></span>
                                         <?php endif; ?>
                                     </h6>
-                                    <span class="text-muted">Date: <?= Util::Print($row->createdAt); ?></span>
+                                    
                                 </div>
                                 <div>
-                                    <a href="<?= (SITE_URL); ?>/admin/invoice.php?cancel=&invoiceId=<?= Util::Print($row->invoiceId); ?>&userId=<?= Util::Print($row->userId); ?>"
-                                        class="btn btn-sm btn-outline-danger">Cancel order</a>
-                                    <a href="#" class="btn btn-sm btn-primary">Track order</a>
+                                    <a href="<?= (SITE_URL); ?>"
+                                        class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="<?= (SITE_URL); ?>"
+                                        class="btn btn-danger btn-sm">Delete</a>
                                 </div>
                             </header>
-                            <hr>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <p class="mb-0 text-muted">Shipping address:</p>
-                                    <p class="m-0"><?= Util::Print($row->country); ?><br>
-                                        <?= Util::Print($row->city); ?> <?= Util::Print($row->region); ?>,
-                                        <?= Util::Print($row->address); ?></p>
-                                </div>
-                            </div>
                             <hr>
                             <ul class="row">
                                 <li class="col-xl-4  col-lg-6">
@@ -86,7 +79,7 @@ Util::Navbar();
                                             <img width="72" height="72" src="" alt="test" class="img-sm rounded border">
                                         </div>
                                         <figcaption class="info">
-                                            <p class="title"><?= Util::Print($row->itemName); ?></p>
+                                            <p class="title"><?= Util::Print($row->title); ?></p>
                                             <strong> $<?= Util::Print($row->price); ?> </strong>
                                         </figcaption>
                                     </figure>

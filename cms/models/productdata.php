@@ -23,7 +23,7 @@ class ProductData extends Database
         $this->prepare('SELECT * FROM `product` WHERE `productId` = ?');
         $this->statement->execute([$productID]);
         $result = $this->statement->fetch();
-        $result->quantity = ((int) $result->quantity === 0) ? 'Available' : 'Out of Stock';
+        $result->quantity = ((int) $result->quantity === 0) ? 'Out of Stock' : 'Available';
         return $result;
     }
 

@@ -19,13 +19,13 @@ class Products
     public function DeleteProduct($productId)
     {
         $Product = new ProductData();
-        return $Invoice->DeleteProduct($productId);
+        return $Product->DeleteProduct($productId);
     }
 
-    public function ProductStatus($invoiceID)
+    public function GetProductStatus($productId)
     {
         $Product = new ProductData();
-        return $Invoice->ProductQuantityStatus($invoiceID);
+        return $Product->ProductQuantityStatus($productId);
     }
 
     public function ProductFilter($filterId)
