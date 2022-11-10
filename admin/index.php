@@ -17,7 +17,7 @@ Util::Navbar();
             <nav class="nav flex-lg-column nav-pills mb-4">
                 <a class="nav-link active" href="#">Admin</a>
                 <a class="nav-link" href="<?= (SITE_URL); ?>/admin/invoice">Customer Invoices</a>
-                <a class="nav-link" href="<?= (SITE_URL); ?>/admin/adminsettings">Settings</a>
+                <a class="nav-link" href="<?= (SITE_URL); ?>/admin/settings">Settings</a>
                 <a class="nav-link" href="<?= (SITE_URL); ?>/logout">Logout</a>
             </nav>
         </aside>

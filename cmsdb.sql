@@ -46,6 +46,13 @@ CREATE TABLE IF NOT EXISTS `company` (
 INSERT INTO `company` (`companyId`, `name`, `email`, `phone`, `desc`, `smalldesc`, `image`, `addressId`) VALUE
 ('1', 'FIT', 'test@test.dk', '+4512345678',  'GOOD FOOD', 'GOOD FOOD', 'GOOD FOOD', '1');
 
+DROP TABLE IF EXISTS `productfilter`;
+CREATE TABLE IF NOT EXISTS `productfilter` (
+  `productFilterId` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`productFilterId`)
+);
+
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE IF NOT EXISTS `product` (
   `productId` int NOT NULL AUTO_INCREMENT,
@@ -54,13 +61,33 @@ CREATE TABLE IF NOT EXISTS `product` (
   `desc` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
   `price` int(11) NOT NULL,
-  `addressId` int NOT NULL,
+  `productFilterId` int NOT NULL,
   PRIMARY KEY (`productId`),
-  FOREIGN KEY (`addressId`) REFERENCES `company`(`addressId`)
+  FOREIGN KEY (`productFilterId`) REFERENCES `productfilter`(`productFilterId`)
 );
 
-INSERT INTO `product` (`productId`, `title`, `quantity`, `desc`, `image`, `price`, `addressId`) VALUE
-('1', 'Burger', '10', 'Good Burger', 'burger.jpg', '100', '1');
+insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (1, 'Mushroom - Morel Frozen', 9, 'Pork - Sausage, Medium', 'http://dummyimage.com/112x100.png/5fa2dd/ffffff', 45, 3);
+insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (2, 'Ham - Proscuitto', 3, 'Nantucket - 518ml', 'http://dummyimage.com/105x100.png/5fa2dd/ffffff', 82, 3);
+insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (3, 'Gelatine Leaves - Bulk', 2, 'Water - Spring Water 500ml', 'http://dummyimage.com/143x100.png/cc0000/ffffff', 18, 3);
+insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (4, 'Cookie Double Choco', 2, 'Beef - Rib Roast, Capless', 'http://dummyimage.com/217x100.png/ff4444/ffffff', 71, 2);
+insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (5, 'Carbonated Water - Orange', 4, 'Cheese - Shred Cheddar / Mozza', 'http://dummyimage.com/163x100.png/5fa2dd/ffffff', 57, 2);
+insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (6, 'Lemonade - Natural, 591 Ml', 3, 'Bread - Ciabatta Buns', 'http://dummyimage.com/120x100.png/cc0000/ffffff', 53, 2);
+insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (7, 'Wine - Chablis J Moreau Et Fils', 10, 'Vodka - Moskovskaya', 'http://dummyimage.com/146x100.png/5fa2dd/ffffff', 20, 3);
+insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (8, 'Soup V8 Roasted Red Pepper', 7, 'Cornstarch', 'http://dummyimage.com/112x100.png/cc0000/ffffff', 81, 2);
+insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (9, 'Cookie Double Choco', 9, 'Soup Bowl Clear 8oz92008', 'http://dummyimage.com/122x100.png/dddddd/000000', 74, 2);
+insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (10, 'Red Currants', 4, 'Silicone Parch. 16.3x24.3', 'http://dummyimage.com/249x100.png/ff4444/ffffff', 27, 1);
+insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (11, 'Clam - Cherrystone', 4, 'Raisin - Dark', 'http://dummyimage.com/101x100.png/ff4444/ffffff', 67, 2);
+insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (12, 'Langers - Mango Nectar', 6, 'Rice - Wild', 'http://dummyimage.com/170x100.png/5fa2dd/ffffff', 13, 3);
+insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (13, 'Salmon Atl.whole 8 - 10 Lb', 9, 'Beef Ground Medium', 'http://dummyimage.com/207x100.png/cc0000/ffffff', 40, 2);
+insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (14, 'Chivas Regal - 12 Year Old', 8, 'Turkey - Oven Roast Breast', 'http://dummyimage.com/190x100.png/ff4444/ffffff', 43, 1);
+insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (15, 'Wine - Red, Gamay Noir', 9, 'Pickle - Dill', 'http://dummyimage.com/160x100.png/cc0000/ffffff', 85, 3);
+
+DELIMITER //
+Create Trigger before_inser_productqty BEFORE INSERT ON product FOR EACH ROW
+BEGIN
+IF NEW.quantity < 0 THEN SET NEW.quantity = 0;
+END IF;
+END
 
 DROP TABLE IF EXISTS `has`;
 CREATE TABLE IF NOT EXISTS `has` (
@@ -136,3 +163,10 @@ CREATE TABLE IF NOT EXISTS `userrole` (
 
 INSERT INTO `userrole` (`uid`, `roleid`) VALUE
 ('1', '1');
+
+DELIMITER //
+Create Trigger before_inser_productqty BEFORE INSERT ON product FOR EACH ROW
+BEGIN
+IF NEW.quantity < 0 THEN SET NEW.quantity = 0;
+END IF;
+END

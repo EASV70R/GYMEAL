@@ -4,10 +4,10 @@ require_once '../cms/controllers/company.php';
 
 Util::IsAdmin();
 
-require_once '../cms/controllers/invoices.php';
+require_once '../cms/controllers/products.php';
 
-$invoice = new Invoices;
-$invoices = $invoice->GetInvoicesArray();
+$products = new products;
+$products = $products->GetProductsArray();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET["cancel"])) {
@@ -46,14 +46,14 @@ Util::Navbar();
                         </p>
                     </figcaption>
                     <hr>
-                    <h4 class="card-title text-center">Invoices</h4>
-                    <?php foreach ($invoices as $row) : ?>
+                    <h4 class="card-title text-center">Products</h4>
+                    <?php foreach ($products as $row) : ?>
                     <article class="card border-primary mb-4">
                         <div class="card-body">
                             <header class="d-lg-flex">
                                 <div class="flex-grow-1">
-                                    <h6 class="mb-0">Invoice ID: <?= Util::Print($row->invoiceId); ?><i class="dot"></i>
-                                        <?php if ($row->status == 0) : ?>
+                                    <h6 class="mb-0">Product ID: <?= Util::Print($row->productId); ?><i class="dot"></i>
+                                        <?php if ($row->quantity == 0) : ?>
                                         <span
                                             class="text-danger"><?= Util::Print($invoice->GetInvoiceStatus($row->invoiceId, $row->userId)->status); ?></span>
                                         <?php else : ?>
