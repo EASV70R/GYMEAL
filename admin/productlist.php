@@ -10,14 +10,20 @@ $product = new products;
 var_dump($product->GetProductStatus(1));
 $products = $product->GetProductArray();
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (isset($_GET["cancel"])) {
-        $invoiceId = $_GET["invoiceId"];
-        $userId = $_GET["userId"];
-        $invoice->DeleteInvoice($invoiceId, $userId);
-        Util::Redirect('/invoice');
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST["cuItem"])) {
+        $error = $product->CreateProduct($_POST);
     }
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (isset($_GET["delete"])) {
+        $productId = $_GET["productId"];
+        $product->DeleteProduct($productId);
+        Util::Redirect('/productlist');
+    }
+}
+
 // invoice.php?cancel=&invoiceId=4&userId=2
 Util::Header();
 Util::Navbar();
@@ -27,6 +33,13 @@ Util::Navbar();
 </br>
 <main class="container mt-5">
     <div class="row justify-content-center">
+        <div class="col-12 mt-3 mb-2">
+            <?php if (isset($error)) : ?>
+            <div class="alert alert-primary" role="alert">
+                <?= Util::Print($error); ?>
+            </div>
+            <?php endif; ?>
+        </div>
         <aside class="col-lg-3 col-xl-3">
             <nav class="nav flex-lg-column nav-pills mb-4">
                 <a class="nav-link" href="<?= (SITE_URL); ?>/admin">Admin</a>
@@ -43,28 +56,28 @@ Util::Navbar();
                             <h4 class="card-title text-center">Create / Update Product</h4>
                             <form method="POST">
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-sm"
-                                        placeholder="Item Name" name="itemName" required>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Item Name"
+                                        name="itemName" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="desc" class="form-control form-control-sm"
+                                    <input type="itemDesc" class="form-control form-control-sm"
                                         placeholder="Item Description" name="itemDesc" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="number" class="form-control form-control-sm"
-                                        placeholder="Quantity" name="quantity" required>
+                                    <input type="number" class="form-control form-control-sm" placeholder="Quantity"
+                                        name="itemQuantity" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="number" class="form-control form-control-sm"
-                                        placeholder="Price" name="price" required>
+                                    <input type="number" class="form-control form-control-sm" placeholder="Price"
+                                        name="itemPrice" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="number" class="form-control form-control-sm"
-                                        placeholder="Filter" name="filterId" min="1" max="3" required>
+                                    <input type="number" class="form-control form-control-sm" placeholder="Filter"
+                                        name="filterId" min="1" max="3" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-sm"
-                                        placeholder="Item Image" name="itemImage" required>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Item Image"
+                                        name="itemImage" required>
                                 </div>
                                 <button class="btn btn-outline-primary btn-block" name="cuItem" type="submit"
                                     value="submit">Create / Update
@@ -92,7 +105,7 @@ Util::Navbar();
                                 </div>
                                 <div>
                                     <a href="<?= (SITE_URL); ?>" class="btn btn-primary btn-sm">Edit</a>
-                                    <a href="<?= (SITE_URL); ?>" class="btn btn-danger btn-sm">Delete</a>
+                                    <a href="<?= (SITE_URL); ?>/admin/productlist/?delete=&productId=<?= Util::Print($row->productId); ?>" class="btn btn-danger btn-sm">Delete</a>
                                 </div>
                             </header>
                             <hr>

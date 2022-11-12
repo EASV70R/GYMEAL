@@ -16,6 +16,22 @@ class Products
         return $Product->ProductArray();
     }
 
+    public function CreateProduct($data): string
+    {
+        $Product = new ProductData();
+
+        $title = trim($data['itemName']);
+        $desc = trim($data['itemDesc']);
+        $price = (int)$data['itemPrice'];
+        $quantity = (int)$data['itemQuantity'];
+        $image = trim($data['itemImage']);
+        $productFilterId = (int)$data['filterId'];
+
+        $response = $Product->CreateProduct($title, $quantity, $desc, $image, $price, $productFilterId);
+
+        return ($response) ? 'Product created.' : 'Product creation failed.';
+    }
+
     public function DeleteProduct($productId)
     {
         $Product = new ProductData();

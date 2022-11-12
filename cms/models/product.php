@@ -12,6 +12,17 @@ class ProductData extends Database
         return $this->statement->fetchAll();
     }
 
+    public function CreateProduct($name, $quantity, $desc, $image, $price, $category): bool
+    {
+        $this->prepare('INSERT INTO `product` (`title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) VALUES (?, ?, ?, ?, ?, ?)');
+        if ($this->statement->execute([$name, $quantity, $desc, $image, $price, $category]))
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function DeleteProduct($productID)
     {
         $this->prepare('DELETE FROM `product` WHERE `productId` = ?');
