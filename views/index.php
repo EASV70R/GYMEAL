@@ -1,8 +1,13 @@
 <?php
 require_once './cms/require.php';
 require_once './cms/controllers/company.php';
+require_once './cms/controllers/products.php';
 
 $companyData = new Company;
+
+$product = new Products;
+$firstProduct = $product->GetLatestProductFirst();
+$products = $product->GetLatestProductOffsetByOne();
 
 Util::Header();
 Util::Navbar();
@@ -67,86 +72,38 @@ Util::Navbar();
                 <div class="row mx-auto my-auto justify-content-center">
                     <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner" role="listbox">
+                            <?php foreach ($firstProduct as $row) : ?>
                             <div class="carousel-item active">
                                 <div class="col-md-3">
                                     <div class="card">
-                                        <div class="img-wrapper"><img
-                                                src="<?= (SITE_URL); ?>/assets/img/s-well-CJdZ800-Fbs-unsplash.jpg"
-                                                class="img-wrapper" alt="..."> </div>
+                                        <div class="img-wrapper"><img src="<?= Util::Print($row->image); ?>"
+                                                class="img-wrapper" alt="<?= Util::Print($row->title); ?>"> </div>
                                         <div class="card-body">
-                                            <h5 class="card-title">test</h5>
-                                            <p class="card-text">test</p>
-                                            <a href="#" class="btn btn-primary">View product</a>
+                                            <h5 class="card-title"><?= Util::Print($row->title); ?></h5>
+                                            <p class="card-text"><?= Util::Print($row->desc); ?></p>
+                                            <a href="<?= (SITE_URL); ?>/productview/?product&id=<?= Util::Print($row->productId); ?>"
+                                                class="btn btn-primary">View product</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <?php endforeach; ?>
+                            <?php foreach ($products as $row) : ?>
                             <div class="carousel-item">
                                 <div class="col-md-3">
                                     <div class="card">
-                                        <div class="img-wrapper"><img
-                                                src="<?= (SITE_URL); ?>/assets/img/ella-olsson-P4jRJYN33wE-unsplash.jpg"
-                                                class="img-wrapper" alt="..."> </div>
+                                        <div class="img-wrapper"><img src="<?= Util::Print($row->image); ?>"
+                                                class="img-wrapper" alt="<?= Util::Print($row->title); ?>"> </div>
                                         <div class="card-body">
-                                            <h5 class="card-title">test</h5>
-                                            <p class="card-text">test</p>
-                                            <a href="#" class="btn btn-primary">View product</a>
+                                            <h5 class="card-title"><?= Util::Print($row->title); ?></h5>
+                                            <p class="card-text"><?= Util::Print($row->desc); ?></p>
+                                            <a href="<?= (SITE_URL); ?>/productview/?product&id=<?= Util::Print($row->productId); ?>"
+                                                class="btn btn-primary">View product</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="carousel-item">
-                                <div class="col-md-3">
-                                    <div class="card">
-                                        <div class="img-wrapper"><img src="//via.placeholder.com/500x400/e66?text=1"
-                                                class="img-wrapper" alt="..."> </div>
-                                        <div class="card-body">
-                                            <h5 class="card-title">test</h5>
-                                            <p class="card-text">test</p>
-                                            <a href="#" class="btn btn-primary">View product</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="col-md-3">
-                                    <div class="card">
-                                        <div class="img-wrapper"><img src="//via.placeholder.com/500x400/e66?text=1"
-                                                class="img-wrapper" alt="..."> </div>
-                                        <div class="card-body">
-                                            <h5 class="card-title">test</h5>
-                                            <p class="card-text">test</p>
-                                            <a href="#" class="btn btn-primary">View product</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="col-md-3">
-                                    <div class="card">
-                                        <div class="img-wrapper"><img src="//via.placeholder.com/500x400/e66?text=1"
-                                                class="img-wrapper" alt="..."> </div>
-                                        <div class="card-body">
-                                            <h5 class="card-title">test</h5>
-                                            <p class="card-text">test</p>
-                                            <a href="#" class="btn btn-primary">View product</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="col-md-3">
-                                    <div class="card">
-                                        <div class="img-wrapper"><img src="//via.placeholder.com/500x400/e66?text=1"
-                                                class="img-wrapper" alt="..."> </div>
-                                        <div class="card-body">
-                                            <h5 class="card-title">test</h5>
-                                            <p class="card-text">test</p>
-                                            <a href="#" class="btn btn-primary">View product</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php endforeach; ?>
                         </div>
                         <a class="carousel-control-prev bg-transparent w-aut" href="#productCarousel" role="button"
                             data-bs-slide="prev">

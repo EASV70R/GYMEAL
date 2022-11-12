@@ -16,6 +16,18 @@ class Products
         return $Product->ProductArray();
     }
 
+    public function GetLatestProductFirst()
+    {
+        $Product = new ProductData();
+        return $Product->LatestProductFirst();
+    }
+    
+    public function GetLatestProductOffsetByOne()
+    {
+        $Product = new ProductData();
+        return $Product->LatestProductOffsetByOne();
+    }
+
     public function CreateProduct($data): string
     {
         $Product = new ProductData();

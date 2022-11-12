@@ -12,6 +12,20 @@ class ProductData extends Database
         return $this->statement->fetchAll();
     }
 
+    public function LatestProductFirst()
+    {
+        $this->prepare('SELECT * FROM `product` ORDER BY `productId` DESC LIMIT 1');
+        $this->statement->execute();
+        return $this->statement->fetchAll();
+    }
+
+    public function LatestProductOffsetByOne()
+    {
+        $this->prepare('SELECT * FROM `product` ORDER BY `productId` DESC LIMIT 5 OFFSET 1');
+        $this->statement->execute();
+        return $this->statement->fetchAll();
+    }
+
     public function CreateProduct($title, $quantity, $desc, $image, $price, $category): bool
     {
         $this->prepare('INSERT INTO `product` (`title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) VALUES (:title, :quantity, :adesc, :aimage, :price, :productFilterId)');
