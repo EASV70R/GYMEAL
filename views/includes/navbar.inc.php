@@ -17,6 +17,8 @@
                 <a href="<?= (SITE_URL); ?>/products" class="nav-item nav-link">Products</a>
                 <a href="<?= (SITE_URL); ?>/about" class="nav-item nav-link">About Us</a>
                 <a href="<?= (SITE_URL); ?>/contactus" class="nav-item nav-link">Contact Us</a>
+                <a href="<?= (SITE_URL); ?>/cart" class="nav-item nav-link"><small
+                            class="fa fa-shopping-cart text-body"></small></a>
                 <div class="nav-item dropdown">
                     <!-- 
                         btn-sm-square bg-white rounded-circle ms-3
@@ -25,16 +27,16 @@
                             class="fa fa-user text-body"></small></a>
                     <div class="dropdown-menu dropdown-menu-left">
                         <?php if (Session::Get('login')) : ?>
-                            <p class="dropdown-item"><?= Util::Print(Session::Get('username'));?></p>
+                        <p class="dropdown-item"><?= Util::Print(Session::Get('username'));?></p>
                         <?php if (Session::Get('admin')) : ?>
-                            <a href="<?= (SITE_URL); ?>/admin" class="dropdown-item">Admin</a>
+                        <a href="<?= (SITE_URL); ?>/admin" class="dropdown-item">Admin</a>
                         <?php else : ?>
-                            <a href="<?= (SITE_URL); ?>/profile" class="dropdown-item">Profile</a>
+                        <a href="<?= (SITE_URL); ?>/profile" class="dropdown-item">Profile</a>
                         <?php endif; ?>
-                            <a href="<?= (SITE_URL); ?>/logout" class="dropdown-item">Logout</a>
+                        <a href="<?= (SITE_URL); ?>/logout" class="dropdown-item">Logout</a>
                         <?php else : ?>
-                            <a href="<?= (SITE_URL); ?>/login" class="dropdown-item">Login</a>
-                            <a href="<?= (SITE_URL); ?>/register" class="dropdown-item">Register</a>
+                        <a href="<?= (SITE_URL); ?>/login" class="dropdown-item">Login</a>
+                        <a href="<?= (SITE_URL); ?>/register" class="dropdown-item">Register</a>
                         <?php endif; ?>
                     </div>
                 </div>
