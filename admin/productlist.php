@@ -38,14 +38,40 @@ Util::Navbar();
         <div class="col-lg-9 col-xl-9">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title text-center">Profile</h4>
-                    <figcaption class="info">
-                        <h6 class="title"><?= Util::Print(Session::Get('username'));?></h6>
-                        <p>Email: <?= Util::Print(Session::Get('email'));?>, Phone:
-                            <?= Util::Print(Session::Get('phone'));?>
-                            <a href="#" class="px-2"><i class="fa fa-pen"></i></a>
-                        </p>
-                    </figcaption>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title text-center">Create / Update Product</h4>
+                            <form method="POST">
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-sm"
+                                        placeholder="Item Name" name="itemName" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="desc" class="form-control form-control-sm"
+                                        placeholder="Item Description" name="itemDesc" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" class="form-control form-control-sm"
+                                        placeholder="Quantity" name="quantity" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" class="form-control form-control-sm"
+                                        placeholder="Price" name="price" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" class="form-control form-control-sm"
+                                        placeholder="Filter" name="filterId" min="1" max="3" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-sm"
+                                        placeholder="Item Image" name="itemImage" required>
+                                </div>
+                                <button class="btn btn-outline-primary btn-block" name="cuItem" type="submit"
+                                    value="submit">Create / Update
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                     <hr>
                     <h4 class="card-title text-center">Products</h4>
                     <?php foreach ($products as $row) : ?>
@@ -54,7 +80,7 @@ Util::Navbar();
                             <header class="d-lg-flex">
                                 <div class="flex-grow-1">
                                     <h6 class="mb-0">Product ID: <?= Util::Print($row->productId); ?><i class="dot"></i>
-                                    <?php if ($row->quantity == 0) : ?>
+                                        <?php if ($row->quantity == 0) : ?>
                                         <span
                                             class="text-danger"><?= Util::Print($product->GetProductStatus($row->productId)->quantity); ?></span>
                                         <?php else : ?>
@@ -62,13 +88,11 @@ Util::Navbar();
                                             class="text-success"><?= Util::Print($product->GetProductStatus($row->productId)->quantity); ?></span>
                                         <?php endif; ?>
                                     </h6>
-                                    
+
                                 </div>
                                 <div>
-                                    <a href="<?= (SITE_URL); ?>"
-                                        class="btn btn-primary btn-sm">Edit</a>
-                                    <a href="<?= (SITE_URL); ?>"
-                                        class="btn btn-danger btn-sm">Delete</a>
+                                    <a href="<?= (SITE_URL); ?>" class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="<?= (SITE_URL); ?>" class="btn btn-danger btn-sm">Delete</a>
                                 </div>
                             </header>
                             <hr>
