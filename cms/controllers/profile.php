@@ -20,7 +20,7 @@ class Profile
 
     public function UpdatePassword($data): string
     {
-        $User = new User();
+        $User = new UserModel();
 
         $currentPassword = (string) $data['currentPassword'];
         $newPassword = (string) $data['newPassword'];

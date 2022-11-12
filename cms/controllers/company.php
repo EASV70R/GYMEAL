@@ -7,13 +7,13 @@ class Company
 {
     public function GetCompanyArray()
     {
-        $Company = new CompanyData();
+        $Company = new CompanyModel();
         return $Company->CompanyDataArray();
     }
 
     public function UpdateCompanyData($data): string
     {
-        $Company = new CompanyData();
+        $Company = new CompanyModel();
         $title = (string) $data['title'];
         $email = (string) $data['email'];
         $phone = (string) $data['phone'];
@@ -33,7 +33,7 @@ class Company
 
     public function GetCompanyAddress($companyId)
     {
-        $Company = new CompanyData();
+        $Company = new CompanyModel();
         return $Company->GetCompanyAddress($companyId);
     }
 }

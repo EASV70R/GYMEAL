@@ -3,7 +3,7 @@ defined('BASE_PATH') or exit('No direct script access allowed');
 
 require_once __DIR__.'/../core/database.php';
 
-class BlogData extends Database
+class BlogModel extends Database
 {
     public function BlogDataArray()
     {

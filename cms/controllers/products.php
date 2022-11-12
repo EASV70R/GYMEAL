@@ -7,25 +7,25 @@ class Products
 {
     public function GetProductArray()
     {
-        $Product = new ProductData();
+        $Product = new ProductModel();
         return $Product->ProductArray();
     }
 
     public function GetLatestProductFirst()
     {
-        $Product = new ProductData();
+        $Product = new ProductModel();
         return $Product->LatestProductFirst();
     }
     
     public function GetLatestProductOffsetByOne()
     {
-        $Product = new ProductData();
+        $Product = new ProductModel();
         return $Product->LatestProductOffsetByOne();
     }
 
     public function CreateProduct($data): string
     {
-        $Product = new ProductData();
+        $Product = new ProductModel();
 
         $title = trim($data['itemName']);
         $desc = trim($data['itemDesc']);
@@ -41,7 +41,7 @@ class Products
 
     public function UpdateProduct($data): string
     {
-        $Product = new ProductData();
+        $Product = new ProductModel();
 
         $title = trim($data['itemName']);
         $desc = trim($data['itemDesc']);
@@ -58,37 +58,37 @@ class Products
 
     public function DeleteProduct($productId)
     {
-        $Product = new ProductData();
+        $Product = new ProductModel();
         return $Product->DeleteProduct($productId);
     }
 
     public function GetProductStatus($productId)
     {
-        $Product = new ProductData();
+        $Product = new ProductModel();
         return $Product->ProductQuantityStatus($productId);
     }
 
     public function ProductFilter($filterId)
     {
-        $Product = new ProductData();
+        $Product = new ProductModel();
         return $Product->ProductFilter($filterId);
     }
 
     public function ProductMealFilter()
     {
-        $Product = new ProductData();
+        $Product = new ProductModel();
         return $Product->ProductMealFilter();
     }
 
     public function ProductDrinkFilter()
     {
-        $Product = new ProductData();
+        $Product = new ProductModel();
         return $Product->ProductDrinkFilter();
     }
 
     public function GetProductById($id)
     {
-        $Product = new ProductData();
+        $Product = new ProductModel();
         return $Product->ProductById($id);
     }
 }

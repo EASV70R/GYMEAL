@@ -12,25 +12,25 @@ class Invoices
 {
     public function GetInvoicesArray()
     {
-        $Invoice = new Invoice();
+        $Invoice = new InvoiceModel();
         return $Invoice->InvoiceArray();
     }
 
     public function GetUserInvoices()
     {
-        $Invoice = new Invoice();
+        $Invoice = new InvoiceModel();
         return $Invoice->InvoiceFromCurrentUID();
     }
 
     public function DeleteInvoice($invoiceID, $userID)
     {
-        $Invoice = new Invoice();
+        $Invoice = new InvoiceModel();
         return $Invoice->DeleteInvoice($invoiceID, $userID);
     }
 
     public function GetInvoiceStatus($invoiceID, $userID)
     {
-        $Invoice = new Invoice();
+        $Invoice = new InvoiceModel();
         return $Invoice->InvoiceStatus($invoiceID, $userID);
     }
 }

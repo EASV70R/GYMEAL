@@ -7,13 +7,13 @@ class Blog
 {
     public function GetBlogArray()
     {
-        $Blog = new BlogData();
+        $Blog = new BlogModel();
         return $Blog->BlogDataArray();
     }
 
     public function CreateBlogPost($data): string
     {
-        $Blog = new BlogData();
+        $Blog = new BlogModel();
 
         $title = trim($data['title']);
         $content = trim($data['content']);

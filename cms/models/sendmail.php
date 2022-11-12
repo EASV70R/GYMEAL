@@ -8,7 +8,7 @@ require './vendor/lib/PHPMailer/src/PHPMailer.php';
 require './vendor/lib/PHPMailer/src/SMTP.php';
 
 //Create an instance; passing `true` enables exceptions
-Class SendMail
+Class SendMailModel
 {
     public function SendMail($email, $name, $subject, $message): string
     {

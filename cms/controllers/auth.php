@@ -9,7 +9,7 @@ class Auth
 {
     public function Register($data): string
     {
-        $User = new User();
+        $User = new UserModel();
 
         $username = trim($data['username']);
         $password = (string) $data['password'];
@@ -39,7 +39,7 @@ class Auth
 
     public function Login($data): null|string
     {
-        $User = new User();
+        $User = new UserModel();
 
         $username = trim($data['username']);
         $password = (string) $data['password'];
