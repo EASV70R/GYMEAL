@@ -12,10 +12,40 @@ class ProductData extends Database
         return $this->statement->fetchAll();
     }
 
-    public function CreateProduct($name, $quantity, $desc, $image, $price, $category): bool
+    public function CreateProduct($title, $quantity, $desc, $image, $price, $category): bool
     {
-        $this->prepare('INSERT INTO `product` (`title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) VALUES (?, ?, ?, ?, ?, ?)');
-        if ($this->statement->execute([$name, $quantity, $desc, $image, $price, $category]))
+        $this->prepare('INSERT INTO `product` (`title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) VALUES (:title, :quantity, :adesc, :aimage, :price, :productFilterId)');
+        $sanitized_title = htmlspecialchars($title);
+		$sanitized_desc = htmlspecialchars($desc);
+        $sanitized_aimage = htmlspecialchars($image);
+		$this->statement->bindParam(':title', $sanitized_title);
+        $this->statement->bindParam(':quantity', $quantity);
+        $this->statement->bindParam(':adesc', $sanitized_desc);
+        $this->statement->bindParam(':aimage', $sanitized_aimage);
+        $this->statement->bindParam(':price', $price);
+        $this->statement->bindParam(':productFilterId', $category);
+        if ($this->statement->execute())
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function UpdateProduct($id, $title, $quantity, $desc, $image, $price, $category): bool
+    {
+        $this->prepare('UPDATE `product` SET `title` = :title, `quantity` = :quantity, `desc` = :adesc, `image` = :aimage, `price` = :price, `productFilterId` = :productFilterId WHERE `productId` = :productId');
+        $sanitized_title = htmlspecialchars($title);
+        $sanitized_desc = htmlspecialchars($desc);
+        $sanitized_aimage = htmlspecialchars($image);
+        $this->statement->bindParam(':productId', $id);
+        $this->statement->bindParam(':title', $sanitized_title);
+        $this->statement->bindParam(':quantity', $quantity);
+        $this->statement->bindParam(':adesc', $sanitized_desc);
+        $this->statement->bindParam(':aimage', $sanitized_aimage);
+        $this->statement->bindParam(':price', $price);
+        $this->statement->bindParam(':productFilterId', $category);
+        if ($this->statement->execute())
         {
             return true;
         } else {
@@ -25,14 +55,16 @@ class ProductData extends Database
 
     public function DeleteProduct($productID)
     {
-        $this->prepare('DELETE FROM `product` WHERE `productId` = ?');
-        $this->statement->execute([$productID]);
+        $this->prepare('DELETE FROM `product` WHERE `productId` = :productID');
+        $this->statement->bindParam(':productID', $productID);
+        $this->statement->execute();
     }
 
     public function ProductQuantityStatus($productID)
     {
-        $this->prepare('SELECT * FROM `product` WHERE `productId` = ?');
-        $this->statement->execute([$productID]);
+        $this->prepare('SELECT * FROM `product` WHERE `productId` = :productID');
+        $this->statement->bindParam(':productID', $productID);
+        $this->statement->execute();
         $result = $this->statement->fetch();
         $result->quantity = ((int) $result->quantity === 0) ? 'Out of Stock' : 'Available';
         return $result;
@@ -61,8 +93,9 @@ class ProductData extends Database
 
     public function ProductById($id)
     {
-        $this->prepare('SELECT * FROM `product` WHERE `productId` = ?');
-        $this->statement->execute([$id]);
+        $this->prepare('SELECT * FROM `product` WHERE `productId` = :productID');
+        $this->statement->bindParam(':productID', $id);
+        $this->statement->execute();
         return $this->statement->fetchAll();
     }
 }

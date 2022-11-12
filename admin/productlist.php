@@ -104,7 +104,7 @@ Util::Navbar();
 
                                 </div>
                                 <div>
-                                    <a href="<?= (SITE_URL); ?>" class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="<?= (SITE_URL); ?>/admin/editproduct/?edit=&id=<?= Util::Print($row->productId); ?>" class="btn btn-primary btn-sm">Edit</a>
                                     <a href="<?= (SITE_URL); ?>/admin/productlist/?delete=&productId=<?= Util::Print($row->productId); ?>" class="btn btn-danger btn-sm">Delete</a>
                                 </div>
                             </header>

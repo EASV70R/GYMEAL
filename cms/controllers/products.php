@@ -32,6 +32,23 @@ class Products
         return ($response) ? 'Product created.' : 'Product creation failed.';
     }
 
+    public function UpdateProduct($data): string
+    {
+        $Product = new ProductData();
+
+        $title = trim($data['itemName']);
+        $desc = trim($data['itemDesc']);
+        $price = (int)$data['itemPrice'];
+        $quantity = (int)$data['itemQuantity'];
+        $image = trim($data['itemImage']);
+        $productFilterId = (int)$data['filterId'];
+        $id = (int)$_GET["id"];
+        
+        $response = $Product->UpdateProduct($id, $title, $quantity, $desc, $image, $price, $productFilterId);
+
+        return ($response) ? 'Product updated.' : 'Product update failed.';
+    }
+
     public function DeleteProduct($productId)
     {
         $Product = new ProductData();
