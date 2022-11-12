@@ -48,12 +48,16 @@ Util::Navbar();
                 <div class="product-dtl">
                     <div class="product-info">
                         <div class="product-name">
-                            <div class="form-group">
-                                <input type="text" placeholder="Title"
-                                    class="form-control my-3 bg-dark text-white text-center" name="itemName"
-                                    value="<?= Util::Print($row->title); ?>">
-                            </div>
+                            <input type="text" placeholder="Title"
+                                class="form-control my-3 bg-dark text-white text-center" name="itemName"
+                                value="<?= Util::Print($row->title); ?>">
                         </div>
+                        <label for="category">Category:</label>
+                        <select id="filterId" name="filterId">
+                            <option value="1">Meals</option>
+                            <option value="2">Drinks</option>
+                            <option value="3">Other</option>
+                        </select>
                         <div class="reviews-counter">
                             <div class="rate">
                                 <input type="radio" id="star5" name="rate" value="5" checked />

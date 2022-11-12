@@ -43,7 +43,7 @@ class Products
         $image = trim($data['itemImage']);
         $productFilterId = (int)$data['filterId'];
         $id = (int)$_GET["id"];
-        
+
         $response = $Product->UpdateProduct($id, $title, $quantity, $desc, $image, $price, $productFilterId);
 
         return ($response) ? 'Product updated.' : 'Product update failed.';
