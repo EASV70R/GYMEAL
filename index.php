@@ -16,10 +16,10 @@ $router->get('register', 'views/register');
 $router->get('profile', 'views/profile');
 $router->get('profilesettings', 'views/profilesettings');
 $router->get('admin', 'admin/index');
-$router->get('admin', 'admin/settings');
-$router->get('admin', 'admin/invoice');
-$router->get('admin', 'admin/productlist');
-$router->get('admin', 'admin/blog');
+$router->get('admin/settings', 'admin/settings');
+$router->get('admin/invoice', 'admin/invoice');
+$router->get('admin/productlist', 'admin/productlist');
+$router->get('admin/blog', 'admin/blog');
 $router->get('logout', 'views/logout');
 $router->get('404', 'views/404');
 
