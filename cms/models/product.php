@@ -47,4 +47,11 @@ class ProductData extends Database
         $this->statement->execute();
         return $this->statement->fetchAll();
     }
+
+    public function ProductById($id)
+    {
+        $this->prepare('SELECT * FROM `product` WHERE `productId` = ?');
+        $this->statement->execute([$id]);
+        return $this->statement->fetchAll();
+    }
 }

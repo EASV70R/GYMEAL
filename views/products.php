@@ -9,6 +9,13 @@ $products = $product->GetProductArray();
 $mealFilter = $product->ProductMealFilter();
 $drinkFilter = $product->ProductDrinkFilter();
 
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (isset($_GET["product"])) {
+        $productId = $_GET["id"];
+        $product->ProductId($productId);
+    }
+}
+
 Util::Header();
 Util::Navbar();
 ?>
@@ -55,7 +62,7 @@ Util::Navbar();
                             </div>
                             <div class="d-flex border-top">
                                 <small class="w-50 text-center border-end py-2">
-                                    <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View
+                                    <a class="text-body" href="<?= (SITE_URL); ?>/productview/?product&id=<?= Util::Print($row->productId); ?>"><i class="fa fa-eye text-primary me-2"></i>View
                                         detail</a>
                                 </small>
                                 <small class="w-50 text-center py-2">
@@ -88,7 +95,7 @@ Util::Navbar();
                             </div>
                             <div class="d-flex border-top">
                                 <small class="w-50 text-center border-end py-2">
-                                    <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View
+                                    <a class="text-body" href="<?= (SITE_URL); ?>/productview/?product&id=<?= Util::Print($row->productId); ?>"><i class="fa fa-eye text-primary me-2"></i>View
                                         detail</a>
                                 </small>
                                 <small class="w-50 text-center py-2">
@@ -121,7 +128,7 @@ Util::Navbar();
                             </div>
                             <div class="d-flex border-top">
                                 <small class="w-50 text-center border-end py-2">
-                                    <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View
+                                    <a class="text-body" href="<?= (SITE_URL); ?>/productview/?product&id=<?= Util::Print($row->productId); ?>"><i class="fa fa-eye text-primary me-2"></i>View
                                         detail</a>
                                 </small>
                                 <small class="w-50 text-center py-2">

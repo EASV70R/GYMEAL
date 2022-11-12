@@ -45,4 +45,10 @@ class Products
         $Product = new ProductData();
         return $Product->ProductDrinkFilter();
     }
+
+    public function GetProductById($id)
+    {
+        $Product = new ProductData();
+        return $Product->ProductById($id);
+    }
 }

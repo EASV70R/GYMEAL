@@ -2,6 +2,18 @@
 require_once './cms/require.php';
 require_once './cms/controllers/company.php';
 
+require_once './cms/controllers/products.php';
+
+$product = new Products;
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (isset($_GET["product"])) {
+        $productId = $_GET["id"];
+        var_dump($product->GetProductById($productId));
+    }
+}
+
 Util::Header();
 Util::Navbar();
 ?>
@@ -11,16 +23,17 @@ Util::Navbar();
 	            <h2>Product Details</h2>
 	        </div>
 	        <div class="row">
+				<?php foreach ($product->GetProductById(Util::Print($_GET["id"])) as $row) : ?>
 	        	<div class="col-md-6">
 						<div class="item">
-						  	<img src="/assets/img/chicken.png" />
+						  	<img src="<?= Util::Print($row->image); ?>" />
 						</div>
 					
 	        	</div>
 	        	<div class="col-md-6">
 	        		<div class="product-dtl">
         				<div class="product-info">
-		        			<div class="product-name">Variable Product</div>
+		        			<div class="product-name"><?= Util::Print($row->title); ?></div>
 		        			<div class="reviews-counter">
 								<div class="rate">
 								    <input type="radio" id="star5" name="rate" value="5" checked />
@@ -36,21 +49,22 @@ Util::Navbar();
 								  </div>
 								<span>3 Reviews</span>
 							</div>
-		        			<div class="product-price-discount"><span>$39.00</span><span class="line-through">$29.00</span></div>
+		        			<div class="product-price-discount"><span>$<?= Util::Print($row->price); ?></span><!--<span class="line-through"></span>--></div>
 		        		</div>
-	        			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+	        			<p><?= Util::Print($row->desc); ?></p>
 	        			
 	        			<div class="product-count">
 	        				<label for="size">Quantity</label>
 	        				<form action="#" class="display-flex">
 							    <div class="qtyminus">-</div>
-							    <input type="text" name="quantity" value="1" class="qty">
+							    <input type="text" name="quantity" value="<?= Util::Print($row->quantity); ?>" class="qty">
 							    <div class="qtyplus">+</div>
 							</form>
 							<a href="#" class="round-black-btn">Add to Cart</a>
 	        			</div>
 	        		</div>
 	        	</div>
+				<?php endforeach; ?>
 	        </div>
 	        <div class="product-info-tabs">
 		        <ul class="nav nav-tabs" id="myTab" role="tablist">
