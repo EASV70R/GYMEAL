@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `address` (
 );
 
 INSERT INTO `address` (`addressId`, `street`, `city`, `postalCode`, `country`) VALUE
-('1', 'EASV', 'EASV', '420', 'USA');
+('1', 'Erhvervsakademi Sydvest, Spangsbjerg Kirkevej 103', 'Esbjerg', '6700 ', 'Denmark');
 
 DROP TABLE IF EXISTS `company`;
 CREATE TABLE IF NOT EXISTS `company` (
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `company` (
 );
 
 INSERT INTO `company` (`companyId`, `name`, `email`, `phone`, `desc`, `smalldesc`, `image`, `addressId`) VALUE
-('1', 'FIT', 'test@test.dk', '+4512345678',  'GOOD FOOD', 'GOOD FOOD', 'GOOD FOOD', '1');
+('1', 'GYMEAL', 'test@test.dk', '+4512345678',  'GOOD FOOD', 'GOOD FOOD', 'GOOD FOOD', '1');
 
 DROP TABLE IF EXISTS `productfilter`;
 CREATE TABLE IF NOT EXISTS `productfilter` (
@@ -52,6 +52,11 @@ CREATE TABLE IF NOT EXISTS `productfilter` (
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`productFilterId`)
 );
+
+INSERT INTO `productfilter` (`productFilterId`, `name`) VALUE
+('1', 'Meals'),
+('2', 'Drinks'),
+('3', 'Other');
 
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE IF NOT EXISTS `product` (
@@ -81,13 +86,6 @@ insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`,
 insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (13, 'Salmon Atl.whole 8 - 10 Lb', 9, 'Beef Ground Medium', 'http://dummyimage.com/207x100.png/cc0000/ffffff', 40, 2);
 insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (14, 'Chivas Regal - 12 Year Old', 8, 'Turkey - Oven Roast Breast', 'http://dummyimage.com/190x100.png/ff4444/ffffff', 43, 1);
 insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (15, 'Wine - Red, Gamay Noir', 9, 'Pickle - Dill', 'http://dummyimage.com/160x100.png/cc0000/ffffff', 85, 3);
-
-DELIMITER //
-Create Trigger before_inser_productqty BEFORE INSERT ON product FOR EACH ROW
-BEGIN
-IF NEW.quantity < 0 THEN SET NEW.quantity = 0;
-END IF;
-END
 
 DROP TABLE IF EXISTS `has`;
 CREATE TABLE IF NOT EXISTS `has` (
@@ -167,6 +165,6 @@ INSERT INTO `userrole` (`uid`, `roleid`) VALUE
 DELIMITER //
 Create Trigger before_inser_productqty BEFORE INSERT ON product FOR EACH ROW
 BEGIN
-IF NEW.quantity < 0 THEN SET NEW.quantity = 0;
+IF NEW.quantity < 0 OR NEW.quantity > 20 THEN SET NEW.quantity = 0;
 END IF;
 END

@@ -3,11 +3,6 @@ defined('BASE_PATH') or exit('No direct script access allowed');
 
 require_once __DIR__.'/../models/product.php';
 
-if (!Session::Get('login')) {
-    http_response_code(403);
-    exit();
-}
-
 class Products
 {
     public function GetProductArray()

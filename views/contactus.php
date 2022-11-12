@@ -12,7 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $_SESSION['lastSentSubmission'] = time();
-$_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
 
 $companyData = new Company;
 

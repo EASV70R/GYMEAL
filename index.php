@@ -25,4 +25,5 @@ $router->get('logout', 'views/logout');
 $router->get('404', 'views/404');
 
 
-echo "test";
+echo $_SESSION['ipaddress'];
+echo session_id();
