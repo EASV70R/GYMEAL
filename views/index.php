@@ -25,8 +25,8 @@ Util::Navbar();
                                 <div class="col-lg-7">
                                     <h1 class="display-2 mb-5 animated slideInDown">Quality protein meal for you,
                                         after heavy training</h1>
-                                    <a href="" class="btn btn-primary rounded-pill py-sm-3 px-sm-5">Products</a>
-                                    <a href="" class="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3">Services</a>
+                                    <a href="/products" class="btn btn-primary rounded-pill py-sm-3 px-sm-5">Products</a>
+                                    <a href="#services" class="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3">Services</a>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +120,7 @@ Util::Navbar();
     </div>
 </div>
 
-<div class="container-xxl py-5">
+<div class="container-xxl py-5" id="services">
     <div class="container">
         <div class="row g-5 align-items-center">
             <?php foreach ($companyData->GetCompanyArray() as $row) : ?>
