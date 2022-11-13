@@ -28,9 +28,9 @@ $companyData = new Company;
             </div>
             <div class="col-lg-3 col-md-6">
                 <h4 class="text-light mb-4">Quick Links</h4>
-                <a class="btn btn-link" href="about">About Us</a>
-                <a class="btn btn-link" href="contactus">Contact Us</a>
-                <a class="btn btn-link" href="products">Products</a>
+                <a class="btn btn-link" href="/about">About Us</a>
+                <a class="btn btn-link" href="/contactus">Contact Us</a>
+                <a class="btn btn-link" href="/products">Products</a>
             </div>
             <?php endforeach ?>
         </div>
