@@ -53,7 +53,7 @@ Util::Navbar();
                 <div class="card-body">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title text-center">Create / Update Product</h4>
+                            <h4 class="card-title text-center">Create Product</h4>
                             <form method="POST">
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-sm" placeholder="Item Name"
@@ -80,7 +80,7 @@ Util::Navbar();
                                         name="itemImage" required>
                                 </div>
                                 <button class="btn btn-outline-primary btn-block" name="cuItem" type="submit"
-                                    value="submit">Create / Update
+                                    value="submit">Create
                                 </button>
                             </form>
                         </div>
