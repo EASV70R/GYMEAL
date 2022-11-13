@@ -39,7 +39,7 @@ $companyData = new Company;
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy; <a href="#"><?= (SITE_NAME); ?></a>, All Right Reserved.
+                    &copy; <a href="/"><?= (SITE_NAME); ?></a>, All Right Reserved.
                 </div>
             </div>
         </div>
