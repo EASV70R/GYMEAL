@@ -11,8 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$_SESSION['lastSentSubmission'] = time();
-
 $companyData = new Company;
 
 Util::Header();

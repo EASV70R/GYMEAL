@@ -37,10 +37,12 @@ class Mail
         if(isset($_SESSION['ipaddress']) && (time() - $_SESSION['lastSentSubmission']) < TIME_INTERVAL)
         {
             return "Please wait 10 seconds before your next submission.";
-        } else {
-            $mail = new SendMailModel();
-            return $mail->SendMail($email, $name, $subject, $message);
         }
+
+        $_SESSION['lastSentSubmission'] = time();
+
+        $mail = new SendMailModel();
+        return $mail->SendMail($email, $name, $subject, $message);
     }
 }
 
