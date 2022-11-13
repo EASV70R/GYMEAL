@@ -87,30 +87,6 @@ insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`,
 insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (14, 'Chivas Regal - 12 Year Old', 8, 'Turkey - Oven Roast Breast', 'http://dummyimage.com/190x100.png/ff4444/ffffff', 43, 1);
 insert into product (`productId`, `title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (15, 'Wine - Red, Gamay Noir', 9, 'Pickle - Dill', 'http://dummyimage.com/160x100.png/cc0000/ffffff', 85, 3);
 
-DROP TABLE IF EXISTS `has`;
-CREATE TABLE IF NOT EXISTS `has` (
-  `productId` int NOT NULL,
-  `orderId` int NOT NULL,
-  CONSTRAINT PK_Has PRIMARY KEY (`productId`, `orderId`),
-  FOREIGN KEY (`productId`) REFERENCES `product`(`productId`),
-  FOREIGN KEY (`orderId`) REFERENCES `order`(`orderId`)
-);
-
-INSERT INTO `has` (`productId`, `orderId`) VALUE
-('1', '1');
-
-DROP TABLE IF EXISTS `order`;
-CREATE TABLE IF NOT EXISTS `order` (
-  `orderId` int NOT NULL AUTO_INCREMENT,
-  `orderDate` timestamp NULL DEFAULT current_timestamp(),
-  `customerId` int NOT NULL,
-  PRIMARY KEY (`orderId`),
-  FOREIGN KEY (`customerId`) REFERENCES `customer`(`customerId`)
-);
-
-INSERT INTO `order` (`orderId`, `orderDate`, `customerId`) VALUE
-('1', '2019-01-01 00:00:00', '1');
-
 DROP TABLE IF EXISTS `customer`;
 CREATE TABLE IF NOT EXISTS `customer` (
   `customerId` int NOT NULL AUTO_INCREMENT,
@@ -124,14 +100,24 @@ CREATE TABLE IF NOT EXISTS `customer` (
   FOREIGN KEY (`uid`) REFERENCES `user`(`uid`)
 );
 
-DROP TABLE IF EXISTS `worksFor`;
-CREATE TABLE IF NOT EXISTS `worksFor` (
-  `companyId` int NOT NULL,
-  `employeeId` int NOT NULL,
-  CONSTRAINT PK_WorksFor PRIMARY KEY (`companyId`, `employeeId`),
-  FOREIGN KEY (`companyId`) REFERENCES `company`(`companyId`),
-  FOREIGN KEY (`employeeId`) REFERENCES `employee`(`employeeId`)
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE IF NOT EXISTS `order` (
+  `orderId` int NOT NULL AUTO_INCREMENT,
+  `orderDate` timestamp NULL DEFAULT current_timestamp(),
+  `customerId` int NOT NULL,
+  PRIMARY KEY (`orderId`),
+  FOREIGN KEY (`customerId`) REFERENCES `customer`(`customerId`)
 );
+
+DROP TABLE IF EXISTS `has`;
+CREATE TABLE IF NOT EXISTS `has` (
+  `productId` int NOT NULL,
+  `orderId` int NOT NULL,
+  CONSTRAINT PK_Has PRIMARY KEY (`productId`, `orderId`),
+  FOREIGN KEY (`productId`) REFERENCES `product`(`productId`),
+  FOREIGN KEY (`orderId`) REFERENCES `order`(`orderId`)
+);
+
 
 DROP TABLE IF EXISTS `employee`;
 CREATE TABLE IF NOT EXISTS `employee` (
@@ -151,6 +137,15 @@ INSERT INTO `employee` (`employeeId`, `firstName`, `lastName`, `phone`, `address
 INSERT INTO `customer` (`customerId`, `firstName`, `lastName`, `phone`, `addressId`, `uid`) VALUE
 ('1', 'admin', 'admin', '12345678', '1', '1');
 
+DROP TABLE IF EXISTS `worksFor`;
+CREATE TABLE IF NOT EXISTS `worksFor` (
+  `companyId` int NOT NULL,
+  `employeeId` int NOT NULL,
+  CONSTRAINT PK_WorksFor PRIMARY KEY (`companyId`, `employeeId`),
+  FOREIGN KEY (`companyId`) REFERENCES `company`(`companyId`),
+  FOREIGN KEY (`employeeId`) REFERENCES `employee`(`employeeId`)
+);
+
 DROP TABLE IF EXISTS `userrole`;
 CREATE TABLE IF NOT EXISTS `userrole` (
   `uid` int NOT NULL,
@@ -160,6 +155,12 @@ CREATE TABLE IF NOT EXISTS `userrole` (
 );
 
 INSERT INTO `userrole` (`uid`, `roleid`) VALUE
+('1', '1');
+
+INSERT INTO `order` (`orderId`, `orderDate`, `customerId`) VALUE
+('1', '2019-01-01 00:00:00', '1');
+
+INSERT INTO `has` (`productId`, `orderId`) VALUE
 ('1', '1');
 
 DELIMITER //

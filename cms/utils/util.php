@@ -40,8 +40,7 @@ class Util
 
     public static function Redirect(string $location): void
     {
-        header("location: ${SITE_URL}.${location}");
-        exit;
+        exit(header("Location: ${location}"));
     }
 
     public static function Print(string $string): string

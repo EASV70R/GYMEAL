@@ -1,8 +1,8 @@
 <?php
-require_once '../cms/require.php';
-require_once '../cms/controllers/company.php';
+require_once './cms/require.php';
+require_once './cms/controllers/company.php';
 
-require_once '../cms/controllers/products.php';
+require_once './cms/controllers/products.php';
 
 $product = new Products;
 

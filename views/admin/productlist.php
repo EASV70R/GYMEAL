@@ -1,10 +1,10 @@
 <?php
-require_once '../cms/require.php';
-require_once '../cms/controllers/company.php';
+require_once './cms/require.php';
+require_once './cms/controllers/company.php';
 
 Util::IsAdmin();
 
-require_once '../cms/controllers/products.php';
+require_once './cms/controllers/products.php';
 
 $product = new products;
 var_dump($product->GetProductStatus(1));
@@ -43,8 +43,9 @@ Util::Navbar();
         <aside class="col-lg-3 col-xl-3">
             <nav class="nav flex-lg-column nav-pills mb-4">
                 <a class="nav-link" href="<?= (SITE_URL); ?>/admin">Admin</a>
-                <a class="nav-link active" href="<?= (SITE_URL); ?>/admin/invoice">Customer Invoices</a>
-                <a class="nav-link" href="<?= (SITE_URL); ?>/admin/settings">Settings</a>
+                <a class="nav-link" href="<?= (SITE_URL); ?>/editinvoice">Customer Invoices</a>
+                <a class="nav-link" href="<?= (SITE_URL); ?>/admsettings">Settings</a>
+                <a class="nav-link active" href="<?= (SITE_URL); ?>/editproductlist">Products</a>
                 <a class="nav-link" href="<?= (SITE_URL); ?>/logout">Logout</a>
             </nav>
         </aside>
@@ -104,8 +105,10 @@ Util::Navbar();
 
                                 </div>
                                 <div>
-                                    <a href="<?= (SITE_URL); ?>/admin/editproduct/?edit=&id=<?= Util::Print($row->productId); ?>" class="btn btn-primary btn-sm">Edit</a>
-                                    <a href="<?= (SITE_URL); ?>/admin/productlist/?delete=&productId=<?= Util::Print($row->productId); ?>" class="btn btn-danger btn-sm">Delete</a>
+                                    <a href="<?= (SITE_URL); ?>/editproductlist/?edit=&id=<?= Util::Print($row->productId); ?>"
+                                        class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="<?= (SITE_URL); ?>/editproductlist/?delete=&productId=<?= Util::Print($row->productId); ?>"
+                                        class="btn btn-danger btn-sm">Delete</a>
                                 </div>
                             </header>
                             <hr>

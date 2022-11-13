@@ -53,8 +53,9 @@ class Auth
         if ($response) {
             $response2 = $User->GetRole($response->uid);
             if ($response) {
-            Session::CreateUserSession($response, $response2);  
-            Util::Redirect('/');
+                Session::CreateUserSession($response, $response2);  
+                Util::Redirect('/');
+           // return ($response2) ? 'Login successful.' : 'Login failed.';
             }
 
         } else {
