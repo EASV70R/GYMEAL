@@ -26,6 +26,13 @@ class UserModel extends Database
         return $this->statement->fetch();
     }
 
+    public function AdditionalAdminCheck($uid): bool|stdClass
+    {
+        $this->prepare('SELECT * FROM `userrole` WHERE `uid` = ? AND `roleid` = 1');
+        $this->statement->execute([$uid]);
+        return $this->statement->fetch();
+    }
+
     public function Register($username, $hashedPassword, $email): bool
     {
         $this->prepare('INSERT INTO `user` (`username`, `password`, `email`) VALUES (?, ?, ?)');
