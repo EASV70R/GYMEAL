@@ -24,7 +24,4 @@ $router->get('bloglist', 'views/admin/blog');
 $router->get('logout', 'views/logout');
 $router->get('404', 'views/404');
 
-var_dump(session_status() == PHP_SESSION_ACTIVE); // false
-echo "test";
-echo session_id();
-echo $_SESSION['ipaddress'];
+//var_dump(session_status() == PHP_SESSION_ACTIVE); // false
