@@ -93,7 +93,6 @@ Util::Navbar();
                                 class="qty">
                             <div class="qtyplus">+</div>
                         </form>
-                        <a href="#" class="round-black-btn">Add to Cart</a>
                     </div>
                 </div>
             </div>
