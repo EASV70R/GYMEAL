@@ -126,7 +126,7 @@ Util::Navbar();
             <?php foreach ($companyData->GetCompanyArray() as $row) : ?>
             <div class="col-lg-6">
                 <div class="about-img position-relative overflow-hidden p-5 pe-0">
-                    <img class="img-fluid w-100" src="<?= (SITE_URL); ?>/assets/img/<?= Util::Print($row->image); ?>">
+                    <img class="img-fluid w-100" src="<?= Util::Print($row->image); ?>">
                 </div>
             </div>
             <div class="col-lg-6">

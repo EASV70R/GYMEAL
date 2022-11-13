@@ -21,17 +21,16 @@ class Validator
     {
         // https://stackoverflow.com/a/8141210
         // NOTE: Use only for live server.
-        //$passwordSchema = "/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$/";
+        $passwordSchema = "/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$/";
         if (empty($password)) {
             $error = "Please enter a password.";
         } elseif (strlen($password) < 4) {
             $error = "Password is too short.";
         } elseif (strlen($password) > 50) {
             $error = "Password is too long.";
-        }
-        /*} elseif (!preg_match($passwordSchema, $password)) {
+        } elseif (!preg_match($passwordSchema, $password)) {
             $error = "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
-        }*/
+        }
         return $error ?? false;
     }
 

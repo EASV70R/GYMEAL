@@ -2,6 +2,7 @@
 defined('BASE_PATH') or exit('No direct script access allowed');
 //https://stackoverflow.com/a/14371652
 define('TIME_INTERVAL', 10);
+$_SESSION['lastSentSubmission'] = 0;
 
 require_once __DIR__.'/../models/sendmail.php';
 

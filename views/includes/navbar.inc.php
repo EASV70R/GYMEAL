@@ -6,7 +6,7 @@
 <div class="container-fluid fixed-top px-0">
     <nav class="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-5">
         <a href="<?= (SITE_URL); ?>/home" class="navbar-brand ms-4 ms-lg-0">
-            <h1 class="fw-bold text-primary m-0">F<span class="text-secondary">I</span>T</h1>
+            <h1 class="fw-bold text-primary m-0">GYMEAL</h1>
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>

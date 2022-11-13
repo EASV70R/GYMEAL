@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `company` (
 );
 
 INSERT INTO `company` (`companyId`, `name`, `email`, `phone`, `desc`, `smalldesc`, `image`, `addressId`) VALUE
-('1', 'GYMEAL', 'test@test.dk', '+4512345678',  'GOOD FOOD', 'GOOD FOOD', 'GOOD FOOD', '1');
+('1', 'GYMEAL', 'test@test.dk', '+4512345678',  'Meals catered to your body', 'Meals catered to your body', 'http://fitdwp.dk/assets/img/represent.jpg', '1');
 
 DROP TABLE IF EXISTS `productfilter`;
 CREATE TABLE IF NOT EXISTS `productfilter` (
