@@ -7,7 +7,6 @@ Util::IsAdmin();
 require_once './cms/controllers/products.php';
 
 $product = new products;
-var_dump($product->GetProductStatus(1));
 $products = $product->GetProductArray();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -20,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET["delete"])) {
         $productId = $_GET["productId"];
         $product->DeleteProduct($productId);
-        Util::Redirect('/productlist');
+        Util::Redirect('/editproductlist');
     }
 }
 
@@ -107,7 +106,7 @@ Util::Navbar();
                                 <div>
                                     <a href="<?= (SITE_URL); ?>/editproduct/?edit=&id=<?= Util::Print($row->productId); ?>"
                                         class="btn btn-primary btn-sm">Edit</a>
-                                    <a href="<?= (SITE_URL); ?>/editproduct/?delete=&productId=<?= Util::Print($row->productId); ?>"
+                                    <a href="<?= (SITE_URL); ?>/editproductlist/?delete=&productId=<?= Util::Print($row->productId); ?>"
                                         class="btn btn-danger btn-sm">Delete</a>
                                 </div>
                             </header>
