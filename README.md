@@ -5,7 +5,7 @@
 <br />
 <div align="center">
   <h1>
-    <a href="https://github.com/EASVT0R/FITDWP">GYMEAL</a>
+    <a href="https://github.com/EASV70R/GYMEAL">GYMEAL</a>
   </h1>
 
 <h3 align="center">DWP Project</h3>
