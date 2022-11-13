@@ -43,7 +43,7 @@
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[project-screenshot]: https://i.imgur.com/B6B88iy.jpeg
+[project-screenshot]: https://i.imgur.com/AEXR2pJ.jpeg
 [PHP]: https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white
 [PHP-url]: https://www.php.net/
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
