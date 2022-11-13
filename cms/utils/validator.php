@@ -29,7 +29,7 @@ class Validator
         } elseif (strlen($password) > 50) {
             $error = "Password is too long.";
         } elseif (!preg_match($passwordSchema, $password)) {
-            $error = "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
+            $error = "Password must contain at least 8 letter long, one uppercase letter, one lowercase letter, one number, and one special character.";
         }
         return $error ?? false;
     }

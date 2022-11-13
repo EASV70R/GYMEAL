@@ -9,7 +9,7 @@ $product = new Products;
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET["edit"])) {
         $productId = $_GET["id"];
-        var_dump($product->GetProductById($productId));
+        //var_dump($product->GetProductById($productId));
     }
 }
 

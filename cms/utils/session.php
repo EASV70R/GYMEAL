@@ -10,28 +10,6 @@ class Session
         Session::Set("ipaddress", $_SERVER['REMOTE_ADDR']);
         Session::Set("useragent", $_SERVER['HTTP_USER_AGENT']);
         Session::Set("lastaccess", time());
-
-        if ($_SERVER['REMOTE_ADDR'] != $_SESSION['ipaddress'])
-        {
-            session_unset();
-            session_destroy();
-        }
-
-        if ($_SERVER['HTTP_USER_AGENT'] != $_SESSION['useragent'])
-        {
-            session_unset();
-            session_destroy();
-        }
-
-        if (time() > ($_SESSION['lastaccess'] + 3600))
-        {
-            session_unset();
-            session_destroy();
-        }
-        else
-        {
-            $_SESSION['lastaccess'] = time();
-        }
     }
 
     public static function Get(string $key)

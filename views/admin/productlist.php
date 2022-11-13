@@ -115,7 +115,7 @@ Util::Navbar();
                                 <li class="col-xl-4  col-lg-6">
                                     <figure class="itemside mb-3">
                                         <div class="aside">
-                                            <img width="72" height="72" src="" alt="test" class="img-sm rounded border">
+                                            <img width="72" height="72" src="<?= Util::Print($row->image); ?>" alt="test" class="img-sm rounded border">
                                         </div>
                                         <figcaption class="info">
                                             <p class="title"><?= Util::Print($row->title); ?></p>

@@ -10,14 +10,17 @@ $product = new Products;
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET["product"])) {
         $productId = $_GET["id"];
-        var_dump($product->GetProductById($productId));
+        //var_dump($product->GetProductById($productId));
     }
 }
 
 Util::Header();
 Util::Navbar();
 ?>
-
+</br>
+</br>
+</br>
+</br>
 		<div class="container">
 	        <div class="heading-section">
 	            <h2>Product Details</h2>

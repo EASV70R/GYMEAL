@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 );
 
 INSERT INTO `user` (`uid`, `username`, `password`, `email`, `createdAt`) VALUES
-(1, 'easv', '$2y$10$uMkFYilGKgW/vETBK3cStOYjGLfywHi4UyoljFXB9NtKEdO3FFoC.', 'easv@easv.dk', current_timestamp());
+(1, 'easv', '$2y$10$R/LZ8/ojdHpO3xCw60albOtj5uECEaLS1SSyLEJvYy5D7vwAnSb.m', 'easv@easv.dk', current_timestamp());
 
 DROP TABLE IF EXISTS `address`;
 CREATE TABLE IF NOT EXISTS `address` (
