@@ -7,6 +7,13 @@ require_once __DIR__.'/../utils/validator.php';
 
 class Auth
 {
+
+    public function GetAllUsers(): array
+    {
+        $User = new UserModel();
+        return $User->GetUsers();
+    }
+
     public function Register($data): string
     {
         $User = new UserModel();
@@ -75,5 +82,34 @@ class Auth
             );
         }
         session_destroy();
+    }
+
+    public function EditUser($data): null|string
+    {
+        $User = new UserModel();
+
+        $username = trim($data['mUsername']);
+        if( isset($data['mPassword']) ){
+            $password = (string) $data['mPassword'];
+        }
+        $email = (string) $data['mEmail'];
+        $uid = (int) $data['uid'];
+
+        $validationError = Validator::EditUserForm($username, $email);
+        if ($validationError) {
+            return $validationError;
+        }
+
+        $response = $User->EditUser($uid, $username, $password, $email);
+
+        return ($response) ? 'User edited successfully.' : 'User edit failed.';
+    }
+
+    public function DeleteUser($data): null|string
+    {
+        $User = new UserModel();
+        $uid = (int)$data['uid'];
+        $response = $User->DeleteUser($uid);
+       return ($response) ? $uid : 'User delete failed.';
     }
 }

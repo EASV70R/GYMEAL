@@ -5,6 +5,65 @@ require_once __DIR__.'/../core/database.php';
 
 class UserModel extends Database
 {
+    public function GetUsers()
+    {
+        $this->prepare('SELECT * FROM `user`');
+        $this->statement->execute();
+        return $this->statement->fetchAll();
+    }
+
+    public function EditUser($uid, $username, $password, $email) : string
+    {
+        $row = $this->GetUserById($uid);
+
+        if ($row) {
+            if($password != null){
+                $this->prepare('UPDATE `user` SET `username` = :username, `password` = :password, `email` = :email WHERE `uid` = :uid');
+                $this->statement->bindParam(':password', $password);
+            }else{
+                $this->prepare('UPDATE `user` SET `username` = :username, `email` = :email WHERE `uid` = :uid');
+            }
+            $this->statement->bindParam(':username', $username);
+            $this->statement->bindParam(':email', $email);
+            $this->statement->bindParam(':uid', $uid);
+            $this->statement->execute();
+            return 'User updated successfully!';
+        } else {
+            return 'User does not exist!';
+        }
+    }
+
+    public function DeleteUser($uid) : bool
+    /*{
+        $row = $this->GetUserById($uid);
+
+        if ($row) {
+            $this->prepare('DELETE FROM `user` WHERE `uid` = :uid');
+            $this->statement->bindParam(':uid', $uid);
+            $this->statement->execute();
+            return 'User deleted successfully!';
+        } else {
+            return 'User does not exist!';
+        }
+    }*/
+    {
+        $this->prepare('DELETE FROM `user` WHERE `uid` = :uid');
+        $this->statement->bindParam(':uid', $uid);
+        if ($this->statement->execute())
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function GetUserById($uid): bool|stdClass
+    {
+        $this->prepare('SELECT * FROM `user` WHERE `uid` = ? LIMIT 1');
+        $this->statement->execute([$uid]);
+        return $this->statement->fetch();
+    }
+
     public function GetUsername($username): bool|stdClass
     {
         $this->prepare('SELECT * FROM `user` WHERE `username` = ? LIMIT 1');
