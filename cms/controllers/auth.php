@@ -59,7 +59,7 @@ class Auth
         $response = $User->Login($username, $password);
         if ($response) {
             $response2 = $User->GetRole($response->uid);
-            if ($response) {
+            if ($response2) {
                 Session::CreateUserSession($response, $response2);  
                 Util::Redirect('/');
            // return ($response2) ? 'Login successful.' : 'Login failed.';

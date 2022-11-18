@@ -186,5 +186,4 @@ Util::Navbar();
     </div>
 </div>
 
-
 <?php Util::Footer(); ?>
