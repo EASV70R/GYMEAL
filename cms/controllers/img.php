@@ -9,8 +9,8 @@ class Image
         $Image = new ImgResizeModel();
 
         $imagefile = (string) $data['imagefile'];
-        $width = (string) $data['width'];
-        $height = (string) $data['height'];
+        $width = (int) $data['width'];
+        $height = (int) $data['height'];
 
         $Image->load($imagefile);
         $Image->resize($width, $height);
