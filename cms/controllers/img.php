@@ -17,4 +17,14 @@ class Image
         $Image->save("test.jpg");
         $Image->UploadImg("test.jpg");
     }
+
+    public function UploadImg($imagefile, $width, $height, $newfile) : void
+    {
+        $Image = new ImgResizeModel();
+
+        $Image->load($imagefile);
+        //$Image->resize($width, $height);
+        $Image->save($newfile);
+        $Image->UploadImg($newfile);
+    }
 }

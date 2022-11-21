@@ -5,13 +5,42 @@ require_once './cms/controllers/company.php';
 Util::IsAdmin();
 
 require_once './cms/controllers/profile.php';
+require_once './cms/controllers/img.php';
+$imgresize = new Image();
 
 $profile = new Profile;
 $companyData = new Company;
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST["updateCompany"])) {
-        $error = $companyData->UpdateCompanyData($_POST);
+    if (isset($_POST["updateCompany"]))
+    {
+        if ((($_FILES['file']['type']=="image/gif") ||
+        ($_FILES['file']['type']=="image/jpeg") ||
+        ($_FILES['file']['type']=="image/png") ||
+        ($_FILES['file']['type']=="image/pjpeg"))&&
+        ($_FILES['file']['size']<10000000))
+        {
+        if($_FILES['file']['error']>0)
+        {
+            $error = "Return Code: " . $_FILES['file']['error'];
+        }else{
+            /*echo "Uploaded: ". $_FILES['file']['name']. "<br>";
+            echo "Type: ". $_FILES['file']['type']. "<br>";
+            echo "Size: ". $_FILES['file']['size']. "<br>";
+            echo "Temp file: ".$_FILES['file']['tmp_name']. "<br>";
+            echo "Uploaded: ". $_FILES['file']['name']. "<br>";*/
+            if (file_exists("assets/img/".$_FILES['file']['name'])){
+                $error = $_FILES['file']['name']. " already exists. ";
+            }else{
+                $imgresize->ResizeImage($_FILES['file']['tmp_name'], 100, 100, "assets/img/".$_FILES['file']['name']);
+                $_POST['image'] = "assets/img/".$_FILES['file']['name'];
+                $error = $companyData->UpdateCompanyData($_POST);
+            }
+        }
+    }else{ 
+        $error = "Invalid file";
+    }   
     }
 }
 
@@ -20,6 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = $profile->UpdatePassword($_POST);
     }
 }
+
+
 
 Util::Header();
 Util::Navbar();
@@ -50,7 +81,7 @@ Util::Navbar();
                 <div class="card-body">
                     <?php foreach ($companyData->GetCompanyArray() as $row) : ?>
                     <h4 class="card-title text-center">Update Company Info</h4>
-                    <form method="POST">
+                    <form method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <input type="text" class="form-control form-control" placeholder="Title" name="title"
                                 value="<?= Util::Print($row->name);?>" required>
@@ -76,9 +107,11 @@ Util::Navbar();
                                 value="<?= Util::Print($row->email);?>" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control form-control" placeholder="Image" name="image"
-                                value="<?= Util::Print($row->image);?>" required>
+                            <label for="image_uploads">Choose images to upload (PNG, JPG)</label>
+                            <input type="file" id="file" name="file" onchange="preview()" accept=".jpg, .jpeg, .png"
+                                multiple />
                         </div>
+                        <img id="frame" src="<?= Util::Print($row->image);?>" class="img-fluid h-25 w-25" />
                         <button class="btn btn-outline-primary btn-block" name="updateCompany" type="submit"
                             value="submit">Update
                         </button>
@@ -112,3 +145,14 @@ Util::Navbar();
     </div>
 </main>
 <?php Util::Footer(); ?>
+
+<script>
+function preview() {
+    frame.src = URL.createObjectURL(event.target.files[0]);
+}
+
+function clearImage() {
+    document.getElementById('formFile').value = null;
+    frame.src = "";
+}
+</script>
