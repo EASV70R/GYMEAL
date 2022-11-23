@@ -1,3 +1,4 @@
+<script src="https://www.google.com/recaptcha/api.js?render=6LcTbSwjAAAAAJXudVwwKCWV2rmGkSCFegN7wcOH"></script>
 <?php
 require_once './cms/require.php';
 require_once './cms/controllers/company.php';
@@ -7,7 +8,30 @@ $sendmail = new Mail();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST["sendMail"])) {
-        $error = $sendmail->SendMail($_POST);
+        $url = "https://www.google.com/recaptcha/api/siteverify";
+		$data = [
+			'secret' => "6LcTbSwjAAAAAOQ9Fj6jkXfwxxbXfLboqHNhBwnv",
+			'response' => $_POST['token'],
+			// 'remoteip' => $_SERVER['REMOTE_ADDR']
+		];
+        $options = array(
+		    'http' => array(
+		      'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+		      'method'  => 'POST',
+		      'content' => http_build_query($data)
+		    )
+		  );
+
+		$context  = stream_context_create($options);
+  		$response = file_get_contents($url, false, $context);
+
+		$res = json_decode($response, true);
+        if($res['success'] == true){
+            $error = $sendmail->SendMail($_POST);
+        }else{
+            $error = "Please verify that you are not a robot.";
+        }
+       // $error = $sendmail->SendMail($_POST);
     }
 }
 
@@ -55,6 +79,7 @@ Util::Navbar();
             <?php endforeach ?>
             <div class="col-lg-7 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
                 <form method="POST">
+                    <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
                     <div class="row g-3">
                         <div class="col-md-6">
                             <div class="form-floating">
@@ -100,3 +125,16 @@ Util::Navbar();
 </div>
 
 <?php Util::Footer(); ?>
+
+<script>
+function onClick(e) {
+    e.preventDefault();
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6LcTbSwjAAAAAJXudVwwKCWV2rmGkSCFegN7wcOH', {
+            action: 'homepage'
+        }).then(function(token) {
+            document.getElementById('g-recaptcha-response').value = token;
+        });
+    });
+}
+</script>
