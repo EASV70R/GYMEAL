@@ -4,7 +4,7 @@ require_once __DIR__.'/../models/imgresize.php';
 
 class Image
 {
-    public function UploadImg($data) : void
+    /*public function UploadImg($data) : void
     {
         $Image = new ImgResizeModel();
 
@@ -16,7 +16,7 @@ class Image
         $Image->resize($width, $height);
         $Image->save("test.jpg");
         $Image->UploadImg("test.jpg");
-    }
+    }*/
 
     public function UploadImg($imagefile, $width, $height, $newfile) : void
     {

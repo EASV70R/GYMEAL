@@ -15,7 +15,13 @@ $companyData = new Company;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST["updateCompany"]))
     {
-        if ((($_FILES['file']['type']=="image/gif") ||
+        if($_FILES['file']['size'] == 0)
+        {
+            $error = $companyData->UpdateCompanyData($_POST);
+        }
+        else
+        {
+            if ((($_FILES['file']['type']=="image/gif") ||
         ($_FILES['file']['type']=="image/jpeg") ||
         ($_FILES['file']['type']=="image/png") ||
         ($_FILES['file']['type']=="image/pjpeg"))&&
@@ -38,9 +44,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $error = $companyData->UpdateCompanyData($_POST);
             }
         }
-    }else{ 
-        $error = "Invalid file";
-    }   
+        }else{ 
+            $error = "Invalid file";
+        }   
+        }
     }
 }
 
@@ -103,6 +110,10 @@ Util::Navbar();
                         <div class="form-group">
                             <input type="text" class="form-control form-control" placeholder="Mail" name="email"
                                 value="<?= Util::Print($row->email);?>" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control" placeholder="Image" name="image"
+                                value="<?= Util::Print($row->image);?>" required>
                         </div>
                         <div class="form-group">
                             <label for="image_uploads">Choose images to upload (PNG, JPG)</label>
