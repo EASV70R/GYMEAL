@@ -106,6 +106,7 @@ class Auth
             $password = (string) $data['mPassword'];
         }
         $email = (string) $data['mEmail'];
+        $role = (int) $data['mRole'];
         $uid = (int) $data['uid'];
 
         $validationError = Validator::EditUserForm($username, $email);
@@ -113,7 +114,7 @@ class Auth
             return $validationError;
         }
 
-        $response = $User->EditUser($uid, $username, $password, $email);
+        $response = $User->EditUser($uid, $username, $password, $email, $role);
 
         return ($response) ? 'User edited successfully.' : 'User edit failed.';
     }
@@ -124,5 +125,20 @@ class Auth
         $uid = (int)$data['uid'];
         $response = $User->DeleteUser($uid);
        return ($response) ? $uid : 'User delete failed.';
+    }
+
+    public function GetRole($uid): string
+    {
+        $User = new UserModel();
+        $response = $User->GetRole($uid);
+        return ($response->roleid) ? 'Admin' : "Customer";
+    }
+    public function ChangeRole($data): null|string
+    {
+        $User = new UserModel();
+        $uid = (int)$data['uid'];
+        $role = (int)$data['role'];
+        $response = $User->ChangeRole($uid, $role);
+        return ($response) ? 'Role changed successfully.' : 'Role change failed.';
     }
 }

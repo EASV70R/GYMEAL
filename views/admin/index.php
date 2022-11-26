@@ -58,7 +58,12 @@ Util::Navbar();
                                 required>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="role" name="mRole" id="mRole" required>
+                            <select class="form-select" aria-label="Default select example" name="mRole">
+                                <option selected>Role Selection</option>
+                                <option value="0">Customer</option>
+                                <option value="1">Admin</option>
+                            </select>
+                            <!-- <input type="text" class="form-control" placeholder="role" name="mRole" id="mRole" required> -->
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -158,7 +163,7 @@ Util::Navbar();
                         <td scope="row"><?= Util::Print($row->uid); ?></td>
                         <td><?= Util::Print($row->username); ?></td>
                         <td><?= Util::Print($row->email); ?></td>
-                        <td>adasdas</td>
+                        <td><?= Util::Print($auth->GetRole($row->uid)); ?></td>
                         <td>
                             <button class="btn btn-primary editbtn" data-id="1" data-toggle="modal">Edit</button>
                             <button class="btn btn-danger deletebtn" data-id="2" data-toggle="modal">Delete</button>

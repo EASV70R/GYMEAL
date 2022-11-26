@@ -12,9 +12,12 @@ class UserModel extends Database
         return $this->statement->fetchAll();
     }
 
-    public function EditUser($uid, $username, $password, $email) : string
+    public function EditUser($uid, $username, $password, $email, $role) : string
     {
-        $row = $this->GetUserById($uid);
+        /**/
+        try{
+            $this->connect()->beginTransaction();
+            $row = $this->GetUserById($uid);
 
         if ($row) {
             if($password != null){
@@ -27,9 +30,22 @@ class UserModel extends Database
             $this->statement->bindParam(':email', $email);
             $this->statement->bindParam(':uid', $uid);
             $this->statement->execute();
-            return 'User updated successfully!';
-        } else {
+
+            $this->prepare('UPDATE `userrole` SET `roleid` = :role WHERE `uid` = :uid');
+            $this->statement->bindParam(':uid', $uid);
+            $this->statement->bindParam(':role', $role);
+            $this->statement->execute();
+
+            $this->connect()->commit();
+        }else{
+            $this->connect()->rollBack();
+            return 'User not found';
+        }
+        } catch (Throwable $error) {
+            $this->connect()->rollBack();
             return 'User does not exist!';
+        } finally {
+            return 'User updated successfully!';
         }
     }
 
@@ -115,7 +131,6 @@ class UserModel extends Database
             $this->statement->execute([$uid, 0]);
 
             $this->connect()->commit();
-            //$this->connect()->commit();
         } catch (Throwable $error) {
             $this->connect()->rollBack();
             return false;
