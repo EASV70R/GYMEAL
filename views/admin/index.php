@@ -12,16 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST["register"])) {
         $error = $auth->Register($_POST);
     }
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST["edit"])) {
+    else if (isset($_POST["edit"])) {
         $error = $auth->EditUser($_POST);
     }
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST["delete"])) {
+    else if (isset($_POST["delete"])) {
         $error = $auth->DeleteUser($_POST);
         var_dump($_POST);
     }

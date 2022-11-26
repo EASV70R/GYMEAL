@@ -49,10 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }   
         }
     }
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST["updatePassword"])) {
+    else if (isset($_POST["updatePassword"])) {
         $error = $profile->UpdatePassword($_POST);
     }
 }
