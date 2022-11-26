@@ -102,6 +102,37 @@ class UserModel extends Database
         } else {
             return false;
         }
+        /*try{
+            $this->connect()->beginTransaction();
+            $this->prepare('INSERT INTO `user` (`username`, `password`, `email`) VALUES (?, ?, ?)');
+            $this->statement->execute([$username, $hashedPassword, $email]);
+
+            $this->prepare('SELECT uid FROM `user` WHERE `username` = ?');
+            $this->statement->execute([$username]);
+            $uid = $this->statement->fetch();
+
+            $this->prepare('INSERT INTO `userrole` (`uid`, `roleid`) VALUES (?, ?)');
+            $this->statement->execute([$uid, 0]);
+
+            $this->connect()->commit();
+            //$this->connect()->commit();
+        } catch (Throwable $error) {
+            $this->connect()->rollBack();
+            return false;
+        } finally {
+            return true;
+        }*/
+    }
+
+    public function CreateRole($uid, $roleid): bool
+    {
+        $this->prepare('INSERT INTO `userrole` (`uid`, `roleid`) VALUES (?, ?)');
+        if ($this->statement->execute([$uid, $roleid]))
+        {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function Login($username, $password): bool|object

@@ -16,32 +16,45 @@ class Auth
 
     public function Register($data): string
     {
-        $User = new UserModel();
+        try{
+            $User = new UserModel();
 
-        $username = trim($data['username']);
-        $password = (string) $data['password'];
-        $confirmPassword = (string) $data['confirmPassword'];
-        $email = (string) $data['email'];
+            $username = trim($data['username']);
+            $password = (string) $data['password'];
+            $confirmPassword = (string) $data['confirmPassword'];
+            $email = (string) $data['email'];
 
-        $validationError = Validator::RegisterForm($username, $password, $confirmPassword, $email);
-        if ($validationError) {
-            return $validationError;
-        }
+            $validationError = Validator::RegisterForm($username, $password, $confirmPassword, $email);
+            if ($validationError) {
+                return $validationError;
+            }
 
-        $userExists = $User->GetUsername($username);
-        if ($userExists) {
-            return "Username already exists.";
-        }
+            $userExists = $User->GetUsername($username);
+            if ($userExists) {
+                return "Username already exists.";
+            }
   
-        $emailExists = $User->GetEmail($email);
-        if ($emailExists) {
-            return "Email already exists.";
+            $emailExists = $User->GetEmail($email);
+            if ($emailExists) {
+                return "Email already exists.";
+            }
+
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+            $User->Register($username, $hashedPassword, $email);
+        } catch (Throwable $error) {
+            return 'Registration failed.';
+        } finally {
+            $createdUser = $User->GetUsername($username);
+            if ($createdUser) {
+                $response = $User->CreateRole($createdUser->uid, 0);
+                if ($response) {
+                    return 'Registration successful.';
+                }
+            } else {
+                return 'Registration failed.';
+            }
         }
-
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $response = $User->Register($username, $hashedPassword, $email);
-
-        return ($response) ? 'Registration successful.' : 'Registration failed.';
     }
 
     public function Login($data): null|string
@@ -62,7 +75,7 @@ class Auth
             if ($response2) {
                 Session::CreateUserSession($response, $response2);  
                 Util::Redirect('/');
-           // return ($response2) ? 'Login successful.' : 'Login failed.';
+                return ($response2) ? 'Login successful.' : 'Login failed.';
             }
 
         } else {
