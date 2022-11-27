@@ -16,4 +16,10 @@ class Cart
         $Cart = new CartModel();
         return $Cart->ExistingCart($existingItems);
     }
+
+    public function CartAdd($code, $quantity)
+    {
+        $Cart = new CartModel();
+        return $Cart->CartAdd($code, $quantity);
+    }
 }
