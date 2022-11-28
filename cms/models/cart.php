@@ -26,7 +26,7 @@ class CartModel extends Database
         echo "tes2t";
         var_dump($code);
         var_dump($quantity);
-        if(!empty($_GET["quantity"])) {
+        if(!empty($quantity)) {
             echo "test";
             $this->prepare('SELECT * FROM product WHERE productId = :code');
             $this->statement->bindParam(':code', $code);
@@ -47,13 +47,13 @@ class CartModel extends Database
             );*/
             $arraylol = $this->statement->fetch(PDO::FETCH_ASSOC);
             $lol[] = $arraylol;
-            $findCodeInArray = array_search($_GET["code"],  array_column($lol, 'productId'));
+            $findCodeInArray = array_search($code,  array_column($lol, 'productId'));
             $productByCode = $lol[$findCodeInArray];
             $itemArray = array(
                     $productByCode["productId"]=>array(
                         'name'=>$productByCode["title"],
                         'code'=>$productByCode["productId"],
-                        'quantity'=>$_GET["quantity"],
+                        'quantity'=>$quantity,
                         'price'=>$productByCode["price"]
                     )
             );
@@ -70,7 +70,7 @@ class CartModel extends Database
 				if(in_array($productByCode["productId"],array_keys($_SESSION["cart_item"]))) {
 					foreach($_SESSION["cart_item"] as $k => $v) {
 							if($productByCode["productId"] == $k) {
-                                    $_SESSION["cart_item"][$k]["quantity"] += $_GET["quantity"];
+                                    $_SESSION["cart_item"][$k]["quantity"] += $quantity;
 							}
 					}
 				} else {
@@ -82,26 +82,12 @@ class CartModel extends Database
 		}
     }
 
-    public function CartRemove($code){
-        //Remove item from cart
-            /*if (!empty($this->itemArray["cartItem"])) {
-                foreach ($this->itemArray["cartItem"] as $k => $v) {
-                    if ($code == $k)
-                        unset($this->itemArray["cartItem"][$k]);
-                    if (empty($this->itemArray["cartItem"]))
-                        unset($this->itemArray["cartItem"]);
-                }
-            }*/
+    public function CartRemove($code)
+    {
             if(!empty($_SESSION["cart_item"])) {
-                foreach($_SESSION["cart_item"] as $cartItemCode => $v) {
-                    var_dump($v);
-                    echo "Key: $v<br>";
-                    echo "Value: $cartItemCode<br>";
-                        if($_GET["code"] == $cartItemCode)
-                            unset($_SESSION["cart_item"][$cartItemCode]);
-                            var_dump($_SESSION["cart_item"]);
-                            var_dump($_SESSION["cart_item"][$cartItemCode]);
-                            var_dump($cartItemCode);
+                foreach($_SESSION["cart_item"] as $k => $v) {
+                        if($v['code'] == $code)
+                            unset($_SESSION["cart_item"][$k]);
                         if(empty($_SESSION["cart_item"]))
                             unset($_SESSION["cart_item"]);
                 }
