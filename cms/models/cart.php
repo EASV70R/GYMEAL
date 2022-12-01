@@ -5,22 +5,6 @@ require_once __DIR__.'/../core/database.php';
 
 class CartModel extends Database
 {
-    public function ExistingCart($existingItems)
-    {
-        if (!empty($existingItems)) {
-            $this->itemArray["cartItem"] = $existingItems;
-            print_r($this->existingItems);
-        }
-        print_r($this->existingItems);
-    }
-
-    public function CartArray()
-    {
-        $this->prepare('SELECT * FROM `product` ORDER BY `productId` ASC');
-        $this->statement->execute();
-        return $this->statement->fetchAll();
-    }
-
     public function CartAdd($code, $quantity)
     {
         echo "tes2t";
@@ -84,13 +68,18 @@ class CartModel extends Database
 
     public function CartRemove($code)
     {
-            if(!empty($_SESSION["cart_item"])) {
-                foreach($_SESSION["cart_item"] as $k => $v) {
-                        if($v['code'] == $code)
-                            unset($_SESSION["cart_item"][$k]);
-                        if(empty($_SESSION["cart_item"]))
-                            unset($_SESSION["cart_item"]);
-                }
+        if(!empty($_SESSION["cart_item"])) {
+            foreach($_SESSION["cart_item"] as $k => $v) {
+                    if($v['code'] == $code)
+                        unset($_SESSION["cart_item"][$k]);
+                    if(empty($_SESSION["cart_item"]))
+                        unset($_SESSION["cart_item"]);
             }
         }
+    }
+
+    public function CartEmpty()
+    {
+        unset($_SESSION["cart_item"]);
+    }
 }
