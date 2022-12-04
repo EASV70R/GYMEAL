@@ -1023,3 +1023,26 @@
 .shopping-cart .form-control-sm:not(textarea) {
     height: 36px;
 }
+
+.checkout {
+    margin-top: 150px;
+    margin-bottom: 150px;
+}
+
+.checkout h1 {
+    display: block;
+    font-weight: normal;
+    margin: 0;
+    padding: 40px 0;
+    font-size: 24px;
+    text-align: center;
+    width: 100%;
+}
+
+.checkout p {
+    text-align: center;
+}
+
+.checkout .content-wrapper {
+    margin: 0 auto;
+}
