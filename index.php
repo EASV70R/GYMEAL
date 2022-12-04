@@ -11,6 +11,7 @@ $router->get('contactus', 'views/contactus');
 $router->get('products', 'views/products');
 $router->get('productview', 'views/productview');
 $router->get('cart', 'views/cart/cart');
+$router->get('order', 'views/cart/placeorder');
 $router->get('login', 'views/login');
 $router->get('register', 'views/register');
 $router->get('profile', 'views/profile');

@@ -3,31 +3,6 @@ require_once './cms/require.php';
 require_once './cms/controllers/company.php';
 require_once './cms/controllers/cart.php';
 
-$cart = new Cart();
-
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if(!empty($_GET["action"])) {
-        switch($_GET["action"]) {
-        case "add":
-            if (isset($_GET['code'], $_GET['quantity'])) {
-                $code = (int)$_GET['code'];
-                $quantity = (int)$_GET['quantity'];
-                $cart->CartAdd($code, $quantity);
-            }   
-        break;
-        case "remove":
-            if (isset($_GET['code'])) {
-                $code = (int)$_GET['code'];
-                $cart->CartRemove($code);
-            }
-        break;
-        case "empty":
-            unset($_SESSION["cart_item"]);
-        break;	
-    }
-    }
-}
-
 Util::Header();
 Util::Navbar();
 ?>
@@ -93,7 +68,7 @@ Util::Navbar();
             <div class="column"><a class="btn btn-outline-secondary" href="/products"><i class="icon-arrow-left"></i>&nbsp;Back
                     to Shopping</a></div>
             <div class="column"><a class="btn btn-success"
-                    href="#">Checkout</a></div>
+                    href="/order">Checkout</a></div>
         </div>
     </div>
 </main>
