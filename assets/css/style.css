@@ -1024,12 +1024,12 @@
     height: 36px;
 }
 
-.checkout {
+.placeorder {
     margin-top: 150px;
     margin-bottom: 150px;
 }
 
-.checkout h1 {
+.placeorder h1 {
     display: block;
     font-weight: normal;
     margin: 0;
@@ -1039,10 +1039,10 @@
     width: 100%;
 }
 
-.checkout p {
+.placeorder p {
     text-align: center;
 }
 
-.checkout .content-wrapper {
+.placeorder .content-wrapper {
     margin: 0 auto;
 }
