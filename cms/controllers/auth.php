@@ -142,19 +142,19 @@ class Auth
         return ($response) ? 'Role changed successfully.' : 'Role change failed.';
     }
 }
-
+$auth = new Auth();
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
     if(isset($_POST['login']))
     {
-        $response = (new Auth())->Login($_POST);
+        $response = $auth->Login($_POST);
     }
     elseif(isset($_POST['register']))
     {
-        $response = (new Auth())->Register($_POST);
+        $response = $auth->Register($_POST);
     }   
     else if (isset($_POST["delete"])) {
-        $response = (new Auth())->DeleteUser($_POST);
+        $response = $auth-->DeleteUser($_POST);
         var_dump($_POST);
     }
 }
