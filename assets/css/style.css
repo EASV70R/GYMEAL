@@ -1046,3 +1046,8 @@
 .placeorder .content-wrapper {
     margin: 0 auto;
 }
+
+.customform {
+    margin-top: 150px;
+    margin-bottom: 150px;
+}
