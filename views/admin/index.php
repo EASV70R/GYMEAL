@@ -6,21 +6,6 @@ Util::IsAdmin();
 
 require_once './cms/controllers/auth.php';
 
-$auth = new Auth;
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST["register"])) {
-        $error = $auth->Register($_POST);
-    }
-    else if (isset($_POST["edit"])) {
-        $error = $auth->EditUser($_POST);
-    }
-    else if (isset($_POST["delete"])) {
-        $error = $auth->DeleteUser($_POST);
-        var_dump($_POST);
-    }
-}
-
 Util::Header();
 Util::Navbar();
 
@@ -96,9 +81,9 @@ Util::Navbar();
     </div>
     <div class="row justify-content-center">
         <div class="col-12 mt-3 mb-2">
-            <?php if (isset($error)) : ?>
+            <?php if (isset($response)) : ?>
             <div class="alert alert-primary" role="alert">
-                <?= Util::Print($error); ?>
+                <?= Util::Print($response); ?>
             </div>
             <?php endif; ?>
         </div>

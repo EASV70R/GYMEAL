@@ -6,10 +6,6 @@ Util::IsLoggedIn();
 
 require_once './cms/controllers/auth.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
-    $response = (new Auth())->Login($_POST);
-}
-
 Util::Header();
 Util::Navbar();
 ?>
