@@ -80,7 +80,7 @@ Util::Navbar();
                                         <div class="card-body">
                                             <h5 class="card-title"><?= Util::Print($row->title); ?></h5>
                                             <p class="card-text"><?= Util::Print($row->desc); ?></p>
-                                            <a href="<?= (SITE_URL); ?>/productview/?product&id=<?= Util::Print($row->productId); ?>"
+                                            <a href="<?= (SITE_URL); ?>/productview/<?= Util::Print($row->productId); ?>"
                                                 class="btn btn-primary">View product</a>
                                         </div>
                                     </div>
@@ -96,7 +96,7 @@ Util::Navbar();
                                         <div class="card-body">
                                             <h5 class="card-title"><?= Util::Print($row->title); ?></h5>
                                             <p class="card-text"><?= Util::Print($row->desc); ?></p>
-                                            <a href="<?= (SITE_URL); ?>/productview/?product&id=<?= Util::Print($row->productId); ?>"
+                                            <a href="<?= (SITE_URL); ?>/productview/<?= Util::Print($row->productId); ?>"
                                                 class="btn btn-primary">View product</a>
                                         </div>
                                     </div>
