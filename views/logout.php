@@ -1,6 +1,4 @@
 <?php
-require_once './cms/require.php';
-
 Util::IsLoggedIn();
 
 require_once './cms/controllers/auth.php';

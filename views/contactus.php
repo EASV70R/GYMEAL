@@ -1,6 +1,5 @@
 <script src="https://www.google.com/recaptcha/api.js?render=6LcTbSwjAAAAAJXudVwwKCWV2rmGkSCFegN7wcOH"></script>
 <?php
-require_once './cms/require.php';
 require_once './cms/controllers/company.php';
 require_once './cms/controllers/mail.php';
 
@@ -30,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = $sendmail->SendMail($_POST);
         }else{
             $error = "Please verify that you are not a robot.";
+            print_r($res);
         }
        // $error = $sendmail->SendMail($_POST);
     }
@@ -79,7 +79,6 @@ Util::Navbar();
             <?php endforeach ?>
             <div class="col-lg-7 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
                 <form method="POST">
-                    <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
                     <div class="row g-3">
                         <div class="col-md-6">
                             <div class="form-floating">
@@ -110,6 +109,7 @@ Util::Navbar();
                             <button class="btn btn-primary rounded-pill py-3 px-5" name="sendMail" type="submit">Send
                                 Message</button>
                         </div>
+                        <input type="hidden" id="token" name="token">
                     </div>
                 </form>
             </div>
@@ -133,7 +133,7 @@ function onClick(e) {
         grecaptcha.execute('6LcTbSwjAAAAAJXudVwwKCWV2rmGkSCFegN7wcOH', {
             action: 'homepage'
         }).then(function(token) {
-            document.getElementById('g-recaptcha-response').value = token;
+            document.getElementById('token').value = token;
         });
     });
 }

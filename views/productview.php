@@ -1,5 +1,4 @@
 <?php
-require_once './cms/require.php';
 require_once './cms/controllers/company.php';
 
 require_once './cms/controllers/products.php';
@@ -18,7 +17,7 @@ Util::Navbar();
     <div class="heading-section">
         <h2>Product Details</h2>
     </div>
-    <?php foreach ($product->GetProductById(Util::Print($_GET["id"])) as $row) : ?>
+    <?php foreach ($product->GetProductById(Util::Print($id)) as $row) : ?>
     <div class="row">
         <div class="col-md-6">
             <div class="item">

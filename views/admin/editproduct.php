@@ -8,13 +8,14 @@ $product = new Products;
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET["edit"])) {
-        $productId = $_GET["id"];
-        //var_dump($product->GetProductById($productId));
+        $productId = $id;
+        var_dump($product->GetProductById($productId));
     }
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST["updateProduct"])) {
+        $_GET["id"] = $id;
         $error = $product->UpdateProduct($_POST);
     }
 }
@@ -35,7 +36,7 @@ Util::Navbar();
         <h2>Product Details</h2>
     </div>
     <div class="row">
-        <?php foreach ($product->GetProductById(Util::Print($_GET["id"])) as $row) : ?>
+        <?php foreach ($product->GetProductById(Util::Print($id)) as $row) : ?>
         <form method="POST" class="display-flex">
             <div class="col-md-6">
                 <div class="item">

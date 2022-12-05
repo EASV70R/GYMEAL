@@ -1,5 +1,4 @@
 <?php
-require_once './cms/require.php';
 require_once './cms/controllers/company.php';
 
 Util::IsLoggedIn();
