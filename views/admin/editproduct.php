@@ -53,6 +53,11 @@ Util::Navbar();
                                 class="form-control my-3 bg-dark text-white text-center" name="itemName"
                                 value="<?= Util::Print($row->title); ?>">
                         </div>
+                        <div class="product-code">
+                            <input type="text" placeholder="Title"
+                                class="form-control my-3 bg-dark text-white text-center" name="itemCode"
+                                value="<?= Util::Print($row->code); ?>">
+                        </div>
                         <label for="category">Category:</label>
                         <select id="filterId" name="filterId">
                             <option value="1">Meals</option>

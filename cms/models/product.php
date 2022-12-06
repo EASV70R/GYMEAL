@@ -26,13 +26,15 @@ class ProductModel extends Database
         return $this->statement->fetchAll();
     }
 
-    public function CreateProduct($title, $quantity, $desc, $image, $price, $category): bool
+    public function CreateProduct($title, $code, $quantity, $desc, $image, $price, $category): bool
     {
-        $this->prepare('INSERT INTO `product` (`title`, `quantity`, `desc`, `image`, `price`, `productFilterId`) VALUES (:title, :quantity, :adesc, :aimage, :price, :productFilterId)');
+        $this->prepare('INSERT INTO `product` (`title`, `code`, `quantity`, `desc`, `image`, `price`, `productFilterId`) VALUES (:title, :code, :quantity, :adesc, :aimage, :price, :productFilterId)');
         $sanitized_title = htmlspecialchars($title);
+        $sanitized_code = htmlspecialchars($code);
 		$sanitized_desc = htmlspecialchars($desc);
         $sanitized_aimage = htmlspecialchars($image);
 		$this->statement->bindParam(':title', $sanitized_title);
+        $this->statement->bindParam(':code', $sanitized_code);
         $this->statement->bindParam(':quantity', $quantity);
         $this->statement->bindParam(':adesc', $sanitized_desc);
         $this->statement->bindParam(':aimage', $sanitized_aimage);
@@ -46,14 +48,16 @@ class ProductModel extends Database
         }
     }
 
-    public function UpdateProduct($id, $title, $quantity, $desc, $image, $price, $category): bool
+    public function UpdateProduct($id, $title, $code, $quantity, $desc, $image, $price, $category): bool
     {
-        $this->prepare('UPDATE `product` SET `title` = :title, `quantity` = :quantity, `desc` = :adesc, `image` = :aimage, `price` = :price, `productFilterId` = :productFilterId WHERE `productId` = :productId');
+        $this->prepare('UPDATE `product` SET `title` = :title, `code` = :code, `quantity` = :quantity, `desc` = :adesc, `image` = :aimage, `price` = :price, `productFilterId` = :productFilterId WHERE `productId` = :productId');
         $sanitized_title = htmlspecialchars($title);
+        $sanitized_code = htmlspecialchars($code);
         $sanitized_desc = htmlspecialchars($desc);
         $sanitized_aimage = htmlspecialchars($image);
         $this->statement->bindParam(':productId', $id);
         $this->statement->bindParam(':title', $sanitized_title);
+        $this->statement->bindParam(':code', $sanitized_code);
         $this->statement->bindParam(':quantity', $quantity);
         $this->statement->bindParam(':adesc', $sanitized_desc);
         $this->statement->bindParam(':aimage', $sanitized_aimage);

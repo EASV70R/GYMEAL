@@ -28,13 +28,14 @@ class Products
         $Product = new ProductModel();
 
         $title = trim($data['itemName']);
+        $code = trim($data['itemCode']);
         $desc = trim($data['itemDesc']);
         $price = (int)$data['itemPrice'];
         $quantity = (int)$data['itemQuantity'];
         $image = trim($data['itemImage']);
         $productFilterId = (int)$data['filterId'];
 
-        $response = $Product->CreateProduct($title, $quantity, $desc, $image, $price, $productFilterId);
+        $response = $Product->CreateProduct($title, $code, $quantity, $desc, $image, $price, $productFilterId);
 
         return ($response) ? 'Product created.' : 'Product creation failed.';
     }
@@ -44,6 +45,7 @@ class Products
         $Product = new ProductModel();
 
         $title = trim($data['itemName']);
+        $code = trim($data['itemCode']);
         $desc = trim($data['itemDesc']);
         $price = (int)$data['itemPrice'];
         $quantity = (int)$data['itemQuantity'];
@@ -51,7 +53,7 @@ class Products
         $productFilterId = (int)$data['filterId'];
         $id = (int)$_GET["id"];
 
-        $response = $Product->UpdateProduct($id, $title, $quantity, $desc, $image, $price, $productFilterId);
+        $response = $Product->UpdateProduct($id, $title, $code, $quantity, $desc, $image, $price, $productFilterId);
 
         return ($response) ? 'Product updated.' : 'Product update failed.';
     }

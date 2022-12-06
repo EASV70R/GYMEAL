@@ -53,6 +53,10 @@ Util::Navbar();
                                         name="itemName" required>
                                 </div>
                                 <div class="form-group">
+                                    <input type="itemCode" class="form-control form-control-sm"
+                                        placeholder="Item Code" name="itemCode" required>
+                                </div>
+                                <div class="form-group">
                                     <input type="itemDesc" class="form-control form-control-sm"
                                         placeholder="Item Description" name="itemDesc" required>
                                 </div>
