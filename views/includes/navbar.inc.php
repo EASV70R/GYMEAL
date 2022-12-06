@@ -1,3 +1,6 @@
+<?php
+$num_items_in_cart = isset($_SESSION['cart_item']) ? count($_SESSION['cart_item']) : 0;
+?>
 <div id="spinner"
     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
     <div class="spinner-border text-primary" role="status"></div>
@@ -18,7 +21,10 @@
                 <a href="<?= (SITE_URL); ?>/about" class="nav-item nav-link">About Us</a>
                 <a href="<?= (SITE_URL); ?>/contactus" class="nav-item nav-link">Contact Us</a>
                 <a href="<?= (SITE_URL); ?>/cart" class="nav-item nav-link"><small
-                            class="fa fa-shopping-cart text-body"></small></a>
+                        class="fa fa-shopping-cart text-body"><?php if ($num_items_in_cart > 0) : ?><span>
+                            <?php echo $num_items_in_cart ?></span>
+                        <?php endif; ?>
+                        </small></a>
                 <div class="nav-item dropdown">
                     <!-- 
                         btn-sm-square bg-white rounded-circle ms-3
