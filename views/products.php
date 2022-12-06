@@ -91,7 +91,7 @@ Util::Navbar();
                                     New</div>
                             </div>
                             <div class="text-center p-4">
-                                <a class="d-block h5 mb-2" href=""><?= Util::Print($row->title); ?></a>
+                                <a class="d-block h5 mb-2" href="<?= (SITE_URL); ?>/productview/<?= Util::Print($row->productId); ?>"><?= Util::Print($row->title); ?></a>
                                 <span class="text-primary me-1">$<?= Util::Print($row->price); ?></span>
                             </div>
                             <div class="d-flex border-top">
