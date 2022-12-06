@@ -23,3 +23,15 @@ class Cart
         return $Cart->CartEmpty();
     }
 }
+
+$cart = new Cart();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST["add"])) {
+        if (isset($_POST['productId'], $_POST['quantity'])) {
+            $productId = (int)$_POST['productId'];
+            $quantity = (int)$_POST['quantity'];
+            $cart->CartAdd($productId, $quantity);
+        }
+    }   
+}
