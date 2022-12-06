@@ -37,3 +37,4 @@ class Company
         return $Company->GetCompanyAddress($companyId);
     }
 }
+

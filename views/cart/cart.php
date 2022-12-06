@@ -27,7 +27,7 @@ Util::Navbar();
                         <th>Product Name</th>
                         <th class="text-center">Quantity</th>
                         <th class="text-center">Subtotal</th>
-                        <th class="text-center"><a class="btn btn-sm btn-outline-danger" href="/cart/?action=empty">Clear Cart</a></th>
+                        <th class="text-center"><a class="btn btn-sm btn-outline-danger" href="/cart/empty">Clear Cart</a></th>
                     </tr>
                 </thead>
                 <tbody>

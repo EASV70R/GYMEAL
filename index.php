@@ -1,30 +1,32 @@
 <?php
+require_once 'cms/require.php';
 include 'router.php';
 
 $request = $_SERVER['REQUEST_URI'];
-$router = new Router($request);
+$router = new Router();
 
-$router->get('/', 'views/index');
-$router->get('home', 'views/index');
-$router->get('about', 'views/about');
-$router->get('contactus', 'views/contactus');
-$router->get('products', 'views/products');
-$router->get('productview', 'views/productview');
-$router->get('cart', 'views/cart/cart');
-$router->get('order', 'views/cart/placeorder');
-$router->get('login', 'views/login');
-$router->get('register', 'views/register');
-$router->get('profile', 'views/profile');
-$router->get('profilesettings', 'views/profilesettings');
-$router->get('admin', 'views/admin/index');
-$router->get('admsettings', 'views/admin/settings');
-$router->get('editinvoice', 'views/admin/invoice');
-$router->get('editproductlist', 'views/admin/productlist');
-$router->get('editproduct', 'views/admin/editproduct');
-$router->get('bloglist', 'views/admin/blog');
-$router->get('logout', 'views/logout');
-$router->get('404', 'views/404');
-
+$router->any('/', 'views/index');
+$router->any('/home', 'views/index');
+$router->any('/about', 'views/about');
+$router->any('/contactus', 'views/contactus');
+$router->any('/products', 'views/products');
+$router->any('/productview/$id', 'views/productview');
+$router->any('/cart', 'views/cart/cart');
+$router->get('/cart/empty', 'cms/callbacks/cart/empty');
+$router->any('/order', 'views/cart/placeorder');
+$router->any('/login', 'views/login');
+$router->any('/register', 'views/register');
+$router->any('/profile', 'views/profile');
+$router->any('/profilesettings', 'views/profilesettings');
+$router->any('/admin', 'views/admin/index');
+$router->any('/admsettings', 'views/admin/settings');
+$router->any('/editinvoice', 'views/admin/invoice');
+$router->any('/editproductlist', 'views/admin/productlist');
+$router->any('/editproductlist/delete/$id', 'views/admin/productdelete');
+$router->any('/editproduct/edit/$id', 'views/admin/editproduct');
+$router->any('/bloglist', 'views/admin/blog');
+$router->any('/logout', 'views/logout');
+$router->any('/404', 'views/404');
 
 if ($_SERVER['REMOTE_ADDR'] != $_SESSION['ipaddress'])
 {
@@ -46,4 +48,5 @@ else
 {
     $_SESSION['lastaccess'] = time();
 }
+
 //var_dump(session_status() == PHP_SESSION_ACTIVE); // false
