@@ -9,86 +9,84 @@ $product = new Products;
 Util::Header();
 Util::Navbar();
 ?>
-</br>
-</br>
-</br>
-</br>
-<div class="container">
-    <div class="heading-section">
-        <h2>Product Details</h2>
-    </div>
-    <?php foreach ($product->GetProductById(Util::Print($id)) as $row) : ?>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="item">
-                <img src="<?= Util::Print($row->image); ?>" />
-            </div>
 
+<main class="testcontainer">
+    <div class="container">
+        <div class="heading-section">
+            <h2>Product Details</h2>
         </div>
-        <div class="col-md-6">
-            <div class="product-dtl">
-                <div class="product-info">
-                    <div class="product-name"><?= Util::Print($row->title); ?></div>
-                    <div class="reviews-counter">
-                        <div class="rate">
-                            <input type="radio" id="star5" name="rate" value="5" checked />
-                            <label for="star5" title="text">5 stars</label>
-                            <input type="radio" id="star4" name="rate" value="4" checked />
-                            <label for="star4" title="text">4 stars</label>
-                            <input type="radio" id="star3" name="rate" value="3" checked />
-                            <label for="star3" title="text">3 stars</label>
-                            <input type="radio" id="star2" name="rate" value="2" />
-                            <label for="star2" title="text">2 stars</label>
-                            <input type="radio" id="star1" name="rate" value="1" />
-                            <label for="star1" title="text">1 star</label>
-                        </div>
-                        <span>3 Reviews</span>
-                    </div>
-                    <div class="product-price-discount"><span>$<?= Util::Print($row->price); ?></span>
-                        <!--<span class="line-through"></span>-->
-                    </div>
+        <?php foreach ($product->GetProductById(Util::Print($id)) as $row) : ?>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="item">
+                    <img src="<?= Util::Print($row->image); ?>" />
                 </div>
-                <p><?= Util::Print($row->desc); ?></p>
-
-                <div class="product-count">
-                    <label for="size">Quantity</label>
-                    <form method="POST">
-                        <div class="form-group">
-                            <input type="hidden" name="productId" value="<?=Util::Print($row->productId); ?>">
-                        </div>
-                        <div class="form-group">
-                            <div class="display-flex">
-                                <div class="qtyminus">-</div>
-                                <input type="text" name="quantity" value="<?= Util::Print($row->quantity); ?>"
-                                    class="qty">
-                                <div class="qtyplus">+</div>
+            </div>
+            <div class="col-md-6">
+                <div class="product-dtl">
+                    <div class="product-info">
+                        <div class="product-name"><?= Util::Print($row->title); ?></div>
+                        <div class="reviews-counter">
+                            <div class="rate">
+                                <input type="radio" id="star5" name="rate" value="5" checked />
+                                <label for="star5" title="text">5 stars</label>
+                                <input type="radio" id="star4" name="rate" value="4" checked />
+                                <label for="star4" title="text">4 stars</label>
+                                <input type="radio" id="star3" name="rate" value="3" checked />
+                                <label for="star3" title="text">3 stars</label>
+                                <input type="radio" id="star2" name="rate" value="2" />
+                                <label for="star2" title="text">2 stars</label>
+                                <input type="radio" id="star1" name="rate" value="1" />
+                                <label for="star1" title="text">1 star</label>
                             </div>
+                            <span>3 Reviews</span>
                         </div>
-                        <div class="form-group">
-                            <button class="round-black-btn" name="add" type="add" value="add">Add To Cart
-                            </button>
+                        <div class="product-price-discount"><span>$<?= Util::Print($row->price); ?></span>
+                            <!--<span class="line-through"></span>-->
                         </div>
-                    </form>
+                    </div>
+                    <p><?= Util::Print($row->desc); ?></p>
+
+                    <div class="product-count">
+                        <label for="size">Quantity</label>
+                        <form method="POST">
+                            <div class="form-group">
+                                <input type="hidden" name="productId" value="<?=Util::Print($row->productId); ?>">
+                            </div>
+                            <div class="form-group">
+                                <div class="display-flex">
+                                    <div class="qtyminus">-</div>
+                                    <input type="text" name="quantity" value="<?= Util::Print($row->quantity); ?>"
+                                        class="qty">
+                                    <div class="qtyplus">+</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="round-black-btn" name="add" type="add" value="add">Add To Cart
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="product-info-tabs">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
+                        aria-controls="description" aria-selected="true">Description</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="description" role="tabpanel"
+                    aria-labelledby="description-tab">
+                    <?= Util::Print($row->desc); ?>
                 </div>
             </div>
         </div>
-
+        <?php endforeach; ?>
     </div>
-    <div class="product-info-tabs">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-                    aria-controls="description" aria-selected="true">Description</a>
-            </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-            <?= Util::Print($row->desc); ?>
-            </div>
-        </div>
-    </div>
-    <?php endforeach; ?>
-</div>
-</div>
+</main>
 
 <?php Util::Footer(); ?>
