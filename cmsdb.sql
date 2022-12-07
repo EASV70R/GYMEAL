@@ -21,19 +21,17 @@ DROP TABLE IF EXISTS `country`;
 CREATE TABLE IF NOT EXISTS `country` (
   `countryId` int NOT NULL AUTO_INCREMENT,
   `city` varchar(255) NOT NULL,
-  `postalCode` varchar(255) NOT NULL,
-  `country` varchar(255) NOT NULL,
+  `postalCode` int NOT NULL,
+  `country` varchar(25) NOT NULL,
   PRIMARY KEY (`countryId`)
 );
 
 DROP TABLE IF EXISTS `address`;
 CREATE TABLE IF NOT EXISTS `address` (
   `addressId` int NOT NULL AUTO_INCREMENT,
-  `street` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `postalCode` varchar(255) NOT NULL,
-  `country` varchar(255) NOT NULL,
-  `countryId` int NOT NULL,
+  `street` varchar(25) NOT NULL,
+  `city` varchar(25) NOT NULL,
+  `postalCode` int NOT NULL,
   PRIMARY KEY (`addressId`)
   FOREIGN KEY (`countryId`) REFERENCES `country`(`countryId`)
 );
@@ -44,11 +42,11 @@ INSERT INTO `address` (`addressId`, `street`, `city`, `postalCode`, `country`) V
 DROP TABLE IF EXISTS `company`;
 CREATE TABLE IF NOT EXISTS `company` (
   `companyId` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `phone` varchar(255) NOT NULL,
+  `name` varchar(25) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `phone` int NOT NULL,
   `desc` varchar(255) NOT NULL,
-  `smalldesc` varchar(255) NOT NULL,
+  `smalldesc` varchar(150) NOT NULL,
   `image` varchar(255) NOT NULL,
   `addressId` int NOT NULL,
   PRIMARY KEY (`companyId`),
@@ -73,12 +71,12 @@ INSERT INTO `productfilter` (`productFilterId`, `name`) VALUE
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE IF NOT EXISTS `product` (
   `productId` int(8) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `code` varchar(255) NOT NULL,
+  `title` varchar(25) NOT NULL,
+  `code` varchar(25) NOT NULL,
   `quantity` int(2) NOT NULL,
   `desc` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
-  `price` int(11) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
   `productFilterId` int NOT NULL,
   PRIMARY KEY (`productId`),
   FOREIGN KEY (`productFilterId`) REFERENCES `productfilter`(`productFilterId`),
@@ -104,9 +102,9 @@ insert into product (`productId`, `title`, `code`, `quantity`, `desc`, `image`, 
 DROP TABLE IF EXISTS `customer`;
 CREATE TABLE IF NOT EXISTS `customer` (
   `customerId` int NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(255) NOT NULL,
-  `lastName` varchar(255) NOT NULL,
-  `phone` varchar(255) NOT NULL,
+  `firstName` varchar(25) NOT NULL,
+  `lastName` varchar(25) NOT NULL,
+  `phone` int NOT NULL,
   `addressId` int NOT NULL,
   `uid` int NOT NULL,
   PRIMARY KEY (`customerId`),
