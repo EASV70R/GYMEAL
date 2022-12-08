@@ -80,3 +80,6 @@ $(".qtyplus").on("click", function() {
         $(".qty").val(parseInt(now) + 1);
     }
 });
+
+
+
