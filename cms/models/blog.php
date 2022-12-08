@@ -14,13 +14,18 @@ class BlogModel extends Database
 
     public function CreateBlogPost($title, $content, $image): bool
     {
-        $this->prepare('INSERT INTO `blog` (`title`, `content`, `image`) VALUES (?, ?, ?)');
-     
-        if ($this->statement->execute([$title, $content, $image]))
+        try
         {
-            return true;
-        } else {
+            $this->connect()->beginTransaction();
+            $this->prepare('INSERT INTO `blog` (`title`, `content`, `image`) VALUES (?, ?, ?)');
+            $this->statement->execute([$title, $content, $image]);
+            $this->connect()->commit();
+        } catch (Throwable $error) {
+            $this->connect()->rollBack();
+            print_r("Error: " . $error->getMessage());
             return false;
+        } finally {
+            return true;
         }
     }
 }

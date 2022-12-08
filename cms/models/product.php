@@ -28,54 +28,74 @@ class ProductModel extends Database
 
     public function CreateProduct($title, $code, $quantity, $desc, $image, $price, $category): bool
     {
-        $this->prepare('INSERT INTO `product` (`title`, `code`, `quantity`, `desc`, `image`, `price`, `productFilterId`) VALUES (:title, :code, :quantity, :adesc, :aimage, :price, :productFilterId)');
-        $sanitized_title = htmlspecialchars($title);
-        $sanitized_code = htmlspecialchars($code);
-		$sanitized_desc = htmlspecialchars($desc);
-        $sanitized_aimage = htmlspecialchars($image);
-		$this->statement->bindParam(':title', $sanitized_title);
-        $this->statement->bindParam(':code', $sanitized_code);
-        $this->statement->bindParam(':quantity', $quantity);
-        $this->statement->bindParam(':adesc', $sanitized_desc);
-        $this->statement->bindParam(':aimage', $sanitized_aimage);
-        $this->statement->bindParam(':price', $price);
-        $this->statement->bindParam(':productFilterId', $category);
-        if ($this->statement->execute())
-        {
-            return true;
-        } else {
+        try{
+            $this->connect()->beginTransaction();
+            $this->prepare('INSERT INTO `product` (`title`, `code`, `quantity`, `desc`, `image`, `price`, `productFilterId`) VALUES (:title, :code, :quantity, :adesc, :aimage, :price, :productFilterId)');
+            $sanitized_title = htmlspecialchars($title);
+            $sanitized_code = htmlspecialchars($code);
+		    $sanitized_desc = htmlspecialchars($desc);
+            $sanitized_aimage = htmlspecialchars($image);
+		    $this->statement->bindParam(':title', $sanitized_title);
+            $this->statement->bindParam(':code', $sanitized_code);
+            $this->statement->bindParam(':quantity', $quantity);
+            $this->statement->bindParam(':adesc', $sanitized_desc);
+            $this->statement->bindParam(':aimage', $sanitized_aimage);
+            $this->statement->bindParam(':price', $price);
+            $this->statement->bindParam(':productFilterId', $category);
+            $this->statement->execute();
+            $this->connect()->commit();
+        } catch (Throwable $error) {
+            $this->connect()->rollBack();
+            print_r("Error: " . $error->getMessage());
             return false;
+        } finally {
+            return true;
         }
     }
 
     public function UpdateProduct($id, $title, $code, $quantity, $desc, $image, $price, $category): bool
     {
-        $this->prepare('UPDATE `product` SET `title` = :title, `code` = :code, `quantity` = :quantity, `desc` = :adesc, `image` = :aimage, `price` = :price, `productFilterId` = :productFilterId WHERE `productId` = :productId');
-        $sanitized_title = htmlspecialchars($title);
-        $sanitized_code = htmlspecialchars($code);
-        $sanitized_desc = htmlspecialchars($desc);
-        $sanitized_aimage = htmlspecialchars($image);
-        $this->statement->bindParam(':productId', $id);
-        $this->statement->bindParam(':title', $sanitized_title);
-        $this->statement->bindParam(':code', $sanitized_code);
-        $this->statement->bindParam(':quantity', $quantity);
-        $this->statement->bindParam(':adesc', $sanitized_desc);
-        $this->statement->bindParam(':aimage', $sanitized_aimage);
-        $this->statement->bindParam(':price', $price);
-        $this->statement->bindParam(':productFilterId', $category);
-        if ($this->statement->execute())
-        {
-            return true;
-        } else {
+        try{
+            $this->connect()->beginTransaction();
+            $this->prepare('UPDATE `product` SET `title` = :title, `code` = :code, `quantity` = :quantity, `desc` = :adesc, `image` = :aimage, `price` = :price, `productFilterId` = :productFilterId WHERE `productId` = :productId');
+            $sanitized_title = htmlspecialchars($title);
+            $sanitized_code = htmlspecialchars($code);
+            $sanitized_desc = htmlspecialchars($desc);
+            $sanitized_aimage = htmlspecialchars($image);
+            $this->statement->bindParam(':productId', $id);
+            $this->statement->bindParam(':title', $sanitized_title);
+            $this->statement->bindParam(':code', $sanitized_code);
+            $this->statement->bindParam(':quantity', $quantity);
+            $this->statement->bindParam(':adesc', $sanitized_desc);
+            $this->statement->bindParam(':aimage', $sanitized_aimage);
+            $this->statement->bindParam(':price', $price);
+            $this->statement->bindParam(':productFilterId', $category);
+            $this->statement->execute();
+            $this->connect()->commit();
+        } catch (Throwable $error) {
+            $this->connect()->rollBack();
+            print_r("Error: " . $error->getMessage());
             return false;
+        } finally {
+            return true;
         }
     }
 
     public function DeleteProduct($productID)
     {
-        $this->prepare('DELETE FROM `product` WHERE `productId` = :productID');
-        $this->statement->bindParam(':productID', $productID);
-        $this->statement->execute();
+        try{
+            $this->connect()->beginTransaction();
+            $this->prepare('DELETE FROM `product` WHERE `productId` = :productID');
+            $this->statement->bindParam(':productID', $productID);
+            $this->statement->execute();
+            $this->connect()->commit();
+        } catch (Throwable $error) {
+            $this->connect()->rollBack();
+            print_r("Error: " . $error->getMessage());
+            return false;
+        } finally {
+            return true;
+        }
     }
 
     public function ProductQuantityStatus($productID)
