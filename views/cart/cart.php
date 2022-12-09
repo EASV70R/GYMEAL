@@ -70,7 +70,7 @@ Util::Navbar();
                 <div class="column"><a class="btn btn-outline-secondary" href="/products"><i
                             class="icon-arrow-left"></i>&nbsp;Back
                         to Shopping</a></div>
-                <div class="column"><a class="btn btn-success" href="/order">Checkout</a></div>
+                <div class="column"><a class="btn btn-success" href="/checkout">Checkout</a></div>
             </div>
         </div>
     </div>
