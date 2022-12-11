@@ -8,27 +8,27 @@ class InvoiceModel extends Database
 {
     public function InvoiceArray()
     {
-        $this->prepare(getinvoices);
+        $this->prepare(INVOICES);
         $this->statement->execute();
         return $this->statement->fetchAll();
     }
 
     public function InvoiceFromCurrentUID()
     {
-        $this->prepare(getinvoicefromuid);
+        $this->prepare(INVOICEFROMUID);
         $this->statement->execute([Session::Get('uid')]);
         return $this->statement->fetchAll();
     }
 
     public function DeleteInvoice($invoiceID, $userID)
     {
-        $this->prepare(deleteinvoice);
+        $this->prepare(DELETEINVOICE);
         $this->statement->execute([$invoiceID, $userID]);
     }
 
     public function InvoiceStatus($invoiceID, $userID)
     {
-        $this->prepare(getinvoicestatus);
+        $this->prepare(INVOICESTATUS);
         $this->statement->execute([$invoiceID, $userID]);
         $result = $this->statement->fetch();
         $result->status = ((int) $result->status === 0) ? 'Not shipped' : 'Shipped';

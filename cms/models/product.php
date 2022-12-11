@@ -8,21 +8,21 @@ class ProductModel extends Database
 {
     public function ProductArray()
     {
-        $this->prepare(getproducts);
+        $this->prepare(PRODUCTS);
         $this->statement->execute();
         return $this->statement->fetchAll();
     }
 
     public function LatestProductFirst()
     {
-        $this->prepare(getlatestproduct);
+        $this->prepare(LATESTPRODUCT);
         $this->statement->execute();
         return $this->statement->fetchAll();
     }
 
     public function LatestProductOffsetByOne()
     {
-        $this->prepare(getlatestproductbyone);
+        $this->prepare(LATESTPRODUCTBYONE);
         $this->statement->execute();
         return $this->statement->fetchAll();
     }
@@ -31,7 +31,7 @@ class ProductModel extends Database
     {
         try{
             $this->connect()->beginTransaction();
-            $this->prepare(createproduct);
+            $this->prepare(CREATEPRODUCT);
             $sanitized_title = htmlspecialchars($title);
             $sanitized_code = htmlspecialchars($code);
 		    $sanitized_desc = htmlspecialchars($desc);
@@ -58,7 +58,7 @@ class ProductModel extends Database
     {
         try{
             $this->connect()->beginTransaction();
-            $this->prepare(updateproduct);
+            $this->prepare(UPDATEPRODUCT);
             $sanitized_title = htmlspecialchars($title);
             $sanitized_code = htmlspecialchars($code);
             $sanitized_desc = htmlspecialchars($desc);
@@ -86,7 +86,7 @@ class ProductModel extends Database
     {
         try{
             $this->connect()->beginTransaction();
-            $this->prepare(deleteproduct);
+            $this->prepare(DELETPRODUCT);
             $this->statement->bindParam(':productID', $productID);
             $this->statement->execute();
             $this->connect()->commit();
@@ -101,7 +101,7 @@ class ProductModel extends Database
 
     public function ProductQuantityStatus($productID)
     {
-        $this->prepare(getproductstatus);
+        $this->prepare(PRODUCTSTATUS);
         $this->statement->bindParam(':productID', $productID);
         $this->statement->execute();
         $result = $this->statement->fetch();
@@ -111,28 +111,28 @@ class ProductModel extends Database
 
     public function ProductFilter($filterId)
     {
-        $this->prepare(innerjoinproductfilter);
+        $this->prepare(INNERJOINPRODUCTFILTER);
         $this->statement->execute();
         return $this->statement->fetchAll();
     }
 
     public function ProductMealFilter()
     {
-        $this->prepare(filterbymeals);
+        $this->prepare(FILTERMEALS);
         $this->statement->execute();
         return $this->statement->fetchAll();
     }
 
     public function ProductDrinkFilter()
     {
-        $this->prepare(filterbydrinks);
+        $this->prepare(FILTERDRINKS);
         $this->statement->execute();
         return $this->statement->fetchAll();
     }
 
     public function ProductById($id)
     {
-        $this->prepare(getproductbyid);
+        $this->prepare(PRODUCTBYID);
         $this->statement->bindParam(':productID', $id);
         $this->statement->execute();
         return $this->statement->fetchAll();

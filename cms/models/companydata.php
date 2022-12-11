@@ -8,7 +8,7 @@ class CompanyModel extends Database
 {
     public function CompanyDataArray()
     {
-        $this->prepare(getcompanydata);
+        $this->prepare(COMPANYDATA);
         $this->statement->execute();
         return $this->statement->fetchAll();
     }
@@ -25,7 +25,7 @@ class CompanyModel extends Database
         try
         {
             $this->connect()->beginTransaction();
-            $this->prepare(updatecompanydata);
+            $this->prepare(UPDATECOMPANYDATA);
             $sanitized_title = htmlspecialchars($title);
 		    $sanitized_email = htmlspecialchars($email);
             $sanitized_phone = htmlspecialchars($phone);

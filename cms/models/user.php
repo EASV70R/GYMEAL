@@ -8,7 +8,7 @@ class UserModel extends Database
 {
     public function GetUsers()
     {
-        $this->prepare(getuser);
+        $this->prepare(USER);
         $this->statement->execute();
         return $this->statement->fetchAll();
     }
@@ -23,10 +23,10 @@ class UserModel extends Database
 
             if ($row) {
                 if($password != null){
-                    $this->prepare(edituser);
+                    $this->prepare(EDITUSER);
                     $this->statement->bindParam(':password', $password);
                 }else{
-                    $this->prepare(edituser2);
+                    $this->prepare(EDITUSER2);
                 }
                 $this->statement->bindParam(':username', $username);
                 $this->statement->bindParam(':email', $email);
@@ -67,7 +67,7 @@ class UserModel extends Database
     {
         try{
             $this->connect()->beginTransaction();
-            $this->prepare(deleteuser);
+            $this->prepare(DELETEUSER);
             $this->statement->bindParam(':uid', $uid);
             $this->statement->execute();
             $this->connect()->commit();
@@ -82,35 +82,35 @@ class UserModel extends Database
 
     public function GetUserById($uid): bool|stdClass
     {
-        $this->prepare(getuserbyid);
+        $this->prepare(USERBYID);
         $this->statement->execute([$uid]);
         return $this->statement->fetch();
     }
 
     public function GetUsername($username): bool|stdClass
     {
-        $this->prepare(getuserbyusername);
+        $this->prepare(USERBYUSERNAME);
         $this->statement->execute([$username]);
         return $this->statement->fetch();
     }
 
     public function GetEmail($email): bool|stdClass
     {
-        $this->prepare(getuserbyemail);
+        $this->prepare(USERBYEMAIL);
         $this->statement->execute([$email]);
         return $this->statement->fetch();
     }
 
     public function GetRole($userrole): bool|stdClass
     {
-        $this->prepare(getrolebyuid);
+        $this->prepare(ROLEBYUID);
         $this->statement->execute([$userrole]);
         return $this->statement->fetch();
     }
 
     public function AdditionalAdminCheck($uid): bool|stdClass
     {
-        $this->prepare(additionaladminchecksql);
+        $this->prepare(ADMINCHECK);
         $this->statement->execute([$uid]);
         return $this->statement->fetch();
     }
@@ -119,7 +119,7 @@ class UserModel extends Database
     {
         try{
             $this->connect()->beginTransaction();
-            $this->prepare(register);
+            $this->prepare(REGISTER);
      
             $this->statement->execute([$username, $hashedPassword, $email]);
             $this->connect()->commit();
@@ -136,7 +136,7 @@ class UserModel extends Database
     {
         try{
             $this->connect()->beginTransaction();
-            $this->prepare(createrole);
+            $this->prepare(CREATEROLE);
      
             $this->statement->execute([$uid, $roleid]);
             $this->connect()->commit();
@@ -163,7 +163,7 @@ class UserModel extends Database
             if ($row)
             {
                 if (password_verify($currentPassword, $row->password)) {
-                    $this->prepare(updatepassword);
+                    $this->prepare(UPDATEPASSWORD);
                     $this->statement->execute([$hashedPassword, $username]);
                     $this->connect()->commit();
                     return 'Password changed successfully.';
