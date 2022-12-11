@@ -23,8 +23,8 @@ Util::Navbar();
                     <div class="card-body">
                         <h4 class="card-title text-center">Profile</h4>
                         <figcaption class="info">
-                            <h6 class="title"><?= Util::Print(Session::Get('username'));?></h6>
-                            <p>Email: <?= Util::Print(Session::Get('email'));?>
+                            <h6 class="title"><?= Session::Get('username');?></h6>
+                            <p>Email: <?= Session::Get('email');?>
                                 <a href="#" class="px-2"><i class="fa fa-pen"></i></a>
                             </p>
                         </figcaption>

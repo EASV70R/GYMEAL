@@ -83,7 +83,7 @@ Util::Navbar();
             <div class="col-12 mt-3 mb-2">
                 <?php if (isset($response)) : ?>
                 <div class="alert alert-primary" role="alert">
-                    <?= Util::Print($response); ?>
+                    <?= $response; ?>
                 </div>
                 <?php endif; ?>
             </div>
@@ -139,10 +139,10 @@ Util::Navbar();
                     <tbody>
                         <?php foreach ($auth->GetAllUsers() as $row) : ?>
                         <tr>
-                            <td scope="row"><?= Util::Print($row->uid); ?></td>
-                            <td><?= Util::Print($row->username); ?></td>
-                            <td><?= Util::Print($row->email); ?></td>
-                            <td><?= Util::Print($auth->GetRole($row->uid)); ?></td>
+                            <td scope="row"><?= $row->uid; ?></td>
+                            <td><?= $row->username; ?></td>
+                            <td><?= $row->email; ?></td>
+                            <td><?= $auth->GetRole($row->uid); ?></td>
                             <td>
                                 <button class="btn btn-primary editbtn" data-id="1" data-toggle="modal">Edit</button>
                                 <button class="btn btn-danger deletebtn" data-id="2" data-toggle="modal">Delete</button>

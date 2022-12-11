@@ -27,7 +27,7 @@ Util::Navbar();
             <div class="col-12 mt-3 mb-2">
                 <?php if (isset($error)) : ?>
                 <div class="alert alert-primary" role="alert">
-                    <?= Util::Print($error); ?>
+                    <?= $error; ?>
                 </div>
                 <?php endif; ?>
             </div>
@@ -88,22 +88,22 @@ Util::Navbar();
                             <div class="card-body">
                                 <header class="d-lg-flex">
                                     <div class="flex-grow-1">
-                                        <h6 class="mb-0">Product ID: <?= Util::Print($row->productId); ?><i
+                                        <h6 class="mb-0">Product ID: <?= $row->productId; ?><i
                                                 class="dot"></i>
                                             <?php if ($row->quantity == 0) : ?>
                                             <span
-                                                class="text-danger"><?= Util::Print($product->GetProductStatus($row->productId)->quantity); ?></span>
+                                                class="text-danger"><?= $product->GetProductStatus($row->productId)->quantity; ?></span>
                                             <?php else : ?>
                                             <span
-                                                class="text-success"><?= Util::Print($product->GetProductStatus($row->productId)->quantity); ?></span>
+                                                class="text-success"><?= $product->GetProductStatus($row->productId)->quantity; ?></span>
                                             <?php endif; ?>
                                         </h6>
 
                                     </div>
                                     <div>
-                                        <a href="<?= (SITE_URL); ?>/editproduct/edit/<?= Util::Print($row->productId); ?>"
+                                        <a href="<?= (SITE_URL); ?>/editproduct/edit/<?= $row->productId; ?>"
                                             class="btn btn-primary btn-sm">Edit</a>
-                                        <a href="<?= (SITE_URL); ?>/editproductlist/delete/<?= Util::Print($row->productId); ?>"
+                                        <a href="<?= (SITE_URL); ?>/editproductlist/delete/<?= $row->productId; ?>"
                                             class="btn btn-danger btn-sm">Delete</a>
                                     </div>
                                 </header>
@@ -112,12 +112,12 @@ Util::Navbar();
                                     <li class="col-xl-4  col-lg-6">
                                         <figure class="itemside mb-3">
                                             <div class="aside">
-                                                <img width="72" height="72" src="<?= Util::Print($row->image); ?>"
+                                                <img width="72" height="72" src="<?= $row->image; ?>"
                                                     alt="test" class="img-sm rounded border">
                                             </div>
                                             <figcaption class="info">
-                                                <p class="title"><?= Util::Print($row->title); ?></p>
-                                                <strong> $<?= Util::Print($row->price); ?> </strong>
+                                                <p class="title"><?= $row->title; ?></p>
+                                                <strong> $<?= $row->price; ?> </strong>
                                             </figcaption>
                                         </figure>
                                     </li>

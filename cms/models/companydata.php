@@ -26,13 +26,13 @@ class CompanyModel extends Database
         {
             $this->connect()->beginTransaction();
             $this->prepare(updatecompanydata);
-            $sanitized_fullName = htmlspecialchars($title);
+            $sanitized_title = htmlspecialchars($title);
 		    $sanitized_email = htmlspecialchars($email);
             $sanitized_phone = htmlspecialchars($phone);
             $sanitized_adesc = htmlspecialchars($desc);
             $sanitized_smalldesc = htmlspecialchars($smalldesc);
             $sanitized_aimage = htmlspecialchars($image);
-		    $this->statement->bindParam(':title', $sanitized_fullName);
+		    $this->statement->bindParam(':title', $sanitized_title);
             $this->statement->bindParam(':email', $sanitized_email);
             $this->statement->bindParam(':phone', $sanitized_phone);
             $this->statement->bindParam(':adesc', $sanitized_adesc);

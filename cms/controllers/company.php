@@ -28,6 +28,7 @@ class Company
         }*/
 
         $response = $Company->UpdateCompanyData($title, $email, $phone, $desc, $smalldesc, $address, $image);
+
         return ($response) ? 'Success' : 'Error';
     }
 

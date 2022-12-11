@@ -23,7 +23,7 @@ Util::Navbar();
             <div class="col-12 mt-3 mb-2">
                 <?php if (isset($error)) : ?>
                 <div class="alert alert-primary" role="alert">
-                    <?= Util::Print($error); ?>
+                    <?= $error; ?>
                 </div>
                 <?php endif; ?>
             </div>

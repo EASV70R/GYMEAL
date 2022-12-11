@@ -33,7 +33,7 @@ $num_items_in_cart = isset($_SESSION['cart_item']) ? count($_SESSION['cart_item'
                             class="fa fa-user text-body"></small></a>
                     <div class="dropdown-menu dropdown-menu-left">
                         <?php if (Session::Get('login')) : ?>
-                        <p class="dropdown-item"><?= Util::Print(Session::Get('username'));?></p>
+                        <p class="dropdown-item"><?= Session::Get('username');?></p>
                         <?php if (Session::Get('admin')) : ?>
                         <a href="<?= (SITE_URL); ?>/admin" class="dropdown-item">Admin</a>
                         <?php else : ?>

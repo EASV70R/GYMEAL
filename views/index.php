@@ -75,12 +75,12 @@ Util::Navbar();
                             <div class="carousel-item active">
                                 <div class="col-md-3">
                                     <div class="card">
-                                        <div class="img-wrapper"><img src="<?= Util::Print($row->image); ?>"
-                                                class="img-wrapper" alt="<?= Util::Print($row->title); ?>"> </div>
+                                        <div class="img-wrapper"><img src="<?= $row->image; ?>"
+                                                class="img-wrapper" alt="<?= $row->title; ?>"> </div>
                                         <div class="card-body">
-                                            <h5 class="card-title"><?= Util::Print($row->title); ?></h5>
-                                            <p class="card-text"><?= Util::Print($row->desc); ?></p>
-                                            <a href="<?= (SITE_URL); ?>/productview/<?= Util::Print($row->productId); ?>"
+                                            <h5 class="card-title"><?= $row->title; ?></h5>
+                                            <p class="card-text"><?= $row->desc; ?></p>
+                                            <a href="<?= (SITE_URL); ?>/productview/<?= $row->productId; ?>"
                                                 class="btn btn-primary">View product</a>
                                         </div>
                                     </div>
@@ -91,12 +91,12 @@ Util::Navbar();
                             <div class="carousel-item">
                                 <div class="col-md-3">
                                     <div class="card">
-                                        <div class="img-wrapper"><img src="<?= Util::Print($row->image); ?>"
-                                                class="img-wrapper" alt="<?= Util::Print($row->title); ?>"> </div>
+                                        <div class="img-wrapper"><img src="<?= $row->image; ?>"
+                                                class="img-wrapper" alt="<?= $row->title; ?>"> </div>
                                         <div class="card-body">
-                                            <h5 class="card-title"><?= Util::Print($row->title); ?></h5>
-                                            <p class="card-text"><?= Util::Print($row->desc); ?></p>
-                                            <a href="<?= (SITE_URL); ?>/productview/<?= Util::Print($row->productId); ?>"
+                                            <h5 class="card-title"><?= $row->title; ?></h5>
+                                            <p class="card-text"><?= $row->desc; ?></p>
+                                            <a href="<?= (SITE_URL); ?>/productview/<?= $row->productId; ?>"
                                                 class="btn btn-primary">View product</a>
                                         </div>
                                     </div>
@@ -125,12 +125,12 @@ Util::Navbar();
             <?php foreach ($companyData->GetCompanyArray() as $row) : ?>
             <div class="col-lg-6">
                 <div class="about-img position-relative overflow-hidden p-5 pe-0">
-                    <img class="img-fluid w-100" src="<?= Util::Print($row->image); ?>">
+                    <img class="img-fluid w-100" src="<?= $row->image; ?>">
                 </div>
             </div>
             <div class="col-lg-6">
-                <h1 class="display-5 mb-4"><?= Util::Print($row->name); ?></h1>
-                <p class="mb-4"><?= Util::Print($row->desc); ?></p>
+                <h1 class="display-5 mb-4"><?= $row->name; ?></h1>
+                <p class="mb-4"><?= $row->desc; ?></p>
                 <p><i class="fa fa-check text-primary me-3"></i>Tempor erat elitr rebum at clita
                 </p>
                 <p><i class="fa fa-check text-primary me-3"></i>Aliqu diam amet diam et eos</p>

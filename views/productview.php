@@ -15,17 +15,17 @@ Util::Navbar();
         <div class="heading-section">
             <h2>Product Details</h2>
         </div>
-        <?php foreach ($product->GetProductById(Util::Print($id)) as $row) : ?>
+        <?php foreach ($product->GetProductById($id) as $row) : ?>
         <div class="row">
             <div class="col-md-6">
                 <div class="item">
-                    <img src="<?= Util::Print($row->image); ?>" />
+                    <img src="/<?= $row->image; ?>" />
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="product-dtl">
                     <div class="product-info">
-                        <div class="product-name"><?= Util::Print($row->title); ?></div>
+                        <div class="product-name"><?= $row->title; ?></div>
                         <div class="reviews-counter">
                             <div class="rate">
                                 <input type="radio" id="star5" name="rate" value="5" checked />
@@ -41,22 +41,22 @@ Util::Navbar();
                             </div>
                             <span>3 Reviews</span>
                         </div>
-                        <div class="product-price-discount"><span>$<?= Util::Print($row->price); ?></span>
+                        <div class="product-price-discount"><span>$<?= $row->price; ?></span>
                             <!--<span class="line-through"></span>-->
                         </div>
                     </div>
-                    <p><?= Util::Print($row->desc); ?></p>
+                    <p><?= $row->desc; ?></p>
 
                     <div class="product-count">
                         <label for="size">Quantity</label>
                         <form method="POST">
                             <div class="form-group">
-                                <input type="hidden" name="productId" value="<?=Util::Print($row->productId); ?>">
+                                <input type="hidden" name="productId" value="<?= $row->productId; ?>">
                             </div>
                             <div class="form-group">
                                 <div class="display-flex">
                                     <div class="qtyminus">-</div>
-                                    <input type="text" name="quantity" value="<?= Util::Print($row->quantity); ?>"
+                                    <input type="text" name="quantity" value="<?= $row->quantity; ?>"
                                         class="qty">
                                     <div class="qtyplus">+</div>
                                 </div>
@@ -81,7 +81,7 @@ Util::Navbar();
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="description" role="tabpanel"
                     aria-labelledby="description-tab">
-                    <?= Util::Print($row->desc); ?>
+                    <?= $row->desc; ?>
                 </div>
             </div>
         </div>
