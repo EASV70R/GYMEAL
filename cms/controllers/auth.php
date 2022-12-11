@@ -153,6 +153,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     {
         $response = $auth->Register($_POST);
     }   
+    else if (isset($_POST["edit"])) {
+        $response = $auth->EditUser($_POST);
+    }
     else if (isset($_POST["delete"])) {
         $response = $auth-->DeleteUser($_POST);
         var_dump($_POST);

@@ -2,26 +2,27 @@
 defined('BASE_PATH') or exit('No direct script access allowed');
 
 require_once __DIR__.'/../core/database.php';
+require_once __DIR__.'/../models/sql/productsql.php';
 
 class ProductModel extends Database
 {
     public function ProductArray()
     {
-        $this->prepare('SELECT * FROM `product` ORDER BY `productId` DESC');
+        $this->prepare(getproducts);
         $this->statement->execute();
         return $this->statement->fetchAll();
     }
 
     public function LatestProductFirst()
     {
-        $this->prepare('SELECT * FROM `product` ORDER BY `productId` DESC LIMIT 1');
+        $this->prepare(getlatestproduct);
         $this->statement->execute();
         return $this->statement->fetchAll();
     }
 
     public function LatestProductOffsetByOne()
     {
-        $this->prepare('SELECT * FROM `product` ORDER BY `productId` DESC LIMIT 5 OFFSET 1');
+        $this->prepare(getlatestproductbyone);
         $this->statement->execute();
         return $this->statement->fetchAll();
     }
@@ -30,7 +31,7 @@ class ProductModel extends Database
     {
         try{
             $this->connect()->beginTransaction();
-            $this->prepare('INSERT INTO `product` (`title`, `code`, `quantity`, `desc`, `image`, `price`, `productFilterId`) VALUES (:title, :code, :quantity, :adesc, :aimage, :price, :productFilterId)');
+            $this->prepare(createproduct);
             $sanitized_title = htmlspecialchars($title);
             $sanitized_code = htmlspecialchars($code);
 		    $sanitized_desc = htmlspecialchars($desc);
@@ -57,7 +58,7 @@ class ProductModel extends Database
     {
         try{
             $this->connect()->beginTransaction();
-            $this->prepare('UPDATE `product` SET `title` = :title, `code` = :code, `quantity` = :quantity, `desc` = :adesc, `image` = :aimage, `price` = :price, `productFilterId` = :productFilterId WHERE `productId` = :productId');
+            $this->prepare(updateproduct);
             $sanitized_title = htmlspecialchars($title);
             $sanitized_code = htmlspecialchars($code);
             $sanitized_desc = htmlspecialchars($desc);
@@ -85,7 +86,7 @@ class ProductModel extends Database
     {
         try{
             $this->connect()->beginTransaction();
-            $this->prepare('DELETE FROM `product` WHERE `productId` = :productID');
+            $this->prepare(deleteproduct);
             $this->statement->bindParam(':productID', $productID);
             $this->statement->execute();
             $this->connect()->commit();
@@ -100,7 +101,7 @@ class ProductModel extends Database
 
     public function ProductQuantityStatus($productID)
     {
-        $this->prepare('SELECT * FROM `product` WHERE `productId` = :productID');
+        $this->prepare(getproductstatus);
         $this->statement->bindParam(':productID', $productID);
         $this->statement->execute();
         $result = $this->statement->fetch();
@@ -110,28 +111,28 @@ class ProductModel extends Database
 
     public function ProductFilter($filterId)
     {
-        $this->prepare('SELECT * FROM `product` as pdt INNER JOIN productfilter as pdtF ON(pdt.productFilterId=pdtF.productFilterId) ORDER BY `productId` DESC');
+        $this->prepare(innerjoinproductfilter);
         $this->statement->execute();
         return $this->statement->fetchAll();
     }
 
     public function ProductMealFilter()
     {
-        $this->prepare('SELECT * FROM `product` WHERE `productFilterId` = 1 ORDER BY `productId` DESC');
+        $this->prepare(filterbymeals);
         $this->statement->execute();
         return $this->statement->fetchAll();
     }
 
     public function ProductDrinkFilter()
     {
-        $this->prepare('SELECT * FROM `product` WHERE `productFilterId` = 2 ORDER BY `productId` DESC');
+        $this->prepare(filterbydrinks);
         $this->statement->execute();
         return $this->statement->fetchAll();
     }
 
     public function ProductById($id)
     {
-        $this->prepare('SELECT * FROM `product` WHERE `productId` = :productID');
+        $this->prepare(getproductbyid);
         $this->statement->bindParam(':productID', $id);
         $this->statement->execute();
         return $this->statement->fetchAll();

@@ -2,12 +2,13 @@
 defined('BASE_PATH') or exit('No direct script access allowed');
 
 require_once __DIR__.'/../core/database.php';
+require_once __DIR__.'/../models/sql/invoicesql.php';
 
 class CompanyModel extends Database
 {
     public function CompanyDataArray()
     {
-        $this->prepare('SELECT * FROM `company` AS com INNER JOIN `address` AS addr ON(com.addressId=addr.addressId) ORDER BY `companyId` ASC LIMIT 1');
+        $this->prepare(getcompanydata);
         $this->statement->execute();
         return $this->statement->fetchAll();
     }
@@ -24,7 +25,7 @@ class CompanyModel extends Database
         try
         {
             $this->connect()->beginTransaction();
-            $this->prepare('UPDATE `company` SET `name` = :title, `email` = :email, `phone` = :phone, `desc` = :adesc, `smalldesc` = :smalldesc, `image` = :aimage WHERE `companyId` = 1');
+            $this->prepare(updatecompanydata);
             $sanitized_fullName = htmlspecialchars($title);
 		    $sanitized_email = htmlspecialchars($email);
             $sanitized_phone = htmlspecialchars($phone);

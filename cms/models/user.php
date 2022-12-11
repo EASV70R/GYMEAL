@@ -2,12 +2,13 @@
 defined('BASE_PATH') or exit('No direct script access allowed');
 
 require_once __DIR__.'/../core/database.php';
+require_once __DIR__.'/../models/sql/usersql.php';
 
 class UserModel extends Database
 {
     public function GetUsers()
     {
-        $this->prepare('SELECT * FROM `user`');
+        $this->prepare(getuser);
         $this->statement->execute();
         return $this->statement->fetchAll();
     }
@@ -22,10 +23,10 @@ class UserModel extends Database
 
             if ($row) {
                 if($password != null){
-                    $this->prepare('UPDATE `user` SET `username` = :username, `password` = :password, `email` = :email WHERE `uid` = :uid');
+                    $this->prepare(edituser);
                     $this->statement->bindParam(':password', $password);
                 }else{
-                    $this->prepare('UPDATE `user` SET `username` = :username, `email` = :email WHERE `uid` = :uid');
+                    $this->prepare(edituser2);
                 }
                 $this->statement->bindParam(':username', $username);
                 $this->statement->bindParam(':email', $email);
@@ -66,7 +67,7 @@ class UserModel extends Database
     {
         try{
             $this->connect()->beginTransaction();
-            $this->prepare('DELETE FROM `user` WHERE `uid` = :uid');
+            $this->prepare(deleteuser);
             $this->statement->bindParam(':uid', $uid);
             $this->statement->execute();
             $this->connect()->commit();
@@ -81,35 +82,35 @@ class UserModel extends Database
 
     public function GetUserById($uid): bool|stdClass
     {
-        $this->prepare('SELECT * FROM `user` WHERE `uid` = ? LIMIT 1');
+        $this->prepare(getuserbyid);
         $this->statement->execute([$uid]);
         return $this->statement->fetch();
     }
 
     public function GetUsername($username): bool|stdClass
     {
-        $this->prepare('SELECT * FROM `user` WHERE `username` = ? LIMIT 1');
+        $this->prepare(getuserbyusername);
         $this->statement->execute([$username]);
         return $this->statement->fetch();
     }
 
     public function GetEmail($email): bool|stdClass
     {
-        $this->prepare('SELECT * FROM `user` WHERE `email` = ? LIMIT 1');
+        $this->prepare(getuserbyemail);
         $this->statement->execute([$email]);
         return $this->statement->fetch();
     }
 
     public function GetRole($userrole): bool|stdClass
     {
-        $this->prepare('SELECT roleid FROM `userrole` WHERE `uid` = ?');
+        $this->prepare(getrolebyuid);
         $this->statement->execute([$userrole]);
         return $this->statement->fetch();
     }
 
     public function AdditionalAdminCheck($uid): bool|stdClass
     {
-        $this->prepare('SELECT * FROM `userrole` WHERE `uid` = ? AND `roleid` = 1');
+        $this->prepare(additionaladminchecksql);
         $this->statement->execute([$uid]);
         return $this->statement->fetch();
     }
@@ -118,7 +119,7 @@ class UserModel extends Database
     {
         try{
             $this->connect()->beginTransaction();
-            $this->prepare('INSERT INTO `user` (`username`, `password`, `email`) VALUES (?, ?, ?)');
+            $this->prepare(register);
      
             $this->statement->execute([$username, $hashedPassword, $email]);
             $this->connect()->commit();
@@ -135,7 +136,7 @@ class UserModel extends Database
     {
         try{
             $this->connect()->beginTransaction();
-            $this->prepare('INSERT INTO `userrole` (`uid`, `roleid`) VALUES (?, ?)');
+            $this->prepare(createrole);
      
             $this->statement->execute([$uid, $roleid]);
             $this->connect()->commit();
@@ -162,7 +163,7 @@ class UserModel extends Database
             if ($row)
             {
                 if (password_verify($currentPassword, $row->password)) {
-                    $this->prepare('UPDATE `user` SET `password` = ? WHERE `username` = ?');
+                    $this->prepare(updatepassword);
                     $this->statement->execute([$hashedPassword, $username]);
                     $this->connect()->commit();
                     return 'Password changed successfully.';
