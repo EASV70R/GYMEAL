@@ -2,7 +2,7 @@
 defined('BASE_PATH') or exit('No direct script access allowed');
 
 require_once __DIR__.'/../core/database.php';
-require_once __DIR__.'/../models/sql/invoicesql.php';
+require_once __DIR__.'/../models/sql/companysql.php';
 
 class CompanyModel extends Database
 {
