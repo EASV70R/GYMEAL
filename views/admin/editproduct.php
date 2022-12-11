@@ -3,8 +3,11 @@ require_once './cms/require.php';
 require_once './cms/controllers/company.php';
 
 require_once './cms/controllers/products.php';
+require_once './cms/controllers/img.php';
 
 $product = new Products;
+
+$imgresize = new Image();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET["edit"])) {
@@ -14,9 +17,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST["updateProduct"])) {
-        $_GET["id"] = $id;
-        $error = $product->UpdateProduct($_POST);
+    if (isset($_POST["updateProduct"]))
+    {
+        if($_FILES['file']['size'] == 0)
+        {
+            var_dump($_POST);
+            $_GET["id"] = $id;
+            $error = $product->UpdateProduct($_POST);
+        }
+        else
+        {
+            if ((($_FILES['file']['type']=="image/gif") ||
+        ($_FILES['file']['type']=="image/jpeg") ||
+        ($_FILES['file']['type']=="image/png") ||
+        ($_FILES['file']['type']=="image/pjpeg"))&&
+        ($_FILES['file']['size']<10000000))
+        {
+        if($_FILES['file']['error']>0)
+        {
+            $error = "Return Code: " . $_FILES['file']['error'];
+        }else{
+            /*echo "Uploaded: ". $_FILES['file']['name']. "<br>";
+            echo "Type: ". $_FILES['file']['type']. "<br>";
+            echo "Size: ". $_FILES['file']['size']. "<br>";
+            echo "Temp file: ".$_FILES['file']['tmp_name']. "<br>";
+            echo "Uploaded: ". $_FILES['file']['name']. "<br>";*/
+            if (file_exists("assets/img/".$_FILES['file']['name'])){
+                $_POST['itemImage'] = "assets/img/product_".$_FILES['file']['name'];
+                //$error = $_FILES['file']['name']. " already exists. ";
+            }else{
+                $imgresize->UploadImg($_FILES['file']['tmp_name'], 500, 650, "assets/img/product_".$_FILES['file']['name']);
+                $_POST['itemImage'] = "assets/img/product_".$_FILES['file']['name'];
+                $imgresize->UploadImg($_FILES['file']['tmp_name'], 300, 200, "assets/img/product_thumbnail_".$_FILES['file']['name']);
+                //$_POST['itemImage'] = "assets/img/product_".$_FILES['file']['name'];
+                $_GET["id"] = $id;
+                $error = $product->UpdateProduct($_POST);
+            }
+        }
+        }else{ 
+            $error = "Invalid file";
+        }   
+        }
     }
 }
 
@@ -28,7 +69,7 @@ Util::Navbar();
     <div class="col-12 mt-3 mb-2">
         <?php if (isset($error)) : ?>
         <div class="alert alert-primary" role="alert">
-            <?= Util::Print($error); ?>
+            <?= $error; ?>
         </div>
         <?php endif; ?>
     </div>
@@ -36,13 +77,16 @@ Util::Navbar();
         <h2>Product Details</h2>
     </div>
     <div class="row">
-        <?php foreach ($product->GetProductById(Util::Print($id)) as $row) : ?>
-        <form method="POST" class="display-flex">
+        <?php foreach ($product->GetProductById($id) as $row) : ?>
+        <form method="POST" enctype="multipart/form-data" class="display-flex">
             <div class="col-md-6">
                 <div class="item">
-                    <img style="height:650px;max-width:500px;" src="<?= Util::Print($row->image); ?>" />
-                    <input type="text" placeholder="Image" class="form-control my-3 bg-dark text-white text-center"
-                        name="itemImage" value="<?= Util::Print($row->image); ?>">
+                    <img style="height:650px;max-width:500px;" src="/<?= $row->image; ?>" />
+                    <div class="form-group">
+                        <label for="image_uploads">Choose images to upload (PNG, JPG)</label>
+                        <input type="file" id="file" name="file" accept=".jpg, .jpeg, .png"
+                            multiple />
+                    </div>
                 </div>
             </div>
             <div class="col-md-6">
@@ -51,12 +95,12 @@ Util::Navbar();
                         <div class="product-name">
                             <input type="text" placeholder="Title"
                                 class="form-control my-3 bg-dark text-white text-center" name="itemName"
-                                value="<?= Util::Print($row->title); ?>">
+                                value="<?= $row->title; ?>">
                         </div>
                         <div class="product-code">
                             <input type="text" placeholder="Title"
                                 class="form-control my-3 bg-dark text-white text-center" name="itemCode"
-                                value="<?= Util::Print($row->code); ?>">
+                                value="<?= $row->code; ?>">
                         </div>
                         <label for="category">Category:</label>
                         <select id="filterId" name="filterId">
@@ -81,13 +125,13 @@ Util::Navbar();
                         </div>
                         <div class="product-price-discount"><span><input type="number" placeholder="Price"
                                     class="form-control my-3 bg-dark text-white text-center" name="itemPrice"
-                                    value="<?= Util::Print($row->price); ?>"></span>
+                                    value="<?= $row->price; ?>"></span>
                             <!--<span class="line-through"></span>-->
                         </div>
                     </div>
                     <p><input type="text" placeholder="Description"
                             class="form-control my-3 bg-dark text-white text-center" name="itemDesc"
-                            value="<?= Util::Print($row->desc); ?>"></p>
+                            value="<?= $row->desc; ?>"></p>
                     <button class="btn btn-outline-primary btn-block" name="updateProduct" type="submit"
                         value="submit">Update
                     </button>
@@ -95,7 +139,7 @@ Util::Navbar();
                         <label for="size">Quantity</label>
                         <form action="#" class="display-flex">
                             <div class="qtyminus">-</div>
-                            <input type="text" name="itemQuantity" value="<?= Util::Print($row->quantity); ?>"
+                            <input type="text" name="itemQuantity" value="<?= $row->quantity; ?>"
                                 class="qty">
                             <div class="qtyplus">+</div>
                         </form>
