@@ -88,7 +88,7 @@ Util::Navbar();
                             <div class="card-body">
                                 <header class="d-lg-flex">
                                     <div class="flex-grow-1">
-                                        <h6 class="mb-0">Product ID: <?= $row->productId; ?><i
+                                        <h6 class="mb-0"><?= $row->title; ?><i
                                                 class="dot"></i>
                                             <?php if ($row->quantity == 0) : ?>
                                             <span
