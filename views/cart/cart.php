@@ -52,7 +52,7 @@ Util::Navbar();
                             <td class="text-center text-lg text-medium">
                                 <?php echo ($v["price"]*$v["quantity"])." DKK"; ?></td>
                             <td class="text-center"><a class="remove-from-cart"
-                                    href="cart/?action=remove&code=<?php echo $v["code"]; ?>" data-toggle="tooltip"
+                                    href="/cart/remove/<?php echo $v["code"]; ?>" data-toggle="tooltip"
                                     title="" data-original-title="Remove item"><i class="fa fa-trash"></i></a></td>
                         </tr>
                         <?php $item_total += ($v["price"]*$v["quantity"]);?>
