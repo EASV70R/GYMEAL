@@ -77,17 +77,6 @@ Util::Navbar();
                         </div>
 
                         <div class="col-12">
-                            <label for="username" class="form-label">Username</label>
-                            <div class="input-group has-validation">
-                                <span class="input-group-text">@</span>
-                                <input type="text" class="form-control" id="username" placeholder="Username" required>
-                                <div class="invalid-feedback">
-                                    Your username is required.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12">
                             <label for="email" class="form-label">Email <span
                                     class="text-muted">(Optional)</span></label>
                             <input type="email" class="form-control" id="email" placeholder="you@example.com">
@@ -114,7 +103,7 @@ Util::Navbar();
                             <label for="country" class="form-label">Country</label>
                             <select class="form-select" id="country" required>
                                 <option value="">Choose...</option>
-                                <option>United States</option>
+                                <option>Denmark</option>
                             </select>
                             <div class="invalid-feedback">
                                 Please select a valid country.
@@ -125,7 +114,7 @@ Util::Navbar();
                             <label for="state" class="form-label">State</label>
                             <select class="form-select" id="state" required>
                                 <option value="">Choose...</option>
-                                <option>California</option>
+                                <option>Esbjerg</option>
                             </select>
                             <div class="invalid-feedback">
                                 Please provide a valid state.
@@ -210,8 +199,8 @@ Util::Navbar();
                     </div>
 
                     <hr class="my-4">
-
-                    <button class="w-100 btn btn-primary btn-lg" href="/order" type="submit">Continue to checkout</button>
+                    <a href="/order" class="w-100 btn btn-primary btn-lg">Continue to checkout</a>
+                    <!-- <button class="w-100 btn btn-primary btn-lg" href="/order" type="submit">Continue to checkout</button> -->
                 </form>
             </div>
         </div>
