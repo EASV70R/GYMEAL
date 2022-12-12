@@ -12,7 +12,7 @@ $imgresize = new Image();
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET["edit"])) {
         $productId = $id;
-        var_dump($product->GetProductById($productId));
+        //var_dump($product->GetProductById($productId));
     }
 }
 
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     {
         if($_FILES['file']['size'] == 0)
         {
-            var_dump($_POST);
+            //var_dump($_POST);
             $_POST['itemImage'] = $_POST['itemImage'];
             $_GET["id"] = $id;
             $error = $product->UpdateProduct($_POST);
