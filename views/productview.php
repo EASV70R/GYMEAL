@@ -41,7 +41,7 @@ Util::Navbar();
                             </div>
                             <span>3 Reviews</span>
                         </div>
-                        <div class="product-price-discount"><span>$<?= $row->price; ?></span>
+                        <div class="product-price-discount"><span><?= $row->price; ?> DKK</span>
                             <!--<span class="line-through"></span>-->
                         </div>
                     </div>

@@ -59,7 +59,7 @@ Util::Navbar();
                                 <div class="text-center p-4">
                                     <a class="d-block h5 mb-2"
                                         href="<?= (SITE_URL); ?>/productview/<?= $row->productId; ?>"><?= $row->title; ?></a>
-                                    <span class="text-primary me-1">$<?= $row->price; ?></span>
+                                    <span class="text-primary me-1"><?= $row->price; ?> DKK</span>
                                 </div>
                                 <div class="d-flex border-top">
                                     <small class="w-50 text-center border-end py-2">
@@ -96,7 +96,7 @@ Util::Navbar();
                                 <div class="text-center p-4">
                                     <a class="d-block h5 mb-2"
                                         href="<?= (SITE_URL); ?>/productview/<?= $row->productId; ?>"><?= $row->title; ?></a>
-                                    <span class="text-primary me-1">$<?= $row->price; ?></span>
+                                    <span class="text-primary me-1"><?= $row->price; ?> DKK</span>
                                 </div>
                                 <div class="d-flex border-top">
                                     <small class="w-50 text-center border-end py-2">
