@@ -27,10 +27,10 @@ Util::Navbar();
                     <?php foreach ($_SESSION["cart_item"] as $k => $v) : ?>
                     <li class="list-group-item d-flex justify-content-between lh-sm">
                         <div>
-                            <h6 class="my-0"><?php echo $v["name"]; ?></h6>
-                            <small class="text-muted"><?php echo $v["desc"]; ?></small>
+                            <h6 class="my-0"><?= $v["name"]; ?></h6>
+                            <small class="text-muted"><?= $v["desc"]; ?></small>
                         </div>
-                        <span class="text-muted"><?php echo ($v["price"]*$v["quantity"])." DKK"; ?></span>
+                        <span class="text-muted"><?= ($v["price"]*$v["quantity"])." DKK"; ?></span>
                     </li>
                     <?php $item_total += ($v["price"]*$v["quantity"]);?>
                     <?php endforeach; ?>
@@ -44,7 +44,7 @@ Util::Navbar();
                     <?php if (isset($_SESSION["cart_item"])): ?>
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Total</span>
-                        <strong><?php echo $item_total. " DKK"; ?></strong>
+                        <strong><?= $item_total. " DKK"; ?></strong>
                     </li>
                     <?php endif; ?>
                 </ul>

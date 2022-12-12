@@ -22,7 +22,7 @@ $num_items_in_cart = isset($_SESSION['cart_item']) ? count($_SESSION['cart_item'
                 <a href="<?= (SITE_URL); ?>/contactus" class="nav-item nav-link">Contact Us</a>
                 <a href="<?= (SITE_URL); ?>/cart" class="nav-item nav-link"><small
                         class="fa fa-shopping-cart text-body"><?php if ($num_items_in_cart > 0) : ?><span>
-                            <?php echo $num_items_in_cart ?></span>
+                            <?= $num_items_in_cart ?></span>
                         <?php endif; ?>
                         </small></a>
                 <div class="nav-item dropdown">
