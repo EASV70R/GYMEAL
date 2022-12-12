@@ -83,7 +83,10 @@ Util::Navbar();
             <div class="col-md-6">
                 <div class="item">
                     <img style="height:650px;max-width:500px;" src="/<?= $row->image; ?>" />
-                    <input type="hidden" name="itemImage" value="<?= $row->image; ?>" />
+                    <div class="form-group">
+                        <input type="text" class="form-control form-control" placeholder="Image" name="itemImage"
+                            value="<?= $row->image;?>">
+                    </div>
                     <div class="form-group">
                         <label for="image_uploads">Choose images to upload (PNG, JPG)</label>
                         <input type="file" id="file" name="file" accept=".jpg, .jpeg, .png" multiple />
@@ -129,7 +132,7 @@ Util::Navbar();
                                     class="form-control my-3" name="itemPrice" value="<?= $row->price; ?>"></span>
                             <!--<span class="line-through"></span>-->
                         </div>
-                       <label>Description:</label>
+                        <label>Description:</label>
                         <textarea class="form-control my-3" name="itemDesc" placeholder="Description" rows="4"
                             cols="50"><?= $row->desc; ?></textarea>
                         <div class="product-count">
@@ -151,27 +154,6 @@ Util::Navbar();
         </form>
         <?php endforeach; ?>
     </div>
-    <div class="product-info-tabs">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-                    aria-controls="description" aria-selected="true">Description</a>
-            </li>
-
-        </ul>
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium, totam rem aperiam.
-            </div>
-
-        </div>
-    </div>
-</div>
 </div>
 
 <?php Util::Footer(); ?>
