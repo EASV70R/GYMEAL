@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $productId = (int)$_POST['productId'];
             $quantity = (int)$_POST['quantity'];
             $cart->CartAdd($productId, $quantity);
+            $response = "Product added to cart";
         }
     }   
 }

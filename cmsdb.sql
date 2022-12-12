@@ -29,7 +29,8 @@ CREATE TABLE IF NOT EXISTS `address` (
   `street` varchar(25) NOT NULL,
   `city` varchar(25) NOT NULL,
   `postalCode` int NOT NULL,
-  PRIMARY KEY (`addressId`)
+  `countryId` int NOT NULL,
+  PRIMARY KEY (`addressId`),
   FOREIGN KEY (`countryId`) REFERENCES `country`(`countryId`)
 );
 

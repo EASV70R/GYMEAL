@@ -12,6 +12,13 @@ Util::Navbar();
 
 <main class="testcontainer">
     <div class="container">
+        <div class="col-12 mt-3 mb-2">
+            <?php if (isset($response)) : ?>
+            <div class="alert alert-primary" role="alert">
+                <?= $response; ?>
+            </div>
+            <?php endif; ?>
+        </div>
         <div class="heading-section">
             <h2>Product Details</h2>
         </div>
@@ -56,13 +63,13 @@ Util::Navbar();
                             <div class="form-group">
                                 <div class="display-flex">
                                     <div class="qtyminus">-</div>
-                                    <input type="text" name="quantity" value="<?= $row->quantity; ?>"
-                                        class="qty">
+                                    <input type="text" name="quantity" value="<?= $row->quantity; ?>" class="qty">
                                     <div class="qtyplus">+</div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button class="round-black-btn" name="add" type="add" value="add">Add To Cart
+                                <button class="round-black-btn" href="/cart" name="add" type="add" value="add">Add To
+                                    Cart
                                 </button>
                             </div>
                         </form>

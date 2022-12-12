@@ -1065,3 +1065,13 @@
         font-size: 3.5rem;
     }
 }
+
+.tab-content .textbutton {
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    line-height: 0%;
+}
