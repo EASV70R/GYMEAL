@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if($_FILES['file']['size'] == 0)
         {
             var_dump($_POST);
+            $_POST['itemImage'] = $_POST['itemImage'];
             $_GET["id"] = $id;
             $error = $product->UpdateProduct($_POST);
         }
@@ -31,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ($_FILES['file']['type']=="image/jpeg") ||
         ($_FILES['file']['type']=="image/png") ||
         ($_FILES['file']['type']=="image/pjpeg"))&&
-        ($_FILES['file']['size']<10000000))
+        ($_FILES['file']['size']<2000000))
         {
         if($_FILES['file']['error']>0)
         {
@@ -82,10 +83,10 @@ Util::Navbar();
             <div class="col-md-6">
                 <div class="item">
                     <img style="height:650px;max-width:500px;" src="/<?= $row->image; ?>" />
+                    <input type="hidden" name="itemImage" value="<?= $row->image; ?>" />
                     <div class="form-group">
                         <label for="image_uploads">Choose images to upload (PNG, JPG)</label>
-                        <input type="file" id="file" name="file" accept=".jpg, .jpeg, .png"
-                            multiple />
+                        <input type="file" id="file" name="file" accept=".jpg, .jpeg, .png" multiple />
                     </div>
                 </div>
             </div>
@@ -93,13 +94,13 @@ Util::Navbar();
                 <div class="product-dtl">
                     <div class="product-info">
                         <div class="product-name">
-                            <input type="text" placeholder="Title"
-                                class="form-control my-3 bg-dark text-white text-center" name="itemName"
+                            <label>Title:</label>
+                            <input type="text" placeholder="Title" class="form-control my-3" name="itemName"
                                 value="<?= $row->title; ?>">
                         </div>
                         <div class="product-code">
-                            <input type="text" placeholder="Title"
-                                class="form-control my-3 bg-dark text-white text-center" name="itemCode"
+                            <label>Item Code:</label>
+                            <input type="text" placeholder="Item Code" class="form-control my-3" name="itemCode"
                                 value="<?= $row->code; ?>">
                         </div>
                         <label for="category">Category:</label>
@@ -123,27 +124,28 @@ Util::Navbar();
                             </div>
                             <span>3 Reviews</span>
                         </div>
-                        <div class="product-price-discount"><span><input type="number" placeholder="Price"
-                                    class="form-control my-3 bg-dark text-white text-center" name="itemPrice"
-                                    value="<?= $row->price; ?>"></span>
+                        <div class="product-price-discount">
+                            <label>Price:</label><span><input type="number" placeholder="Price"
+                                    class="form-control my-3" name="itemPrice" value="<?= $row->price; ?>"></span>
                             <!--<span class="line-through"></span>-->
                         </div>
+                       <label>Description:</label>
+                        <textarea class="form-control my-3" name="itemDesc" placeholder="Description" rows="4"
+                            cols="50"><?= $row->desc; ?></textarea>
+                        <div class="product-count">
+                            <label for="size">Quantity</label>
+                            <form action="#">
+                                <div class="display-flex">
+                                    <div class="qtyminus">-</div>
+                                    <input type="text" name="itemQuantity" value="<?= $row->quantity; ?>" class="qty">
+                                    <div class="qtyplus">+</div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <p><input type="text" placeholder="Description"
-                            class="form-control my-3 bg-dark text-white text-center" name="itemDesc"
-                            value="<?= $row->desc; ?>"></p>
                     <button class="btn btn-outline-primary btn-block" name="updateProduct" type="submit"
                         value="submit">Update
                     </button>
-                    <div class="product-count">
-                        <label for="size">Quantity</label>
-                        <form action="#" class="display-flex">
-                            <div class="qtyminus">-</div>
-                            <input type="text" name="itemQuantity" value="<?= $row->quantity; ?>"
-                                class="qty">
-                            <div class="qtyplus">+</div>
-                        </form>
-                    </div>
                 </div>
             </div>
         </form>
