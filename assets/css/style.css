@@ -1048,7 +1048,7 @@
 }
 
 .testcontainer {
-    margin-top: 100px;
+    margin-top: 150px;
     margin-bottom: 150px;
 }
 
@@ -1064,4 +1064,14 @@
     .bd-placeholder-img-lg {
         font-size: 3.5rem;
     }
+}
+
+.tab-content .textbutton {
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    line-height: 0%;
 }

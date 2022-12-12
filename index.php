@@ -13,6 +13,7 @@ $router->any('/products', 'views/products');
 $router->any('/productview/$id', 'views/productview');
 $router->any('/cart', 'views/cart/cart');
 $router->get('/cart/empty', 'cms/callbacks/cart/empty');
+$router->get('/cart/remove/$id', 'cms/callbacks/cart/removeitem');
 $router->get('/checkout', 'views/cart/checkout');
 $router->any('/order', 'views/cart/placeorder');
 $router->any('/login', 'views/login');

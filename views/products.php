@@ -2,6 +2,7 @@
 require_once './cms/controllers/company.php';
 
 require_once './cms/controllers/products.php';
+require_once './cms/controllers/cart.php';
 
 $product = new Products;
 $products = $product->GetProductArray();
@@ -21,6 +22,13 @@ Util::Navbar();
 <main class="testcontainer">
     <div class="container-xxl py-5">
         <div class="container">
+            <div class="col-12 mt-3 mb-2">
+                <?php if (isset($response)) : ?>
+                <div class="alert alert-primary" role="alert">
+                    <?= $response; ?>
+                </div>
+                <?php endif; ?>
+            </div>
             <div class="row g-0 gx-5 align-items-end">
                 <div class="col-lg-6">
                     <div class="section-header text-start mb-5 wow fadeInUp" data-wow-delay="0.1s"
@@ -51,30 +59,42 @@ Util::Navbar();
                     <div class="row g-4">
                         <?php foreach ($mealFilter as $row) : ?>
                         <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                            <div class="product-item">
-                                <div class="position-relative bg-light overflow-hidden">
-                                    <img class="img-wrapper" src="<?= Util::Print($row->image); ?>" alt="">
-                                    <!-- img-fluid w-100 <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div> -->
+                            <form method="POST">
+                                <div class="form-group">
+                                    <input type="hidden" name="productId" value="<?= $row->productId; ?>">
                                 </div>
-                                <div class="text-center p-4">
-                                    <a class="d-block h5 mb-2"
-                                        href="<?= (SITE_URL); ?>/productview/<?= Util::Print($row->productId); ?>"><?= Util::Print($row->title); ?></a>
-                                    <span class="text-primary me-1">$<?= Util::Print($row->price); ?></span>
+                                <div class="form-group">
+                                    <input type="hidden" name="quantity" value="1">
                                 </div>
-                                <div class="d-flex border-top">
-                                    <small class="w-50 text-center border-end py-2">
-                                        <a class="text-body"
-                                            href="<?= (SITE_URL); ?>/productview/<?= Util::Print($row->productId); ?>"><i
-                                                class="fa fa-eye text-primary me-2"></i>View
-                                            detail</a>
-                                    </small>
-                                    <small class="w-50 text-center py-2">
-                                        <a class="text-body" href=""><i
-                                                class="fa fa-shopping-bag text-primary me-2"></i>Add
-                                            to cart</a>
-                                    </small>
+                                <div class="product-item">
+                                    <div class="position-relative bg-light overflow-hidden">
+                                        <img class="img-wrapper" src="<?= $row->image; ?>" alt="">
+                                        <!-- img-fluid w-100 <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div> -->
+                                    </div>
+                                    <div class="text-center p-4">
+                                        <a class="d-block h5 mb-2"
+                                            href="<?= (SITE_URL); ?>/productview/<?= $row->productId; ?>"><?= $row->title; ?></a>
+                                        <span class="text-primary me-1"><?= $row->price; ?> DKK</span>
+                                    </div>
+                                    <div class="d-flex border-top">
+                                        <small class="w-50 text-center border-end py-2">
+                                            <a class="text-body"
+                                                href="<?= (SITE_URL); ?>/productview/<?= $row->productId; ?>"><i
+                                                    class="fa fa-eye text-primary me-2"></i>View
+                                                detail</a>
+                                        </small>
+                                        <small class="w-50 text-center py-2">
+                                            <div class="form-group">
+                                                <div class="text-body">
+                                                    <button class="textbutton" name="add" type="add" value="add"><i
+                                                            class="fa fa-shopping-bag text-primary me-2"></i>Add to cart
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </small>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                         <?php endforeach; ?>
                         <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
@@ -88,20 +108,20 @@ Util::Navbar();
                         <div class="col-xl-3 col-lg-4 col-md-6">
                             <div class="product-item">
                                 <div class="position-relative bg-light overflow-hidden">
-                                    <img class="img-wrapper" src="<?= Util::Print($row->image); ?>" alt="">
+                                    <img class="img-wrapper" src="<?= $row->image; ?>" alt="">
                                     <div
                                         class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
                                         New</div>
                                 </div>
                                 <div class="text-center p-4">
                                     <a class="d-block h5 mb-2"
-                                        href="<?= (SITE_URL); ?>/productview/<?= Util::Print($row->productId); ?>"><?= Util::Print($row->title); ?></a>
-                                    <span class="text-primary me-1">$<?= Util::Print($row->price); ?></span>
+                                        href="<?= (SITE_URL); ?>/productview/<?= $row->productId; ?>"><?= $row->title; ?></a>
+                                    <span class="text-primary me-1"><?= $row->price; ?> DKK</span>
                                 </div>
                                 <div class="d-flex border-top">
                                     <small class="w-50 text-center border-end py-2">
                                         <a class="text-body"
-                                            href="<?= (SITE_URL); ?>/productview/<?= Util::Print($row->productId); ?>"><i
+                                            href="<?= (SITE_URL); ?>/productview/<?= $row->productId; ?>"><i
                                                 class="fa fa-eye text-primary me-2"></i>View
                                             detail</a>
                                     </small>
@@ -137,7 +157,7 @@ Util::Navbar();
                                 <div class="d-flex border-top">
                                     <small class="w-50 text-center border-end py-2">
                                         <a class="text-body"
-                                            href="<?= (SITE_URL); ?>/productview/<?= Util::Print($row->productId); ?>"><i
+                                            href="<?= (SITE_URL); ?>/productview/<?= $row->productId; ?>"><i
                                                 class="fa fa-eye text-primary me-2"></i>View
                                             detail</a>
                                     </small>

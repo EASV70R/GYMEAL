@@ -124,7 +124,7 @@ class Auth
         $User = new UserModel();
         $uid = (int)$data['uid'];
         $response = $User->DeleteUser($uid);
-       return ($response) ? $uid : 'User delete failed.';
+       return ($response) ? 'User deleted.' : 'User delete failed.';
     }
 
     public function GetRole($uid): string
@@ -153,8 +153,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     {
         $response = $auth->Register($_POST);
     }   
+    else if (isset($_POST["edit"])) {
+        $response = $auth->EditUser($_POST);
+    }
     else if (isset($_POST["delete"])) {
-        $response = $auth-->DeleteUser($_POST);
-        var_dump($_POST);
+        $response = $auth->DeleteUser($_POST);
+        //var_dump($_POST);
     }
 }

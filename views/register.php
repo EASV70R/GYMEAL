@@ -15,7 +15,7 @@ Util::Navbar();
             <div class="col-12 mt-3 mb-2">
                 <?php if (isset($response)) : ?>
                 <div class="alert alert-primary" role="alert">
-                    <?= Util::Print($response); ?>
+                    <?= $response; ?>
                 </div>
                 <?php endif; ?>
             </div>

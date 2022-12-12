@@ -21,10 +21,10 @@ Util::Navbar();
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <img class="img-fluid" src="//via.placeholder.com/500x400/e66?text=1" alt="">
                 <div class="bg-light p-4">
-                    <a class="d-block h5 lh-base mb-4" href=""><?= Util::Print($row->title); ?></a>
+                    <a class="d-block h5 lh-base mb-4" href=""><?= $row->title; ?></a>
                     <div class="text-muted border-top pt-4">
-                        <small class="me-3"><i class="fa fa-user text-primary me-2"></i><?= Util::Print($row->content); ?></small>
-                        <small class="me-3"><i class="fa fa-calendar text-primary me-2"></i><?= Util::Print($row->createdAt); ?></small>
+                        <small class="me-3"><i class="fa fa-user text-primary me-2"></i><?= $row->content; ?></small>
+                        <small class="me-3"><i class="fa fa-calendar text-primary me-2"></i><?= $row->createdAt; ?></small>
                     </div>
                 </div>
             </div>
