@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 //$error = $_FILES['file']['name']. " already exists. ";
             }else{
                 $imgresize->UploadImg($_FILES['file']['tmp_name'], 500, 650, "assets/img/product_".$_FILES['file']['name']);
-                $_POST['itemImage'] = "assets/img/product_".$_FILES['file']['name'];
+                $_POST['itemImage'] = "/assets/img/product_".$_FILES['file']['name'];
                 $imgresize->UploadImg($_FILES['file']['tmp_name'], 300, 200, "assets/img/product_thumbnail_".$_FILES['file']['name']);
                 //$_POST['itemImage'] = "assets/img/product_".$_FILES['file']['name'];
                 $_GET["id"] = $id;
@@ -82,7 +82,7 @@ Util::Navbar();
         <form method="POST" enctype="multipart/form-data" class="display-flex">
             <div class="col-md-6">
                 <div class="item">
-                    <img style="height:650px;max-width:500px;" src="/<?= $row->image; ?>" />
+                    <img style="height:650px;max-width:500px;" src="<?= $row->image; ?>" />
                     <div class="form-group">
                         <input type="text" class="form-control form-control" placeholder="Image" name="itemImage"
                             value="<?= $row->image;?>">

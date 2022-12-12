@@ -8,11 +8,6 @@ Util::Navbar();
 
 <main class="container mt-5">
     <div class="testcontainer">
-        <div class="col-12 mt-3 mb-2">
-            <div class="alert alert-primary" role="alert">
-                WIP
-            </div>
-        </div>
         <div class="container padding-bottom-3x mb-1">
             <div class="table-responsive shopping-cart">
                 <?php

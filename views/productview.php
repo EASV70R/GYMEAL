@@ -26,7 +26,7 @@ Util::Navbar();
         <div class="row">
             <div class="col-md-6">
                 <div class="item">
-                    <img src="/<?= $row->image; ?>" />
+                    <img src="<?= $row->image; ?>" />
                 </div>
             </div>
             <div class="col-md-6">
