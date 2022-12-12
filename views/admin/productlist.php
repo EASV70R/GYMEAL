@@ -56,8 +56,9 @@ Util::Navbar();
                                             placeholder="Item Code" name="itemCode" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="itemDesc" class="form-control form-control-sm"
-                                            placeholder="Item Description" name="itemDesc" required>
+                                        <textarea type="itemDesc" class="form-control form-control-sm"
+                                            placeholder="Item Description" name="itemDesc" required rows="4"
+                                            cols="50"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <input type="number" class="form-control form-control-sm" placeholder="Quantity"
@@ -88,8 +89,7 @@ Util::Navbar();
                             <div class="card-body">
                                 <header class="d-lg-flex">
                                     <div class="flex-grow-1">
-                                        <h6 class="mb-0"><?= $row->title ?><i
-                                                class="dot"></i>
+                                        <h6 class="mb-0"><?= $row->title ?><i class="dot"></i>
                                             <?php if ($row->quantity == 0) : ?>
                                             <span
                                                 class="text-danger"><?= $product->GetProductStatus($row->productId)->quantity; ?></span>
@@ -112,8 +112,8 @@ Util::Navbar();
                                     <li class="col-xl-4  col-lg-6">
                                         <figure class="itemside mb-3">
                                             <div class="aside">
-                                                <img width="72" height="72" src="<?= $row->image; ?>"
-                                                    alt="test" class="img-sm rounded border">
+                                                <img width="72" height="72" src="<?= $row->image; ?>" alt="test"
+                                                    class="img-sm rounded border">
                                             </div>
                                             <figcaption class="info">
                                                 <p class="title"><?= substr($row->desc, 0, 35); ?>...</p>
