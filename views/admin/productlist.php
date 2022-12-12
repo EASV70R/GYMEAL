@@ -88,7 +88,7 @@ Util::Navbar();
                             <div class="card-body">
                                 <header class="d-lg-flex">
                                     <div class="flex-grow-1">
-                                        <h6 class="mb-0"><?= $row->title; ?><i
+                                        <h6 class="mb-0"><?= $row->title ?><i
                                                 class="dot"></i>
                                             <?php if ($row->quantity == 0) : ?>
                                             <span
@@ -116,7 +116,7 @@ Util::Navbar();
                                                     alt="test" class="img-sm rounded border">
                                             </div>
                                             <figcaption class="info">
-                                                <p class="title"><?= $row->title; ?></p>
+                                                <p class="title"><?= substr($row->desc, 0, 35); ?>...</p>
                                                 <strong> $<?= $row->price; ?> </strong>
                                             </figcaption>
                                         </figure>
