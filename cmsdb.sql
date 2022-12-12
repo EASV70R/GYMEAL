@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `uid` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `password` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `createdAt` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`uid`),
@@ -17,8 +17,6 @@ CREATE TABLE IF NOT EXISTS `user` (
 DROP TABLE IF EXISTS `country`;
 CREATE TABLE IF NOT EXISTS `country` (
   `countryId` int NOT NULL AUTO_INCREMENT,
-  `city` varchar(255) NOT NULL,
-  `postalCode` int NOT NULL,
   `country` varchar(25) NOT NULL,
   PRIMARY KEY (`countryId`)
 );
@@ -147,15 +145,27 @@ CREATE TABLE IF NOT EXISTS `userrole` (
 INSERT INTO `user` (`uid`, `username`, `password`, `email`, `createdAt`) VALUES
 (1, 'easv', '$2y$10$R/LZ8/ojdHpO3xCw60albOtj5uECEaLS1SSyLEJvYy5D7vwAnSb.m', 'easv@easv.dk', current_timestamp());
 
-INSERT INTO `address` (`addressId`, `street`, `city`, `postalCode`, `country`) VALUE
+INSERT INTO `country` (`countryId`, `country`) VALUES
+('1', 'Danmark');
+INSERT INTO `country` (`countryId`, `country`) VALUES
+('2', 'England');
+INSERT INTO `country` (`countryId`, `country`) VALUES
+('3', 'Sverige');
+INSERT INTO `country` (`countryId`, `country`) VALUES
+('4', 'Tyskland');
+
+
+INSERT INTO `address` (`addressId`, `street`, `city`, `postalCode`) VALUE
 ('1', 'Erhvervsakademi Sydvest, Spangsbjerg Kirkevej 103', 'Esbjerg', '6700 ', 'Denmark');
 
 INSERT INTO `company` (`companyId`, `name`, `email`, `phone`, `desc`, `smalldesc`, `image`, `addressId`) VALUE
 ('1', 'GYMEAL', 'test@test.dk', '+4512345678',  'Meals catered to your body', 'Meals catered to your body', 'http://fitdwp.dk/assets/img/represent.jpg', '1');
 
 INSERT INTO `productfilter` (`productFilterId`, `name`) VALUE
-('1', 'Meals'),
-('2', 'Drinks'),
+('1', 'Meals');
+INSERT INTO `productfilter` (`productFilterId`, `name`) VALUE
+('2', 'Drinks');
+INSERT INTO `productfilter` (`productFilterId`, `name`) VALUE
 ('3', 'Other');
 
 insert into product (`productId`, `title`, `code`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (1, 'Mushroom - Morel Frozen', 'AS232', 9, 'Pork - Sausage, Medium', 'http://dummyimage.com/112x100.png/5fa2dd/ffffff', 45, 3);
