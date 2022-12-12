@@ -89,9 +89,10 @@ Util::Navbar();
                                     value="<?= $row->name;?>" required>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control" placeholder="Description"
-                                    name="desc" value="<?= $row->desc;?>" required>
-                            </div>
+                                <textarea type="text" class="form-control form-control" placeholder="Description"
+                                    name="desc" rows="4"
+                            cols="50" required><?= $row->desc;?>
+                            </textarea>
                             <div class="form-group">
                                 <input type="text" class="form-control form-control" placeholder="Footer Description"
                                     name="smalldesc" value="<?= $row->smalldesc;?>" required>
