@@ -33,14 +33,14 @@ class CompanyModel extends Database
             $sanitized_street = htmlspecialchars($street);
             $sanitized_city = htmlspecialchars($city);
             $sanitized_aimage = htmlspecialchars($image);
-		    $this->statement->bindParam(':title', $sanitized_title);
-            $this->statement->bindParam(':email', $sanitized_email);
-            $this->statement->bindParam(':phone', $sanitized_phone);
-            $this->statement->bindParam(':adesc', $sanitized_adesc);
-            $this->statement->bindParam(':street', $sanitized_street);
-            $this->statement->bindParam(':city', $sanitized_city);
-            $this->statement->bindParam(':postalCode', $postalCode);
-		    $this->statement->bindParam(':aimage', $sanitized_aimage);
+		    $this->statement->bindParam(':title', $sanitized_title, PDO::PARAM_STR);
+            $this->statement->bindParam(':email', $sanitized_email, PDO::PARAM_STR);
+            $this->statement->bindParam(':phone', $sanitized_phone, PDO::PARAM_STR);
+            $this->statement->bindParam(':adesc', $sanitized_adesc, PDO::PARAM_STR);
+            $this->statement->bindParam(':street', $sanitized_street, PDO::PARAM_STR);
+            $this->statement->bindParam(':city', $sanitized_city, PDO::PARAM_STR);
+            $this->statement->bindParam(':postalCode', $postalCode, PDO::PARAM_INT);
+		    $this->statement->bindParam(':aimage', $sanitized_aimage, PDO::PARAM_STR);
             $this->statement->execute();
             $this->connect()->commit();
         } catch (Throwable $error) {

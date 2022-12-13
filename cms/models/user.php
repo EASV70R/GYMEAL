@@ -28,14 +28,14 @@ class UserModel extends Database
                 }else{
                     $this->prepare(EDITUSER2);
                 }
-                $this->statement->bindParam(':username', $username);
-                $this->statement->bindParam(':email', $email);
-                $this->statement->bindParam(':uid', $uid);
+                $this->statement->bindParam(':username', $username, PDO::PARAM_STR);
+                $this->statement->bindParam(':email', $email, PDO::PARAM_STR);
+                $this->statement->bindParam(':uid', $uid, PDO::PARAM_INT);
                 $this->statement->execute();
 
                 $this->prepare('UPDATE `userrole` SET `roleid` = :role WHERE `uid` = :uid');
-                $this->statement->bindParam(':uid', $uid);
-                $this->statement->bindParam(':role', $role);
+                $this->statement->bindParam(':uid', $uid, PDO::PARAM_INT);
+                $this->statement->bindParam(':role', $role, PDO::PARAM_BOOL);
                 $this->statement->execute();
 
                 $this->connect()->commit();
@@ -68,7 +68,7 @@ class UserModel extends Database
         try{
             $this->connect()->beginTransaction();
             $this->prepare(DELETEUSER);
-            $this->statement->bindParam(':uid', $uid);
+            $this->statement->bindParam(':uid', $uid, PDO::PARAM_INT);
             $this->statement->execute();
             $this->connect()->commit();
         } catch (Throwable $error) {

@@ -36,13 +36,13 @@ class ProductModel extends Database
             $sanitized_code = htmlspecialchars($code);
 		    $sanitized_desc = htmlspecialchars($desc);
             $sanitized_aimage = htmlspecialchars($image);
-		    $this->statement->bindParam(':title', $sanitized_title);
-            $this->statement->bindParam(':code', $sanitized_code);
-            $this->statement->bindParam(':quantity', $quantity);
-            $this->statement->bindParam(':adesc', $sanitized_desc);
-            $this->statement->bindParam(':aimage', $sanitized_aimage);
-            $this->statement->bindParam(':price', $price);
-            $this->statement->bindParam(':productFilterId', $category);
+		    $this->statement->bindParam(':title', $sanitized_title, PDO::PARAM_STR);
+            $this->statement->bindParam(':code', $sanitized_code, PDO::PARAM_STR);
+            $this->statement->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+            $this->statement->bindParam(':adesc', $sanitized_desc, PDO::PARAM_STR);
+            $this->statement->bindParam(':aimage', $sanitized_aimage, PDO::PARAM_STR);
+            $this->statement->bindParam(':price', $price, PDO::PARAM_INT);
+            $this->statement->bindParam(':productFilterId', $category, PDO::PARAM_INT);
             $this->statement->execute();
             $this->connect()->commit();
         } catch (Throwable $error) {
@@ -63,14 +63,14 @@ class ProductModel extends Database
             $sanitized_code = htmlspecialchars($code);
             $sanitized_desc = htmlspecialchars($desc);
             $sanitized_aimage = htmlspecialchars($image);
-            $this->statement->bindParam(':productId', $id);
-            $this->statement->bindParam(':title', $sanitized_title);
-            $this->statement->bindParam(':code', $sanitized_code);
-            $this->statement->bindParam(':quantity', $quantity);
-            $this->statement->bindParam(':adesc', $sanitized_desc);
-            $this->statement->bindParam(':aimage', $sanitized_aimage);
-            $this->statement->bindParam(':price', $price);
-            $this->statement->bindParam(':productFilterId', $category);
+            $this->statement->bindParam(':productId', $id, PDO::PARAM_INT);
+            $this->statement->bindParam(':title', $sanitized_title, PDO::PARAM_STR);
+            $this->statement->bindParam(':code', $sanitized_code, PDO::PARAM_STR);
+            $this->statement->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+            $this->statement->bindParam(':adesc', $sanitized_desc, PDO::PARAM_STR);
+            $this->statement->bindParam(':aimage', $sanitized_aimage, PDO::PARAM_STR);
+            $this->statement->bindParam(':price', $price, PDO::PARAM_INT);
+            $this->statement->bindParam(':productFilterId', $category, PDO::PARAM_INT);
             $this->statement->execute();
             $this->connect()->commit();
         } catch (Throwable $error) {
@@ -87,7 +87,7 @@ class ProductModel extends Database
         try{
             $this->connect()->beginTransaction();
             $this->prepare(DELETPRODUCT);
-            $this->statement->bindParam(':productID', $productID);
+            $this->statement->bindParam(':productID', $productID, PDO::PARAM_INT);
             $this->statement->execute();
             $this->connect()->commit();
         } catch (Throwable $error) {
@@ -102,7 +102,7 @@ class ProductModel extends Database
     public function ProductQuantityStatus($productID)
     {
         $this->prepare(PRODUCTSTATUS);
-        $this->statement->bindParam(':productID', $productID);
+        $this->statement->bindParam(':productID', $productID, PDO::PARAM_INT);
         $this->statement->execute();
         $result = $this->statement->fetch();
         $result->quantity = ((int) $result->quantity === 0) ? 'Out of Stock' : 'Available';
@@ -133,7 +133,7 @@ class ProductModel extends Database
     public function ProductById($id)
     {
         $this->prepare(PRODUCTBYID);
-        $this->statement->bindParam(':productID', $id);
+        $this->statement->bindParam(':productID', $id, PDO::PARAM_INT);
         $this->statement->execute();
         return $this->statement->fetchAll();
     }
