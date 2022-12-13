@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
-  `uid` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
   `password` varchar(225) NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -49,16 +49,17 @@ CREATE TABLE IF NOT EXISTS `company` (
 DROP TABLE IF EXISTS `productfilter`;
 CREATE TABLE IF NOT EXISTS `productfilter` (
   `productFilterId` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(25) NOT NULL,
+  `category` varchar(25) NOT NULL,
   PRIMARY KEY (`productFilterId`)
 );
 
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE IF NOT EXISTS `product` (
-  `productId` int(8) NOT NULL AUTO_INCREMENT,
+  `productId` int NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   `code` varchar(25) NOT NULL,
-  `quantity` int(2) NOT NULL,
+  `quantity` int NOT NULL,
   `desc` TEXT NOT NULL,
   `image` varchar(255) NOT NULL,
   `price` decimal(10,2) NOT NULL,
@@ -86,6 +87,8 @@ CREATE TABLE IF NOT EXISTS `customer` (
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order` (
   `orderId` int NOT NULL AUTO_INCREMENT,
+  `totalprice` decimal(10, 2) NOT NULL,
+  `status` varchar(25) NOT NULL,
   `orderDate` timestamp NULL DEFAULT current_timestamp(),
   `customerId` int NOT NULL,
   PRIMARY KEY (`orderId`),
@@ -96,7 +99,7 @@ DROP TABLE IF EXISTS `has`;
 CREATE TABLE IF NOT EXISTS `has` (
   `productId` int NOT NULL,
   `orderId` int NOT NULL,
-  `quantity` int(2) NOT NULL,
+  `quantity` int NOT NULL,
   `price` decimal(10, 2) NOT NULL,
   CONSTRAINT PK_Has PRIMARY KEY (`productId`, `orderId`),
   FOREIGN KEY (`productId`) REFERENCES `product`(`productId`),
@@ -131,14 +134,14 @@ CREATE TABLE IF NOT EXISTS `worksFor` (
 DROP TABLE IF EXISTS `userrole`;
 CREATE TABLE IF NOT EXISTS `userrole` (
   `uid` int NOT NULL,
-  `roleid` int(1) NOT NULL,
+  `roleid` int NOT NULL,
   CONSTRAINT PK_UserRole PRIMARY KEY (`uid`),
   FOREIGN KEY (`uid`) REFERENCES `user`(`uid`)
 );
 
 DROP TABLE IF EXISTS `imgs`;
 CREATE TABLE IF NOT EXISTS `imgs` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `filename` varchar(128) NOT NULL,
   PRIMARY KEY (`id`)
 );
