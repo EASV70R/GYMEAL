@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if($_FILES['file']['size'] == 0)
         {
             var_dump($_POST);
+            $_POST['image'] = "assets/img/".$_FILES['file']['name'];
             $error = $companyData->UpdateCompanyData($_POST);
         }
         else
@@ -38,8 +39,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "Temp file: ".$_FILES['file']['tmp_name']. "<br>";
             echo "Uploaded: ". $_FILES['file']['name']. "<br>";*/
             if (file_exists("assets/img/".$_FILES['file']['name'])){
-                $error = $_FILES['file']['name']. " already exists. ";
+                var_dump($_POST);
+                $_POST['image'] = "assets/img/".$_FILES['file']['name'];
+                $error = $companyData->UpdateCompanyData($_POST);
+                //$error = $_FILES['file']['name']. " already exists. ";
             }else{
+                var_dump($_POST);
                 $imgresize->UploadImg($_FILES['file']['tmp_name'], 100, 100, "assets/img/".$_FILES['file']['name']);
                 $_POST['image'] = "assets/img/".$_FILES['file']['name'];
                 $error = $companyData->UpdateCompanyData($_POST);
@@ -94,12 +99,8 @@ Util::Navbar();
                             cols="50" required><?= $row->desc;?>
                             </textarea>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control" placeholder="Footer Description"
-                                    name="smalldesc" value="<?= $row->smalldesc;?>" required>
-                            </div>
-                            <div class="form-group">
                                 <input type="text" class="form-control form-control" placeholder="Address"
-                                    name="address" value="<?= $row->street;?>" required>
+                                    name="street" value="<?= $row->street;?>" required>
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control form-control" placeholder="Phone" name="phone"
@@ -111,7 +112,7 @@ Util::Navbar();
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control form-control" placeholder="Image" name="image"
-                                    value="<?= $row->image;?>" required>
+                                    value="<?= $row->image;?>">
                             </div>
                             <div class="form-group">
                                 <label for="image_uploads">Choose images to upload (PNG, JPG)</label>

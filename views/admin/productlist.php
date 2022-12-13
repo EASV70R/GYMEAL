@@ -5,14 +5,49 @@ require_once './cms/controllers/company.php';
 Util::IsAdmin();
 
 require_once './cms/controllers/products.php';
+require_once './cms/controllers/img.php';
 
 $product = new products;
 $products = $product->GetProductArray();
 
+$imgresize = new Image();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST["cuItem"])) {
-        $error = $product->CreateProduct($_POST);
-        Util::Redirect('/editproductlist');
+        if($_FILES['file']['size'] == 0)
+        {
+            //var_dump($_POST);
+            $_POST['itemImage'] = $_POST['itemImage'];
+            $error = $product->CreateProduct($_POST);
+            Util::Redirect('/editproductlist');
+        }
+        else
+        {
+            if ((($_FILES['file']['type']=="image/gif") ||
+        ($_FILES['file']['type']=="image/jpeg") ||
+        ($_FILES['file']['type']=="image/png") ||
+        ($_FILES['file']['type']=="image/pjpeg"))&&
+        ($_FILES['file']['size']<2000000))
+        {
+        if($_FILES['file']['error']>0)
+        {
+            $error = "Return Code: " . $_FILES['file']['error'];
+        }else{
+            if (file_exists("assets/img/".$_FILES['file']['name'])){
+                $_POST['itemImage'] = "assets/img/product_".$_FILES['file']['name'];
+            }else{
+                $imgresize->UploadImg($_FILES['file']['tmp_name'], 500, 650, "assets/img/product_".$_FILES['file']['name']);
+                $_POST['itemImage'] = "/assets/img/product_".$_FILES['file']['name'];
+                $imgresize->UploadImg($_FILES['file']['tmp_name'], 300, 200, "assets/img/product_thumbnail_".$_FILES['file']['name']);
+                
+                $error = $product->CreateProduct($_POST);
+                Util::Redirect('/editproductlist');
+            }
+        }
+        }else{ 
+            $error = "Invalid file";
+        }   
+        }
     }
 }
 
@@ -46,7 +81,7 @@ Util::Navbar();
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title text-center">Create Product</h4>
-                                <form method="POST">
+                                <form method="POST" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-sm" placeholder="Item Name"
                                             name="itemName" required>
@@ -74,7 +109,11 @@ Util::Navbar();
                                     </div>
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-sm" placeholder="Item Image"
-                                            name="itemImage" required>
+                                            name="itemImage">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="image_uploads">Choose images to upload (PNG, JPG)</label>
+                                        <input type="file" id="file" name="file" accept=".jpg, .jpeg, .png" multiple />
                                     </div>
                                     <button class="btn btn-outline-primary btn-block" name="cuItem" type="submit"
                                         value="submit">Create

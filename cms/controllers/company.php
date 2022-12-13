@@ -18,8 +18,7 @@ class Company
         $email = (string) $data['email'];
         $phone = (string) $data['phone'];
         $desc = (string) $data['desc'];
-        $smalldesc = (string) $data['smalldesc'];
-        $address = (string) $data['address'];
+        $street = (string) $data['street'];
         $image = (string) $data['image'];
 
        /* $validationError = Validator::CompanyInfoForm($title, $desc, $footerDesc, $address, $phone, $mail, $image);
@@ -27,7 +26,7 @@ class Company
             return $validationError;
         }*/
 
-        $response = $Company->UpdateCompanyData($title, $email, $phone, $desc, $smalldesc, $address, $image);
+        $response = $Company->UpdateCompanyData($title, $email, $phone, $desc, $street, $image);
 
         return ($response) ? 'Success' : 'Error';
     }
