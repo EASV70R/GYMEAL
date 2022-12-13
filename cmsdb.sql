@@ -50,7 +50,6 @@ DROP TABLE IF EXISTS `productfilter`;
 CREATE TABLE IF NOT EXISTS `productfilter` (
   `productFilterId` int NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
-  `category` varchar(25) NOT NULL,
   PRIMARY KEY (`productFilterId`)
 );
 
@@ -89,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `order` (
   `orderId` int NOT NULL AUTO_INCREMENT,
   `totalprice` decimal(10, 2) NOT NULL,
   `status` varchar(25) NOT NULL,
-  `orderDate` timestamp NULL DEFAULT current_timestamp(),
+  `createdAt` timestamp NULL DEFAULT current_timestamp(),
   `customerId` int NOT NULL,
   PRIMARY KEY (`orderId`),
   FOREIGN KEY (`customerId`) REFERENCES `customer`(`customerId`)
@@ -191,10 +190,10 @@ insert into product (`productId`, `title`, `code`, `quantity`, `desc`, `image`, 
 INSERT INTO `customer` (`customerId`, `firstName`, `lastName`, `email`, `phone`, `addressId`, `uid`) VALUE
 ('1', 'test', 'test', 'test@test.test', '12345678', '1', '1');
 
-INSERT INTO `order` (`orderId`, `orderDate`, `customerId`) VALUE
-('1', '2019-01-01 00:00:00', '1');
+INSERT INTO `order` (`orderId`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
+(1, '69', '1', current_timestamp(), 1);
 
-INSERT INTO `has` (`productId`, `orderId`,`quantity`,`price`) VALUE
+INSERT INTO `has` (`productId`, `orderId`, `quantity`, `price`) VALUE
 ('1', '1', '1', '1');
 
 INSERT INTO `employee` (`employeeId`, `firstName`, `lastName`, `email`, `phone`, `addressId`, `uid`) VALUE
