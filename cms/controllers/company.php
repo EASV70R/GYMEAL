@@ -19,7 +19,7 @@ class Company
         $phone = (string) $data['phone'];
         $desc = (string) $data['desc'];
         $street = (string) $data['street'];
-        $city = (string) $data['street'];
+        $city = (string) $data['city'];
         $postal = (string) $data['postalCode'];
         $image = (string) $data['image'];
 

@@ -45,7 +45,7 @@ class CompanyModel extends Database
             $this->connect()->commit();
         } catch (Throwable $error) {
             $this->connect()->rollBack();
-            print_r("Error: " . $error->getMessage());
+            var_dump("Error: " . $error->getMessage());
             return false;
         } finally {
             return true;
