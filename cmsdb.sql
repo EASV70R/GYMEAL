@@ -83,28 +83,27 @@ CREATE TABLE IF NOT EXISTS `customer` (
   FOREIGN KEY (`uid`) REFERENCES `user`(`uid`)
 );
 
+DROP TABLE IF EXISTS `has`;
+CREATE TABLE IF NOT EXISTS `has` (
+  `productId` int NOT NULL,
+  `quantity` int NOT NULL,
+  `price` decimal(10, 2) NOT NULL,
+  `customerId` int NOT NULL,
+  CONSTRAINT PK_Has PRIMARY KEY (`productId`, `customerId`),
+  FOREIGN KEY (`productId`) REFERENCES `product`(`productId`),
+  FOREIGN KEY (`customerId`) REFERENCES `customer`(`customerId`)
+);
+
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order` (
   `orderId` int NOT NULL AUTO_INCREMENT,
   `totalprice` decimal(10, 2) NOT NULL,
-  `status` varchar(25) NOT NULL,
-  `createdAt` timestamp NULL DEFAULT current_timestamp(),
+  `status` int(1) NOT NULL,
+  `orderDate` timestamp NULL DEFAULT current_timestamp(),
   `customerId` int NOT NULL,
   PRIMARY KEY (`orderId`),
   FOREIGN KEY (`customerId`) REFERENCES `customer`(`customerId`)
 );
-
-DROP TABLE IF EXISTS `has`;
-CREATE TABLE IF NOT EXISTS `has` (
-  `productId` int NOT NULL,
-  `orderId` int NOT NULL,
-  `quantity` int NOT NULL,
-  `price` decimal(10, 2) NOT NULL,
-  CONSTRAINT PK_Has PRIMARY KEY (`productId`, `orderId`),
-  FOREIGN KEY (`productId`) REFERENCES `product`(`productId`),
-  FOREIGN KEY (`orderId`) REFERENCES `order`(`orderId`)
-);
-
 
 DROP TABLE IF EXISTS `employee`;
 CREATE TABLE IF NOT EXISTS `employee` (
@@ -191,10 +190,10 @@ INSERT INTO `customer` (`customerId`, `firstName`, `lastName`, `email`, `phone`,
 ('1', 'test', 'test', 'test@test.test', '12345678', '1', '1');
 
 INSERT INTO `order` (`orderId`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
-(1, '69', '1', current_timestamp(), 1);
+(1, '69', 1, current_timestamp(), 1);
 
-INSERT INTO `has` (`productId`, `orderId`, `quantity`, `price`) VALUE
-('1', '1', '1', '1');
+INSERT INTO `has` (`productId`, `quantity`, `price`, `customerId`) VALUE
+('1', '5', '69', '1');
 
 INSERT INTO `employee` (`employeeId`, `firstName`, `lastName`, `email`, `phone`, `addressId`, `uid`) VALUE
 ('1', 'John', 'Doe', 'asdas', '123' '12345678', '1', '1');
