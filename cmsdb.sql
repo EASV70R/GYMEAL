@@ -105,6 +105,32 @@ CREATE TABLE IF NOT EXISTS `order` (
   FOREIGN KEY (`customerId`) REFERENCES `customer`(`customerId`)
 );
 
+DROP TABLE IF EXISTS `purchases`;
+CREATE TABLE IF NOT EXISTS `purchases` (
+  `purchasesId` int NOT NULL AUTO_INCREMENT,
+  `quantity` int NOT NULL,
+  `price` decimal(10, 2) NOT NULL,
+  `orderId` int NOT NULL,
+  `productId` int NOT NULL,
+  PRIMARY KEY (`purchasesId`),
+  FOREIGN KEY (`orderId`) REFERENCES `order`(`orderId`),
+  FOREIGN KEY (`productId`) REFERENCES `product`(`productId`)
+);
+
+INSERT INTO `order` (`orderId`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
+(1, '420', 1, current_timestamp(), 1);
+INSERT INTO `order` (`orderId`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
+(2, '420', 1, current_timestamp(), 1);
+INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
+('1', '5', '69', '1', '1');
+INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
+('2', '5', '12', '1','2');
+INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
+('3', '5', '151', '1','3');
+INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
+('4', '5', '12', '2','2');
+INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
+('6', '5', '151', '2','3');
 DROP TABLE IF EXISTS `employee`;
 CREATE TABLE IF NOT EXISTS `employee` (
   `employeeId` int NOT NULL AUTO_INCREMENT,
@@ -146,6 +172,8 @@ CREATE TABLE IF NOT EXISTS `imgs` (
 
 INSERT INTO `user` (`uid`, `username`, `password`, `email`, `createdAt`) VALUES
 (1, 'easv', '$2y$10$R/LZ8/ojdHpO3xCw60albOtj5uECEaLS1SSyLEJvYy5D7vwAnSb.m', 'easv@easv.dk', current_timestamp());
+INSERT INTO `user` (`uid`, `username`, `password`, `email`, `createdAt`) VALUES
+(2, 'easv1', '$2y$10$R/LZ8/ojdHpO3xCw60albOtj5uECEaLS1SSyLEJvYy5D7vwAnSb.m', 'easv2@easv.dk', current_timestamp());
 
 INSERT INTO `country` (`countryId`, `country`) VALUES
 ('1', 'Denmark');
@@ -187,20 +215,23 @@ insert into product (`productId`, `title`, `code`, `quantity`, `desc`, `image`, 
 insert into product (`productId`, `title`, `code`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (15, 'Wine - Red, Gamay Noir', 'GSAA2', 9, 'Pickle - Dill', 'http://dummyimage.com/160x100.png/cc0000/ffffff', 85, 3);
 
 INSERT INTO `customer` (`customerId`, `firstName`, `lastName`, `email`, `phone`, `addressId`, `uid`) VALUE
-('1', 'test', 'test', 'test@test.test', '12345678', '1', '1');
+('1', 'test', 'test', 'test@test.test', '12345678', '1', '2');
 
-INSERT INTO `order` (`orderId`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
-(1, '69', 1, current_timestamp(), 1);
+INSERT INTO `order` (`orderId`, `totalprice`, `status`, `orderDate`, `customerId`, `purchasesId`) VALUE
+(1, '69', 1, current_timestamp(), 1, 1);
 
-INSERT INTO `has` (`productId`, `quantity`, `price`, `customerId`) VALUE
+INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `productId`) VALUE
 ('1', '5', '69', '1');
+('1', '5', '12', '2');
+('1', '5', '151', '3');
 
 INSERT INTO `employee` (`employeeId`, `firstName`, `lastName`, `email`, `phone`, `addressId`, `uid`) VALUE
 ('1', 'John', 'Doe', 'asdas', '123' '12345678', '1', '1');
 
 INSERT INTO `userrole` (`uid`, `roleid`) VALUE
 ('1', '1');
-
+INSERT INTO `userrole` (`uid`, `roleid`) VALUE
+('2', '0');
 
 DELIMITER //
 Create Trigger before_inser_productqty BEFORE INSERT ON product FOR EACH ROW

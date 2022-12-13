@@ -26,9 +26,10 @@ Util::Navbar();
         <div class="row justify-content-center">
             <aside class="col-lg-3 col-xl-3">
                 <nav class="nav flex-lg-column nav-pills mb-4">
-                    <a class="nav-link active" href="#">Account</a>
-                    <a class="nav-link" href="<?= (BASE_PATH); ?>profilesettings.php">Settings</a>
-                    <a class="nav-link" href="<?= (BASE_PATH); ?>logout.php">Logout</a>
+                    <a class="nav-link" href="/profile">Account</a>
+                    <a class="nav-link" href="/profilesettings">Settings</a>
+                    <a class="nav-link active" href="/orders">Orders</a>
+                    <a class="nav-link" href="/logout">Logout</a>
                 </nav>
             </aside>
             <div class="col-lg-9 col-xl-9">
@@ -44,51 +45,10 @@ Util::Navbar();
                         </figcaption>
                         <hr>
                         <h4 class="card-title text-center">Invoices</h4>
-                        <?php foreach ($invoices as $row) : ?>
-                        <article class="card border-primary mb-4">
-                            <div class="card-body">
-                                <header class="d-lg-flex">
-                                    <div class="flex-grow-1">
-                                        <h6 class="mb-0">Invoice ID: <?= $row->invoiceId; ?><i
-                                                class="dot"></i>
-                                            <?php if ($row->status == 0) : ?>
-                                            <span
-                                                class="text-danger"><?= $invoice->GetInvoiceStatus($row->invoiceId, $row->userId)->status; ?></span>
-                                            <?php else : ?>
-                                            <span
-                                                class="text-success"><?= $invoice->GetInvoiceStatus($row->invoiceId, $row->userId)->status; ?></span>
-                                            <?php endif; ?>
-                                        </h6>
-                                        <span class="text-muted">Name: <?= $row->firstName; ?>
-                                            <?= $row->lastName; ?></span>
-                                        </br>
-                                        <span class="text-muted">Address: <?= $row->address; ?>
-                                            <?= $row->region; ?> <?= $row->city; ?></span>
-                                        </br>
-                                        <span class="text-muted">Date: <?= $row->createdAt; ?></span>
-                                    </div>
-                                    <div>
-                                        <a href="<?= (BASE_PATH); ?>invoices.php?cancel=&invoiceId=<?= $row->invoiceId; ?>"
-                                            class="btn btn-sm btn-outline-danger">Cancel order</a>
-                                        <a href="#" class="btn btn-sm btn-primary">Track order</a>
-                                    </div>
-                                </header>
-                                <hr>
-
-                                <hr>
-                                <ul class="row">
-                                    <li class="col-xl-4  col-lg-6">
-                                        <figure class="itemside mb-3">
-                                            <div class="aside">
-                                                <img width="72" height="72" src="" alt="test"
-                                                    class="img-sm rounded border">
-                                            </div>
-
-                                        </figure>
-                                    </li>
-                                </ul>
-                            </div>
-                        </article>
+                        <?php /*foreach ($invoices as $row) :*/foreach ($invoices as $k => $v) : ?>
+                            <?php var_dump($k); ?>
+                        <?php var_dump($v); ?>
+                        
                         <?php endforeach; ?>
                     </div>
                 </div>

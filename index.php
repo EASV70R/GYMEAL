@@ -20,6 +20,7 @@ $router->any('/login', 'views/login');
 $router->any('/register', 'views/register');
 $router->any('/profile', 'views/profile');
 $router->any('/profilesettings', 'views/profilesettings');
+$router->any('/orders', 'views/invoices');
 $router->any('/admin', 'views/admin/index');
 $router->any('/admsettings', 'views/admin/settings');
 $router->any('/editinvoice', 'views/admin/invoice');
