@@ -117,20 +117,6 @@ CREATE TABLE IF NOT EXISTS `purchases` (
   FOREIGN KEY (`productId`) REFERENCES `product`(`productId`)
 );
 
-INSERT INTO `order` (`orderId`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
-(1, '420', 1, current_timestamp(), 1);
-INSERT INTO `order` (`orderId`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
-(2, '420', 1, current_timestamp(), 1);
-INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
-('1', '5', '69', '1', '1');
-INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
-('2', '5', '12', '1','2');
-INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
-('3', '5', '151', '1','3');
-INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
-('4', '5', '12', '2','2');
-INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
-('6', '5', '151', '2','3');
 DROP TABLE IF EXISTS `employee`;
 CREATE TABLE IF NOT EXISTS `employee` (
   `employeeId` int NOT NULL AUTO_INCREMENT,
@@ -217,13 +203,21 @@ insert into product (`productId`, `title`, `code`, `quantity`, `desc`, `image`, 
 INSERT INTO `customer` (`customerId`, `firstName`, `lastName`, `email`, `phone`, `addressId`, `uid`) VALUE
 ('1', 'test', 'test', 'test@test.test', '12345678', '1', '2');
 
-INSERT INTO `order` (`orderId`, `totalprice`, `status`, `orderDate`, `customerId`, `purchasesId`) VALUE
-(1, '69', 1, current_timestamp(), 1, 1);
+INSERT INTO `order` (`orderId`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
+(1, '420', 1, current_timestamp(), 1);
+INSERT INTO `order` (`orderId`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
+(2, '420', 1, current_timestamp(), 1);
 
-INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `productId`) VALUE
-('1', '5', '69', '1');
-('1', '5', '12', '2');
-('1', '5', '151', '3');
+INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
+('1', '5', '69', '1', '1');
+INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
+('2', '5', '12', '1','2');
+INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
+('3', '5', '151', '1','3');
+INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
+('4', '5', '12', '2','2');
+INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
+('5', '5', '151', '2','3');
 
 INSERT INTO `employee` (`employeeId`, `firstName`, `lastName`, `email`, `phone`, `addressId`, `uid`) VALUE
 ('1', 'John', 'Doe', 'asdas', '123' '12345678', '1', '1');
