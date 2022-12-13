@@ -9,7 +9,7 @@ $companyData = new Company;
             <div class="col-lg-3 col-md-6">
                 <h1 class="fw-bold text-primary mb-4"><?= $row->name; ?></h1>
                 <!-- <span class="text-secondary"></span> -->
-                <p><?= $row->smalldesc; ?></p>
+                <p><?= substr($row->desc, 0, 35); ?></p>
                 <div class="d-flex pt-2">
                     <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
                             class="fab fa-twitter"></i></a>

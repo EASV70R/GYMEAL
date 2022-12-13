@@ -1,10 +1,8 @@
-
-
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `uid` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(225) NOT NULL,
   `email` varchar(50) NOT NULL,
   `createdAt` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`uid`),
@@ -24,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `country` (
 DROP TABLE IF EXISTS `address`;
 CREATE TABLE IF NOT EXISTS `address` (
   `addressId` int NOT NULL AUTO_INCREMENT,
-  `street` varchar(25) NOT NULL,
+  `street` varchar(50) NOT NULL,
   `city` varchar(25) NOT NULL,
   `postalCode` int NOT NULL,
   `countryId` int NOT NULL,
@@ -39,15 +37,13 @@ CREATE TABLE IF NOT EXISTS `company` (
   `companyId` int NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `phone` int NOT NULL,
-  `desc` varchar(255) NOT NULL,
-  `smalldesc` varchar(150) NOT NULL,
+  `phone` varchar(25) NOT NULL,
+  `desc` TEXT NOT NULL,
   `image` varchar(255) NOT NULL,
   `addressId` int NOT NULL,
   PRIMARY KEY (`companyId`),
   FOREIGN KEY (`addressId`) REFERENCES `address`(`addressId`)
 );
-
 
 
 DROP TABLE IF EXISTS `productfilter`;
@@ -57,15 +53,13 @@ CREATE TABLE IF NOT EXISTS `productfilter` (
   PRIMARY KEY (`productFilterId`)
 );
 
-
-
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE IF NOT EXISTS `product` (
   `productId` int(8) NOT NULL AUTO_INCREMENT,
-  `title` varchar(25) NOT NULL,
+  `title` varchar(100) NOT NULL,
   `code` varchar(25) NOT NULL,
   `quantity` int(2) NOT NULL,
-  `desc` varchar(255) NOT NULL,
+  `desc` TEXT NOT NULL,
   `image` varchar(255) NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `productFilterId` int NOT NULL,
@@ -81,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `firstName` varchar(25) NOT NULL,
   `lastName` varchar(25) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `phone` varchar(255) NOT NULL,
+  `phone` varchar(25) NOT NULL,
   `addressId` int NOT NULL,
   `uid` int NOT NULL,
   PRIMARY KEY (`customerId`),
@@ -142,25 +136,31 @@ CREATE TABLE IF NOT EXISTS `userrole` (
   FOREIGN KEY (`uid`) REFERENCES `user`(`uid`)
 );
 
+DROP TABLE IF EXISTS `imgs`;
+CREATE TABLE IF NOT EXISTS `imgs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `filename` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`)
+);
 
 INSERT INTO `user` (`uid`, `username`, `password`, `email`, `createdAt`) VALUES
 (1, 'easv', '$2y$10$R/LZ8/ojdHpO3xCw60albOtj5uECEaLS1SSyLEJvYy5D7vwAnSb.m', 'easv@easv.dk', current_timestamp());
 
 INSERT INTO `country` (`countryId`, `country`) VALUES
-('1', 'Danmark');
+('1', 'Denmark');
 INSERT INTO `country` (`countryId`, `country`) VALUES
 ('2', 'England');
 INSERT INTO `country` (`countryId`, `country`) VALUES
-('3', 'Sverige');
+('3', 'Sweden');
 INSERT INTO `country` (`countryId`, `country`) VALUES
-('4', 'Tyskland');
+('4', 'Germany');
 
 
-INSERT INTO `address` (`addressId`, `street`, `city`, `postalCode`) VALUE
-('1', 'Erhvervsakademi Sydvest, Spangsbjerg Kirkevej 103', 'Esbjerg', '6700 ', 'Denmark');
+INSERT INTO `address` (`addressId`, `street`, `city`, `postalCode`, `countryId`) VALUE
+('1', 'Erhvervsakademi Sydvest, Spangsbjerg Kirkevej 103', 'Esbjerg', '6700 ', 1);
 
-INSERT INTO `company` (`companyId`, `name`, `email`, `phone`, `desc`, `smalldesc`, `image`, `addressId`) VALUE
-('1', 'GYMEAL', 'test@test.dk', '+4512345678',  'Meals catered to your body', 'Meals catered to your body', 'http://fitdwp.dk/assets/img/represent.jpg', '1');
+INSERT INTO `company` (`companyId`, `name`, `email`, `phone`, `desc`, `image`, `addressId`) VALUE
+('1', 'GYMEAL', 'test@test.dk', '+4512345678',  'Meals catered to your body', 'http://fitdwp.dk/assets/img/represent.jpg', '1');
 
 INSERT INTO `productfilter` (`productFilterId`, `name`) VALUE
 ('1', 'Meals');
@@ -186,16 +186,16 @@ insert into product (`productId`, `title`, `code`, `quantity`, `desc`, `image`, 
 insert into product (`productId`, `title`, `code`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (15, 'Wine - Red, Gamay Noir', 'GSAA2', 9, 'Pickle - Dill', 'http://dummyimage.com/160x100.png/cc0000/ffffff', 85, 3);
 
 INSERT INTO `customer` (`customerId`, `firstName`, `lastName`, `email`, `phone`, `addressId`, `uid`) VALUE
-('1', 'admin', 'admin', '12345678', '1', '1');
+('1', 'test', 'test', 'test@test.test', '12345678', '1', '1');
 
 INSERT INTO `order` (`orderId`, `orderDate`, `customerId`) VALUE
 ('1', '2019-01-01 00:00:00', '1');
 
-INSERT INTO `has` (`productId`, `orderId`,`quantity`,`price`,) VALUE
-('1', '1');
+INSERT INTO `has` (`productId`, `orderId`,`quantity`,`price`) VALUE
+('1', '1', '1', '1');
 
 INSERT INTO `employee` (`employeeId`, `firstName`, `lastName`, `email`, `phone`, `addressId`, `uid`) VALUE
-('1', 'John', 'Doe', '12345678', '1', '1');
+('1', 'John', 'Doe', 'asdas', '123' '12345678', '1', '1');
 
 INSERT INTO `userrole` (`uid`, `roleid`) VALUE
 ('1', '1');
