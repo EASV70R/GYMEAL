@@ -13,7 +13,7 @@ class CompanyModel extends Database
         return $this->statement->fetchAll();
     }
 
-    public function UpdateCompanyData($title, $email, $phone, $desc, $street, $image): bool
+    public function UpdateCompanyData($title, $email, $phone, $desc, $street, $city, $postalCode, $image): bool
     {
         /*$this->prepare('UPDATE `company` SET `name` = ?, `email` = ?, `phone` = ?, `desc` = ?, `smalldesc` = ?, `image` = ? WHERE `companyId` = 1');
         if ($this->statement->execute([$title, $email, $phone, $desc, $smalldesc, $image]))
@@ -31,12 +31,15 @@ class CompanyModel extends Database
             $sanitized_phone = htmlspecialchars($phone);
             $sanitized_adesc = htmlspecialchars($desc);
             $sanitized_street = htmlspecialchars($street);
+            $sanitized_city = htmlspecialchars($city);
             $sanitized_aimage = htmlspecialchars($image);
 		    $this->statement->bindParam(':title', $sanitized_title);
             $this->statement->bindParam(':email', $sanitized_email);
             $this->statement->bindParam(':phone', $sanitized_phone);
             $this->statement->bindParam(':adesc', $sanitized_adesc);
             $this->statement->bindParam(':street', $sanitized_street);
+            $this->statement->bindParam(':city', $sanitized_city);
+            $this->statement->bindParam(':postalCode', $postalCode);
 		    $this->statement->bindParam(':aimage', $sanitized_aimage);
             $this->statement->execute();
             $this->connect()->commit();

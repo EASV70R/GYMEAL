@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if($_FILES['file']['size'] == 0)
         {
             var_dump($_POST);
-            $_POST['image'] = "assets/img/".$_FILES['file']['name'];
+            $_POST['image'] = $_POST['image'];
             $error = $companyData->UpdateCompanyData($_POST);
         }
         else
@@ -99,8 +99,16 @@ Util::Navbar();
                             cols="50" required><?= $row->desc;?>
                             </textarea>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control" placeholder="Address"
+                                <input type="text" class="form-control form-control" placeholder="street"
                                     name="street" value="<?= $row->street;?>" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control" placeholder="City"
+                                    name="city" value="<?= $row->city;?>" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control" placeholder="postalCode"
+                                    name="postalCode" value="<?= $row->postalCode;?>" required>
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control form-control" placeholder="Phone" name="phone"
