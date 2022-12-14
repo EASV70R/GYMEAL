@@ -9,14 +9,6 @@ require_once './cms/controllers/invoices.php';
 $invoice = new Invoices;
 $invoices = $invoice->GetInvoicesArray();
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (isset($_GET["cancel"])) {
-        $invoiceId = $_GET["invoiceId"];
-        $userId = $_GET["userId"];
-        $invoice->DeleteInvoice($invoiceId, $userId);
-        Util::Redirect('/invoice');
-    }
-}
 // invoice.php?cancel=&invoiceId=4&userId=2
 Util::Header();
 Util::Navbar();
@@ -28,8 +20,8 @@ Util::Navbar();
             <aside class="col-lg-3 col-xl-3">
                 <nav class="nav flex-lg-column nav-pills mb-4">
                     <a class="nav-link" href="<?= (SITE_URL); ?>/admin">Admin</a>
-                    <a class="nav-link" href="<?= (SITE_URL); ?>/editinvoice">Customer Invoices</a>
-                    <a class="nav-link active" href="<?= (SITE_URL); ?>/admsettings">Settings</a>
+                    <a class="nav-link active" href="<?= (SITE_URL); ?>/editinvoice">Customer Invoices</a>
+                    <a class="nav-link" href="<?= (SITE_URL); ?>/admsettings">Settings</a>
                     <a class="nav-link" href="<?= (SITE_URL); ?>/editproductlist">Products</a>
                     <a class="nav-link" href="<?= (SITE_URL); ?>/logout">Logout</a>
                 </nav>
@@ -52,48 +44,29 @@ Util::Navbar();
                             <div class="card-body">
                                 <header class="d-lg-flex">
                                     <div class="flex-grow-1">
-                                        <h6 class="mb-0">Invoice ID: <?= $row->invoiceId; ?><i
-                                                class="dot"></i>
+
+                                        <h6 class="mb-0">Invoice ID: <?= $row->orderId; ?><i class="dot"></i>
                                             <?php if ($row->status == 0) : ?>
                                             <span
-                                                class="text-danger"><?= $invoice->GetInvoiceStatus($row->invoiceId, $row->userId)->status; ?></span>
+                                                class="text-danger"><?= $invoice->GetInvoiceStatus($row->orderId, $row->uid)->status; ?></span>
                                             <?php else : ?>
                                             <span
-                                                class="text-success"><?= $invoice->GetInvoiceStatus($row->invoiceId, $row->userId)->status; ?></span>
+                                                class="text-success"><?= $invoice->GetInvoiceStatus($row->orderId, $row->uid)->status; ?></span>
                                             <?php endif; ?>
                                         </h6>
-                                        <span class="text-muted">Date: <?= $row->createdAt); ?></span>
+                                        <span>Name: <?= $row->firstName; ?> <?= $row->lastName; ?></span>
+                                        </br>
+                                        <span class="text-muted">Date: <?= $row->orderDate; ?></span>
+                                        </br>
+                                        <span>Total Price: <?= $row->totalprice; ?></span>
                                     </div>
                                     <div>
-                                        <a href="<?= (SITE_URL); ?>/admin/invoice.php?cancel=&invoiceId=<?= $row->invoiceId; ?>&userId=<?= $row->userId; ?>"
+                                        <a href="/editinvoice/delete/<?= $row->orderId; ?>/<?= $row->uid; ?>"
                                             class="btn btn-sm btn-outline-danger">Cancel order</a>
-                                        <a href="#" class="btn btn-sm btn-primary">Track order</a>
+                                        <a href="/editorder/<?= $row->uid; ?>/<?= $row->orderId; ?>"
+                                            class="btn btn-sm btn-primary">Edit Order</a>
                                     </div>
                                 </header>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <p class="mb-0 text-muted">Shipping address:</p>
-                                        <p class="m-0"><?= $row->country; ?><br>
-                                            <?= $row->city; ?> <?= $row->region; ?>,
-                                            <?= $row->address; ?></p>
-                                    </div>
-                                </div>
-                                <hr>
-                                <ul class="row">
-                                    <li class="col-xl-4  col-lg-6">
-                                        <figure class="itemside mb-3">
-                                            <div class="aside">
-                                                <img width="72" height="72" src="" alt="test"
-                                                    class="img-sm rounded border">
-                                            </div>
-                                            <figcaption class="info">
-                                                <p class="title"><?= $row->itemName; ?></p>
-                                                <strong> $<?= $row->price; ?> </strong>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                </ul>
                             </div>
                         </article>
                         <?php endforeach; ?>

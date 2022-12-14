@@ -29,9 +29,13 @@ class Invoices
         $lastName = (string)$data['lastName'];
         $phone = (string)$data['phone'];
         $totalprice = (int)$data['totalPrice'];
+       /* $productId = (int)$data['productId'];
+        $quantity = (int)$data['quantity'];
+        $price = (int)$data['price'];*/
         $uid = Session::Get('uid');
 
-        $response = $Invoice->CreateCustomerData($firstName, $lastName, $phone, 1, $totalprice, $uid);
+        //var_dump($data);
+        $response = $Invoice->CreateCustomerData($firstName, $lastName, $phone, 1, $totalprice, $uid,/* 5, $quantity, $price*/);
         
         return ($response) ? 'Customer Created.' : 'Customer Info failed.';
     }
@@ -52,6 +56,15 @@ class Invoices
     {
         $Invoice = new InvoiceModel();
         return $Invoice->InvoiceStatus($invoiceID, $userID);
+    }
+
+    public function UpdateInvoiceStatus($data)
+    {
+        $Invoice = new InvoiceModel();
+        $status = (int)$data['mStatus'];
+        $invoiceID = (int)$data['mOrderId'];
+
+        return $Invoice->UpdateInvoiceStatus($status, $invoiceID);
     }
 
     public function GetCustomerInfo()

@@ -96,7 +96,7 @@ Util::Navbar();
                                     <table class="table table-borderless">
                                         <tbody class="totals">
                                             <?php foreach ($invoices as $invoiceRow) : ?>
-                                            <tr>
+                                            <!--<tr>
                                                 <td>
                                                     <div class="text-left">
                                                         <span class="text-muted">Subtotal</span>
@@ -145,7 +145,7 @@ Util::Navbar();
                                                         <span class="text-success">$168.50</span>
                                                     </div>
                                                 </td>
-                                            </tr>
+                                            </tr> -->
                                             <tr class="border-top border-bottom">
                                                 <td>
                                                     <div class="text-left">

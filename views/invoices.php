@@ -63,10 +63,7 @@ Util::Navbar();
                                         </br>
                                         <span class="text-muted">Date: <?= $row->orderDate; ?></span>
                                     </div>
-                                    <div>
-                                        <a href="<?= (BASE_PATH); ?>invoices.php?cancel=&invoiceId=<?= $row->orderId; ?>"
-                                            class="btn btn-sm btn-outline-danger">Cancel order</a>
-                                            
+                                    <div>   
                                         <a href="/vieworder/<?= Session::Get("uid"); ?>/<?= $row->orderId; ?>" class="btn btn-sm btn-primary">View order</a>
                                         <a href="#" class="btn btn-sm btn-secondary">Track order</a>
                                     </div>

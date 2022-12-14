@@ -24,6 +24,7 @@ class CartModel extends Database
 			$itemArray = array($productByCode[0]["code"]=>array(
 			    'name'=>$productByCode[0]["title"],
                 'code'=>$productByCode[0]["code"],
+                'productId'=>$productByCode[0]["productId"],
                 'desc'=>$productByCode[0]["desc"],
                 'quantity'=>$quantity,
                 'price'=>$productByCode[0]["price"]));

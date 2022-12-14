@@ -25,6 +25,8 @@ $router->any('/vieworder/$uid/$id', 'views/vieworder');
 $router->any('/admin', 'views/admin/index');
 $router->any('/admsettings', 'views/admin/settings');
 $router->any('/editinvoice', 'views/admin/invoice');
+$router->any('/editorder/$uid/$id', 'views/admin/editorder');
+$router->any('/editinvoice/delete/$id/$uid', 'cms/callbacks/invoice/removeinvoice');
 $router->any('/editproductlist', 'views/admin/productlist');
 $router->any('/editproductlist/delete/$id', 'views/admin/productdelete');
 $router->any('/editproduct/edit/$id', 'views/admin/editproduct');

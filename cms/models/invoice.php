@@ -13,23 +13,72 @@ class InvoiceModel extends Database
         return $this->fetchAll();
     }
 
-    public function CreateCustomerData($firstName, $lastName, $phone, $address, $totalprice, $uid) : bool
+    public function DoesCustomerExist($uid): bool
+    {
+        $this->prepare('SELECT * FROM `customer` WHERE `uid` = :uid');
+        $this->statement->bindParam(':uid', $uid);
+        $this->statement->execute();
+        $row = $this->statement->fetch();
+        if($row)
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function GetCustomerIdFromUID($uid)
+    {
+        $this->prepare('SELECT `customerId` FROM `customer` WHERE `uid` = :uid');
+        $this->statement->bindParam(':uid', $uid);
+        $this->statement->execute();
+        return $this->statement->fetch();
+    }
+
+    public function CreateProductPurchases($orderID, $productID, $quantity, $price) : bool
     {
         try{
             $this->connect()->beginTransaction();
-            $this->prepare('INSERT INTO `customer` (`firstName`, `lastName`, `phone`, `addressId`, `uid`) VALUES (:firstName, :lastName, :phone, :addressId, :uid)');
-            $sanatized_firstname = htmlspecialchars($firstName);
-            $sanatized_lastname = htmlspecialchars($lastName);
-            $sanatized_phone = htmlspecialchars($phone);
-            $this->statement->bindParam(':firstName', $sanatized_firstname, PDO::PARAM_STR);
-            $this->statement->bindParam(':lastName', $sanatized_lastname, PDO::PARAM_STR);
-            $this->statement->bindParam(':phone', $sanatized_phone, PDO::PARAM_STR);
-            $this->statement->bindParam(':addressId', $address, PDO::PARAM_INT);
-            $this->statement->bindParam(':uid', $uid, PDO::PARAM_INT);
-            $this->statement->execute();
-            $id = $this->connect()->lastInsertId();
-            $this->prepare('INSERT INTO `order` (`totalprice`, `status`, `orderDate`, `customerId`) VALUES (?, ?, ?, ?)');
-            $this->statement->execute([$totalprice, 0, date('Y-m-d H:i:s', time()), $id]);
+            $this->prepare('INSERT INTO `productpurchase` (`quantity`, `price`, `orderId`, `productId`) VALUES (?, ?, ?, ?)');
+            $this->statement->execute([$quantity, $price, $orderID, $productID]);
+            $this->statement->commit();
+            return true;
+        } catch (Throwable $error) {
+            $this->statement->rollBack();
+            print_r("Error: " . $error->getMessage());
+            return false;
+        }
+    }
+
+    public function CreateCustomerData($firstName, $lastName, $phone, $address, $totalprice, $uid/*, $productID, $quantity, $price*/) : bool
+    {
+        //var_dump($productID);
+        try{
+            $this->connect()->beginTransaction();
+            if($this->DoesCustomerExist($uid))
+            {
+                $this->prepare('INSERT INTO `order` (`totalprice`, `status`, `orderDate`, `customerId`) VALUES (?, ?, ?, ?)');
+                $this->statement->execute([$totalprice, 0, date('Y-m-d H:i:s', time()), $this->GetCustomerIdFromUID($uid)->customerId]);
+                //$id = $this->connect()->lastInsertId();
+                //$this->prepare('INSERT INTO `purchases` (`quantity`, `price`, `orderId`, `productId`) VALUES (?, ?, ?, ?)');
+                //$this->statement->execute([$quantity, $price, $id, $productID]);
+                //var_dump($this->DoesCustomerExist($uid));
+                //var_dump($this->GetCustomerIdFromUID($uid)->customerId);
+            } else {
+                $this->prepare('INSERT INTO `customer` (`firstName`, `lastName`, `phone`, `addressId`, `uid`) VALUES (:firstName, :lastName, :phone, :addressId, :uid)');
+                $sanatized_firstname = htmlspecialchars($firstName);
+                $sanatized_lastname = htmlspecialchars($lastName);
+                $sanatized_phone = htmlspecialchars($phone);
+                $this->statement->bindParam(':firstName', $sanatized_firstname, PDO::PARAM_STR);
+                $this->statement->bindParam(':lastName', $sanatized_lastname, PDO::PARAM_STR);
+                $this->statement->bindParam(':phone', $sanatized_phone, PDO::PARAM_STR);
+                $this->statement->bindParam(':addressId', $address, PDO::PARAM_INT);
+                $this->statement->bindParam(':uid', $uid, PDO::PARAM_INT);
+                $this->statement->execute();
+                $id = $this->connect()->lastInsertId();
+                $this->prepare('INSERT INTO `order` (`totalprice`, `status`, `orderDate`, `customerId`) VALUES (?, ?, ?, ?)');
+                $this->statement->execute([$totalprice, 0, date('Y-m-d H:i:s', time()), $id]);
+            }
             $this->commit();
             return true;
         } catch (Exception $e) {
@@ -88,6 +137,13 @@ class InvoiceModel extends Database
         $result = $this->fetch();
         $result->status = ((int) $result->status === 0) ? 'Not shipped' : 'Shipped';
         return $result;
+    }
+
+    public function UpdateInvoiceStatus($status, $invoiceID)
+    {
+        $this->prepare(UPDATEINVOICE);
+        $this->statement->execute([$status, $invoiceID]);
+        $this->close();
     }
 
     public function CustomerInfo()

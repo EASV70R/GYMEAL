@@ -20,8 +20,10 @@ foreach($_SESSION["cart_item"] as $k => $v) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST["createorder"])) {
+
         $_POST["totalPrice"]=$getprice;
         $error = $invoices->CreateCustomerData($_POST);
+        
         util::Redirect('/order');
     }
 }
