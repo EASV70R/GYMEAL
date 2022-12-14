@@ -44,10 +44,10 @@ class Database
         $this->statement = $this->connect()->prepare($sql);
     }
 
-    protected function fetch()
+    protected function fetch(int $mode = PDO::FETCH_DEFAULT)
     {
         try {
-            return $this->statement->fetch();
+            return $this->statement->fetch($mode);
         } catch (Throwable $error) {
             print_r("Error: " . $error->getMessage());
         } finally {
