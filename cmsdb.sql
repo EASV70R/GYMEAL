@@ -82,16 +82,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
   FOREIGN KEY (`uid`) REFERENCES `user`(`uid`)
 );
 
-DROP TABLE IF EXISTS `has`;
-CREATE TABLE IF NOT EXISTS `has` (
-  `productId` int NOT NULL,
-  `quantity` int NOT NULL,
-  `price` decimal(10, 2) NOT NULL,
-  `customerId` int NOT NULL,
-  CONSTRAINT PK_Has PRIMARY KEY (`productId`, `customerId`),
-  FOREIGN KEY (`productId`) REFERENCES `product`(`productId`),
-  FOREIGN KEY (`customerId`) REFERENCES `customer`(`customerId`)
-);
+
 
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order` (
