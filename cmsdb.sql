@@ -74,7 +74,6 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `customerId` int NOT NULL AUTO_INCREMENT,
   `firstName` varchar(25) NOT NULL,
   `lastName` varchar(25) NOT NULL,
-  `email` varchar(50) NOT NULL,
   `phone` varchar(25) NOT NULL,
   `addressId` int NOT NULL,
   `uid` int NOT NULL,
@@ -201,10 +200,10 @@ insert into product (`productId`, `title`, `code`, `quantity`, `desc`, `image`, 
 insert into product (`productId`, `title`, `code`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (14, 'Chivas Regal - 12 Year Old', 'AA2222', 8, 'Turkey - Oven Roast Breast', 'http://dummyimage.com/190x100.png/ff4444/ffffff', 43, 1);
 insert into product (`productId`, `title`, `code`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (15, 'Wine - Red, Gamay Noir', 'GSAA2', 9, 'Pickle - Dill', 'http://dummyimage.com/160x100.png/cc0000/ffffff', 85, 3);
 
-INSERT INTO `customer` (`customerId`, `firstName`, `lastName`, `email`, `phone`, `addressId`, `uid`) VALUE
-('1', 'test', 'test', 'test@test.test', '12345678', '1', '1');
-INSERT INTO `customer` (`customerId`, `firstName`, `lastName`, `email`, `phone`, `addressId`, `uid`) VALUE
-('2', 'test', 'test', 'ssss@test.test', '12345678', '1', '2');
+INSERT INTO `customer` (`customerId`, `firstName`, `lastName`, `phone`, `addressId`, `uid`) VALUE
+('1', 'test', 'test', '12345678', '1', '1');
+INSERT INTO `customer` (`customerId`, `firstName`, `lastName`, `phone`, `addressId`, `uid`) VALUE
+('2', 'test', 'test', '12345678', '1', '2');
 
 INSERT INTO `order` (`orderId`, `orderCode`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
 (1, 'dog', '420', 1, current_timestamp(), 1);
