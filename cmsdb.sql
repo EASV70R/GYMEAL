@@ -97,6 +97,7 @@ CREATE TABLE IF NOT EXISTS `has` (
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order` (
   `orderId` int NOT NULL AUTO_INCREMENT,
+  `orderCode` varchar(25) NOT NULL,
   `totalprice` decimal(10, 2) NOT NULL,
   `status` int(1) NOT NULL,
   `orderDate` timestamp NULL DEFAULT current_timestamp(),
@@ -201,23 +202,31 @@ insert into product (`productId`, `title`, `code`, `quantity`, `desc`, `image`, 
 insert into product (`productId`, `title`, `code`, `quantity`, `desc`, `image`, `price`, `productFilterId`) values (15, 'Wine - Red, Gamay Noir', 'GSAA2', 9, 'Pickle - Dill', 'http://dummyimage.com/160x100.png/cc0000/ffffff', 85, 3);
 
 INSERT INTO `customer` (`customerId`, `firstName`, `lastName`, `email`, `phone`, `addressId`, `uid`) VALUE
-('1', 'test', 'test', 'test@test.test', '12345678', '1', '2');
+('1', 'test', 'test', 'test@test.test', '12345678', '1', '1');
+INSERT INTO `customer` (`customerId`, `firstName`, `lastName`, `email`, `phone`, `addressId`, `uid`) VALUE
+('2', 'test', 'test', 'ssss@test.test', '12345678', '1', '2');
 
-INSERT INTO `order` (`orderId`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
-(1, '420', 1, current_timestamp(), 1);
-INSERT INTO `order` (`orderId`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
-(2, '420', 1, current_timestamp(), 1);
+INSERT INTO `order` (`orderId`, `orderCode`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
+(1, 'dog', '420', 1, current_timestamp(), 1);
+INSERT INTO `order` (`orderId`, `orderCode`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
+(2, 'shit', '420', 1, current_timestamp(), 1);
+INSERT INTO `order` (`orderId`, `orderCode`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
+(3, 'lol', '420', 2, current_timestamp(), 1);
 
 INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
-('1', '5', '69', '1', '1');
+('1', '2', '69', '1', '1');
 INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
-('2', '5', '12', '1','2');
+('2', '6', '12', '1','2');
 INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
-('3', '5', '151', '1','3');
+('3', '7', '151', '1','3');
 INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
-('4', '5', '12', '2','2');
+('4', '2', '12', '2','2');
 INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
-('5', '5', '151', '2','3');
+('5', '9', '151', '2','3');
+INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
+('6', '2', '12', '3','2');
+INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
+('7', '9', '151', '3','3');
 
 INSERT INTO `employee` (`employeeId`, `firstName`, `lastName`, `email`, `phone`, `addressId`, `uid`) VALUE
 ('1', 'John', 'Doe', 'asdas', '123' '12345678', '1', '1');
