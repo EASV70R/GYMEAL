@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     {
         if($_FILES['file']['size'] == 0)
         {
-            var_dump($_POST);
+            //var_dump($_POST);
             $_POST['image'] = $_POST['image'];
             $error = $companyData->UpdateCompanyData($_POST);
         }
@@ -39,12 +39,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "Temp file: ".$_FILES['file']['tmp_name']. "<br>";
             echo "Uploaded: ". $_FILES['file']['name']. "<br>";*/
             if (file_exists("assets/img/".$_FILES['file']['name'])){
-                var_dump($_POST);
+                //var_dump($_POST);
                 $_POST['image'] = "assets/img/".$_FILES['file']['name'];
                 $error = $companyData->UpdateCompanyData($_POST);
                 //$error = $_FILES['file']['name']. " already exists. ";
             }else{
-                var_dump($_POST);
+                //var_dump($_POST);
                 $imgresize->UploadImg($_FILES['file']['tmp_name'], 100, 100, "assets/img/".$_FILES['file']['name']);
                 $_POST['image'] = "assets/img/".$_FILES['file']['name'];
                 $error = $companyData->UpdateCompanyData($_POST);
