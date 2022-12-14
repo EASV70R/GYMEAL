@@ -13,7 +13,7 @@ class InvoiceModel extends Database
         return $this->fetchAll();
     }
 
-    public function CreateCustomerData($firstName, $lastName, $phone, $address, $uid) : bool
+    public function CreateCustomerData($firstName, $lastName, $phone, $address, $totalprice, $uid) : bool
     {
         try{
             $this->connect()->beginTransaction();
@@ -27,6 +27,9 @@ class InvoiceModel extends Database
             $this->statement->bindParam(':addressId', $address, PDO::PARAM_INT);
             $this->statement->bindParam(':uid', $uid, PDO::PARAM_INT);
             $this->statement->execute();
+            $id = $this->connect()->lastInsertId();
+            $this->prepare('INSERT INTO `order` (`totalprice`, `status`, `orderDate`, `customerId`) VALUES (?, ?, ?, ?)');
+            $this->statement->execute([$totalprice, 0, date('Y-m-d H:i:s', time()), $id]);
             $this->commit();
             return true;
         } catch (Exception $e) {

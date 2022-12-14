@@ -3,10 +3,10 @@ defined('BASE_PATH') or exit('No direct script access allowed');
 
 require_once __DIR__.'/../models/invoice.php';
 
-if (!Session::Get('login')) {
+/*if (!Session::Get('login')) {
     http_response_code(403);
     exit();
-}
+}*/
 
 class Invoices
 {
@@ -28,11 +28,11 @@ class Invoices
         $firstName = (string)$data['firstName'];
         $lastName = (string)$data['lastName'];
         $phone = (string)$data['phone'];
-        $address = 1;//(int)$data['address'];
+        $totalprice = (int)$data['totalPrice'];
         $uid = Session::Get('uid');
 
-        $response = $Invoice->CreateCustomerData($firstName, $lastName, $phone, $address, $uid);
-
+        $response = $Invoice->CreateCustomerData($firstName, $lastName, $phone, 1, $totalprice, $uid);
+        
         return ($response) ? 'Customer Created.' : 'Customer Info failed.';
     }
 

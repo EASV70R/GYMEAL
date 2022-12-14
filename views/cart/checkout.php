@@ -2,14 +2,27 @@
 require_once './cms/controllers/company.php';
 require_once './cms/controllers/invoices.php';
 
+/*if(!Session::Get('login'))
+{
+    $error = 'You must be logged in to view this page.';
+    util::Redirect('/register');
+}*/
+
 $invoices = new Invoices();
 //$createcustomer = $invoices->CreateCustomerData();
+$getprice = 0;
+if(empty($getprice))
+{
+foreach($_SESSION["cart_item"] as $k => $v) {
+    $getprice += ($v["price"]*$v["quantity"]);
+}
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST["createorder"])) {
-        var_dump($_POST);
+        $_POST["totalPrice"]=$getprice;
         $error = $invoices->CreateCustomerData($_POST);
-       //util::Redirect('/order');
+        util::Redirect('/order');
     }
 }
 
@@ -28,6 +41,7 @@ Util::Navbar();
             </div>
             <?php endif; ?>
         </div>
+        <?php if (Session::Get("login")) : ?>
         <div class="py-5 text-center">
             <h2>Checkout</h2>
         </div>
@@ -228,8 +242,8 @@ Util::Navbar();
                             </div>
                         </div>
                     </div>
-
                     <hr class="my-4">
+
                     <!-- <a href="/order" class="w-100 btn btn-primary btn-lg">Continue to checkout</a> -->
                     <button class="w-100 btn btn-primary btn-lg" name="createorder" type="submit"
                         value="submit">Continue to
@@ -237,6 +251,11 @@ Util::Navbar();
                     </button>
                 </form>
             </div>
+            <?php else : ?>
+            <div class="alert alert-primary" role="alert">
+                <?= "You must login to purchase" ?>
+            </div>
+            <?php endif; ?>
         </div>
     </div>
 

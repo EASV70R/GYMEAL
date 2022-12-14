@@ -43,7 +43,7 @@ Util::Navbar();
                                             <td>
                                                 <div class="py-2">
                                                     <span class="d-block text-muted">Order No</span>
-                                                    <span><?= $invoiceRow->orderCode; ?></span>
+                                                    <span><?= $invoiceRow->orderId; ?></span>
                                                 </div>
                                             </td>
                                             <td>

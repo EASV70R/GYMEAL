@@ -87,7 +87,6 @@ CREATE TABLE IF NOT EXISTS `customer` (
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order` (
   `orderId` int NOT NULL AUTO_INCREMENT,
-  `orderCode` varchar(25) NOT NULL,
   `totalprice` decimal(10, 2) NOT NULL,
   `status` int(1) NOT NULL,
   `orderDate` timestamp NULL DEFAULT current_timestamp(),
@@ -196,12 +195,12 @@ INSERT INTO `customer` (`customerId`, `firstName`, `lastName`, `phone`, `address
 INSERT INTO `customer` (`customerId`, `firstName`, `lastName`, `phone`, `addressId`, `uid`) VALUE
 ('2', 'test', 'test', '12345678', '1', '2');
 
-INSERT INTO `order` (`orderId`, `orderCode`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
-(1, 'dog', '420', 1, current_timestamp(), 1);
-INSERT INTO `order` (`orderId`, `orderCode`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
-(2, 'shit', '420', 1, current_timestamp(), 1);
-INSERT INTO `order` (`orderId`, `orderCode`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
-(3, 'lol', '420', 2, current_timestamp(), 2);
+INSERT INTO `order` (`orderId`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
+(1, '420', 1, current_timestamp(), 1);
+INSERT INTO `order` (`orderId`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
+(2, '420', 1, current_timestamp(), 1);
+INSERT INTO `order` (`orderId`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
+(3, '420', 2, current_timestamp(), 2);
 
 INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
 ('1', '2', '69', '1', '1');
