@@ -10,20 +10,42 @@ class InvoiceModel extends Database
     {
         $this->prepare(INVOICES);
         $this->statement->execute();
-        return $this->statement->fetchAll();
+        return $this->fetchAll();
     }
 
-    public function CreateInvoice( $totalprice, $status, $orderDate, $customerId)
+    public function CreateCustomerData($firstName, $lastName, $phone, $address, $uid) : bool
     {
         try{
             $this->connect()->beginTransaction();
-            $this->prepare('INSERT INTO `order` (`totalprice`, `status`, `orderDate`, `customerId`) VALUES (?, ?, ?, ?)');
-            $this->statement->execute([$totalprice, $status, $orderDate, $customerId]);
-            $this->prepare('INSERT INTO `purchases` (`orderId`, `productId`, `price`) VALUES (?, ?, ?)');
-            $this->statement->execute([Session::Get('orderId'), Session::Get('productId'), Session::Get('price')]);
-            $this->connect()->commit();
+            $this->prepare('INSERT INTO `customer` (`firstName`, `lastName`, `phone`, `addressId`, `uid`) VALUES (:firstName, :lastName, :phone, :addressId, :uid)');
+            $sanatized_firstname = htmlspecialchars($firstName);
+            $sanatized_lastname = htmlspecialchars($lastName);
+            $sanatized_phone = htmlspecialchars($phone);
+            $this->statement->bindParam(':firstName', $sanatized_firstname, PDO::PARAM_STR);
+            $this->statement->bindParam(':lastName', $sanatized_lastname, PDO::PARAM_STR);
+            $this->statement->bindParam(':phone', $sanatized_phone, PDO::PARAM_STR);
+            $this->statement->bindParam(':addressId', $address, PDO::PARAM_INT);
+            $this->statement->bindParam(':uid', $uid, PDO::PARAM_INT);
+            $this->statement->execute();
+            $this->commit();
+            return true;
+        } catch (Exception $e) {
+            $this->rollBack();
+            print_r("Error: " . $e->getMessage());
+            return false;
+        }
+    }
+    public function CreateInvoice($orderCode, $totalprice, $customerId)
+    {
+        try{
+            $this->connect()->beginTransaction();
+            $this->prepare('INSERT INTO `order` (`orderCode`, `totalprice`, `status`, `customerId`, `customerId`) VALUES (?, ?, ?, ?, ?)');
+            $this->statement->execute([$orderCode, $totalprice, 0, now(), $customerId]);
+            //$this->prepare('INSERT INTO `purchases` (`orderId`, `productId`, `price`) VALUES (?, ?, ?)');
+            //$this->statement->execute([Session::Get('orderId'), Session::Get('productId'), Session::Get('price')]);
+            $this->commit();
         } catch (Throwable $error) {
-            $this->connect()->rollBack();
+            $this->rollBack();
             print_r("Error: " . $error->getMessage());
             return false;
         } finally {
@@ -39,27 +61,28 @@ class InvoiceModel extends Database
 			$results[] = $row;
 		}		
         return $results;*/
-        return $this->statement->fetchAll();
+        return $this->fetchAll();
     }
 
     public function InvoiceFromOrderId($orderId)
     {
         $this->prepare(INVOICEFROMORDERID);
         $this->statement->execute([$orderId, Session::Get('uid')]);
-        return $this->statement->fetchAll();
+        return $this->fetchAll();
     }
 
     public function DeleteInvoice($invoiceID, $userID)
     {
         $this->prepare(DELETEINVOICE);
         $this->statement->execute([$invoiceID, $userID]);
+        $this->close();
     }
 
     public function InvoiceStatus($invoiceID, $userID)
     {
         $this->prepare(INVOICESTATUS);
         $this->statement->execute([$invoiceID, $userID]);
-        $result = $this->statement->fetch();
+        $result = $this->fetch();
         $result->status = ((int) $result->status === 0) ? 'Not shipped' : 'Shipped';
         return $result;
     }
@@ -68,13 +91,13 @@ class InvoiceModel extends Database
     {
         $this->prepare(CUSTOMERINFO);
         $this->statement->execute([Session::Get('uid')]);
-        return $this->statement->fetchAll();
+        return $this->fetchAll();
     }
 
     public function ProductData($orderId)
     {
         $this->prepare(PRODUCTDATA);
         $this->statement->execute([$orderId]);
-        return $this->statement->fetchAll();
+        return $this->fetchAll();
     }
 }

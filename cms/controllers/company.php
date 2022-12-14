@@ -13,6 +13,7 @@ class Company
 
     public function UpdateCompanyData($data): string
     {
+        try{
         $Company = new CompanyModel();
         $title = (string) $data['title'];
         $email = (string) $data['email'];
@@ -31,6 +32,9 @@ class Company
         $response = $Company->UpdateCompanyData($title, $email, $phone, $desc, $street, $city, $postal, $image);
 
         return ($response) ? 'Success' : 'Error';
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     public function GetCompanyAddress($companyId)

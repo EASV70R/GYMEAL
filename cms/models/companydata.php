@@ -10,7 +10,7 @@ class CompanyModel extends Database
     {
         $this->prepare(COMPANYDATA);
         $this->statement->execute();
-        return $this->statement->fetchAll();
+        return $this->fetchAll();
     }
 
     public function UpdateCompanyData($title, $email, $phone, $desc, $street, $city, $postalCode, $image): bool
@@ -42,9 +42,9 @@ class CompanyModel extends Database
             $this->statement->bindParam(':postalCode', $postalCode, PDO::PARAM_INT);
 		    $this->statement->bindParam(':aimage', $sanitized_aimage, PDO::PARAM_STR);
             $this->statement->execute();
-            $this->connect()->commit();
+            $this->commit();
         } catch (Throwable $error) {
-            $this->connect()->rollBack();
+            $this->rollBack();
             var_dump("Error: " . $error->getMessage());
             return false;
         } finally {

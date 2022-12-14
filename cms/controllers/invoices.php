@@ -22,6 +22,20 @@ class Invoices
         return $Invoice->InvoiceFromCurrentUID();
     }
 
+    public function CreateCustomerData($data) : string
+    {
+        $Invoice = new InvoiceModel();
+        $firstName = (string)$data['firstName'];
+        $lastName = (string)$data['lastName'];
+        $phone = (string)$data['phone'];
+        $address = 1;//(int)$data['address'];
+        $uid = Session::Get('uid');
+
+        $response = $Invoice->CreateCustomerData($firstName, $lastName, $phone, $address, $uid);
+
+        return ($response) ? 'Customer Created.' : 'Customer Info failed.';
+    }
+
     public function GetInvoiceFromOrderId($orderId)
     {
         $Invoice = new InvoiceModel();

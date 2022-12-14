@@ -10,21 +10,21 @@ class ProductModel extends Database
     {
         $this->prepare(PRODUCTS);
         $this->statement->execute();
-        return $this->statement->fetchAll();
+        return $this->fetchAll();
     }
 
     public function LatestProductFirst()
     {
         $this->prepare(LATESTPRODUCT);
         $this->statement->execute();
-        return $this->statement->fetchAll();
+        return $this->fetchAll();
     }
 
     public function LatestProductOffsetByOne()
     {
         $this->prepare(LATESTPRODUCTBYONE);
         $this->statement->execute();
-        return $this->statement->fetchAll();
+        return $this->fetchAll();
     }
 
     public function CreateProduct($title, $code, $quantity, $desc, $image, $price, $category): bool
@@ -44,9 +44,9 @@ class ProductModel extends Database
             $this->statement->bindParam(':price', $price, PDO::PARAM_INT);
             $this->statement->bindParam(':productFilterId', $category, PDO::PARAM_INT);
             $this->statement->execute();
-            $this->connect()->commit();
+            $this->commit();
         } catch (Throwable $error) {
-            $this->connect()->rollBack();
+            $this->rollBack();
             print_r("Error: " . $error->getMessage());
             return false;
         } finally {
@@ -72,9 +72,9 @@ class ProductModel extends Database
             $this->statement->bindParam(':price', $price, PDO::PARAM_INT);
             $this->statement->bindParam(':productFilterId', $category, PDO::PARAM_INT);
             $this->statement->execute();
-            $this->connect()->commit();
+            $this->commit();
         } catch (Throwable $error) {
-            $this->connect()->rollBack();
+            $this->rollBack();
             print_r("Error: " . $error->getMessage());
             return false;
         } finally {
@@ -89,9 +89,9 @@ class ProductModel extends Database
             $this->prepare(DELETPRODUCT);
             $this->statement->bindParam(':productID', $productID, PDO::PARAM_INT);
             $this->statement->execute();
-            $this->connect()->commit();
+            $this->commit();
         } catch (Throwable $error) {
-            $this->connect()->rollBack();
+            $this->rollBack();
             print_r("Error: " . $error->getMessage());
             return false;
         } finally {
@@ -104,7 +104,7 @@ class ProductModel extends Database
         $this->prepare(PRODUCTSTATUS);
         $this->statement->bindParam(':productID', $productID, PDO::PARAM_INT);
         $this->statement->execute();
-        $result = $this->statement->fetch();
+        $result = $this->fetch();
         $result->quantity = ((int) $result->quantity === 0) ? 'Out of Stock' : 'Available';
         return $result;
     }
@@ -113,21 +113,21 @@ class ProductModel extends Database
     {
         $this->prepare(INNERJOINPRODUCTFILTER);
         $this->statement->execute();
-        return $this->statement->fetchAll();
+        return $this->fetchAll();
     }
 
     public function ProductMealFilter()
     {
         $this->prepare(FILTERMEALS);
         $this->statement->execute();
-        return $this->statement->fetchAll();
+        return $this->fetchAll();
     }
 
     public function ProductDrinkFilter()
     {
         $this->prepare(FILTERDRINKS);
         $this->statement->execute();
-        return $this->statement->fetchAll();
+        return $this->fetchAll();
     }
 
     public function ProductById($id)
@@ -135,6 +135,6 @@ class ProductModel extends Database
         $this->prepare(PRODUCTBYID);
         $this->statement->bindParam(':productID', $id, PDO::PARAM_INT);
         $this->statement->execute();
-        return $this->statement->fetchAll();
+        return $this->fetchAll();
     }
 }

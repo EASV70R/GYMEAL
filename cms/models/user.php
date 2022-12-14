@@ -10,7 +10,7 @@ class UserModel extends Database
     {
         $this->prepare(USER);
         $this->statement->execute();
-        return $this->statement->fetchAll();
+        return $this->fetchAll();
     }
 
     public function EditUser($uid, $username, $password, $email, $role) : string
@@ -38,13 +38,13 @@ class UserModel extends Database
                 $this->statement->bindParam(':role', $role, PDO::PARAM_BOOL);
                 $this->statement->execute();
 
-                $this->connect()->commit();
+                $this->commit();
             }else{
-                $this->connect()->rollBack();
+                $this->rollBack();
                 return 'User not found';
             }
         } catch (Throwable $error) {
-            $this->connect()->rollBack();
+            $this->rollBack();
             print_r("Error: " . $error->getMessage());
         } finally {
             return 'User updated successfully!';
@@ -70,9 +70,9 @@ class UserModel extends Database
             $this->prepare(DELETEUSER);
             $this->statement->bindParam(':uid', $uid, PDO::PARAM_INT);
             $this->statement->execute();
-            $this->connect()->commit();
+            $this->commit();
         } catch (Throwable $error) {
-            $this->connect()->rollBack();
+            $this->rollBack();
             print_r("Error: " . $error->getMessage());
             return false;
         } finally {
@@ -84,35 +84,35 @@ class UserModel extends Database
     {
         $this->prepare(USERBYID);
         $this->statement->execute([$uid]);
-        return $this->statement->fetch();
+        return $this->fetch();
     }
 
     public function GetUsername($username): bool|stdClass
     {
         $this->prepare(USERBYUSERNAME);
         $this->statement->execute([$username]);
-        return $this->statement->fetch();
+        return $this->fetch();
     }
 
     public function GetEmail($email): bool|stdClass
     {
         $this->prepare(USERBYEMAIL);
         $this->statement->execute([$email]);
-        return $this->statement->fetch();
+        return $this->fetch();
     }
 
     public function GetRole($userrole): bool|stdClass
     {
         $this->prepare(ROLEBYUID);
         $this->statement->execute([$userrole]);
-        return $this->statement->fetch();
+        return $this->fetch();
     }
 
     public function AdditionalAdminCheck($uid): bool|stdClass
     {
         $this->prepare(ADMINCHECK);
         $this->statement->execute([$uid]);
-        return $this->statement->fetch();
+        return $this->fetch();
     }
 
     public function Register($username, $hashedPassword, $email): bool
@@ -120,15 +120,13 @@ class UserModel extends Database
         try{
             $this->connect()->beginTransaction();
             $this->prepare(REGISTER);
-     
             $this->statement->execute([$username, $hashedPassword, $email]);
-            $this->connect()->commit();
-        } catch (Throwable $error) {
-            $this->connect()->rollBack();
-            print_r("Error: " . $error->getMessage());
-            return false;
-        } finally {
+            $this->commit();
             return true;
+        } catch (Exception $e) {
+            $this->rollBack();
+            print_r("Error: " . $e->getMessage());
+            return false;
         }
     }
 
@@ -137,15 +135,13 @@ class UserModel extends Database
         try{
             $this->connect()->beginTransaction();
             $this->prepare(CREATEROLE);
-     
             $this->statement->execute([$uid, $roleid]);
-            $this->connect()->commit();
+            $this->commit();
+            return true;
         } catch (Throwable $error) {
-            $this->connect()->rollBack();
+            $this->rollBack();
             print_r("Error: " . $error->getMessage());
             return false;
-        } finally {
-            return true;
         }
     }
 
@@ -165,14 +161,14 @@ class UserModel extends Database
                 if (password_verify($currentPassword, $row->password)) {
                     $this->prepare(UPDATEPASSWORD);
                     $this->statement->execute([$hashedPassword, $username]);
-                    $this->connect()->commit();
+                    $this->commit();
                     return 'Password changed successfully.';
                 } else {
                     return 'Failed to change password.';
                 }
             }
         } catch (Throwable $error) {
-            $this->connect()->rollBack();
+            $this->rollBack();
             print_r("Error: " . $error->getMessage());
         } finally {
             return 'Password changed successfully.';

@@ -10,7 +10,7 @@ class CartModel extends Database
         $this->statement->bindParam(':code', $code);
         $this->statement->execute();
 		//$result = $this->statement->fetch(PDO::FETCH_ASSOC);
-		while($row=$this->statement->fetch(PDO::FETCH_ASSOC)) {
+		while($row=$this->fetch(PDO::FETCH_ASSOC)) {
 			$results[] = $row;
 		}		
 		if(!empty($results))

@@ -1,5 +1,17 @@
 <?php
 require_once './cms/controllers/company.php';
+require_once './cms/controllers/invoices.php';
+
+$invoices = new Invoices();
+//$createcustomer = $invoices->CreateCustomerData();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST["createorder"])) {
+        var_dump($_POST);
+        $error = $invoices->CreateCustomerData($_POST);
+       //util::Redirect('/order');
+    }
+}
 
 Util::Header();
 Util::Navbar();
@@ -9,6 +21,13 @@ Util::Navbar();
 <main class="testcontainer">
 
     <div class="container">
+        <div class="col-12 mt-3 mb-2">
+            <?php if (isset($error)) : ?>
+            <div class="alert alert-primary" role="alert">
+                <?= $error; ?>
+            </div>
+            <?php endif; ?>
+        </div>
         <div class="py-5 text-center">
             <h2>Checkout</h2>
         </div>
@@ -58,19 +77,23 @@ Util::Navbar();
             </div>
             <div class="col-md-7 col-lg-8">
                 <h4 class="mb-3">Billing address</h4>
-                <form class="needs-validation" novalidate>
+                <form method="POST" class="needs-validation" novalidate>
+                    <!--   -->
                     <div class="row g-3">
                         <div class="col-sm-6">
-                            <label for="firstName" class="form-label">First name</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-                            <div class="invalid-feedback">
-                                Valid first name is required.
+                            <div class="form-group">
+                                <label for="firstName" class="form-label">First name</label>
+                                <input type="text" class="form-control" name="firstName" placeholder="" value=""
+                                    required>
+                                <div class="invalid-feedback">
+                                    Valid first name is required.
+                                </div>
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <label for="lastName" class="form-label">Last name</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                            <input type="text" class="form-control" name="lastName" placeholder="" value="" required>
                             <div class="invalid-feedback">
                                 Valid last name is required.
                             </div>
@@ -79,15 +102,23 @@ Util::Navbar();
                         <div class="col-12">
                             <label for="email" class="form-label">Email <span
                                     class="text-muted">(Optional)</span></label>
-                            <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                            <input type="email" class="form-control" name="email" placeholder="you@example.com">
                             <div class="invalid-feedback">
                                 Please enter a valid email address for shipping updates.
                             </div>
                         </div>
 
                         <div class="col-12">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" name="phone" placeholder="+1234567890">
+                            <div class="invalid-feedback">
+                                Please enter a valid phone number.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
                             <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+                            <input type="text" class="form-control" name="address" placeholder="1234 Main St" required>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
                             </div>
@@ -96,12 +127,12 @@ Util::Navbar();
                         <div class="col-12">
                             <label for="address2" class="form-label">Address 2 <span
                                     class="text-muted">(Optional)</span></label>
-                            <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                            <input type="text" class="form-control" name="address2" placeholder="Apartment or suite">
                         </div>
 
                         <div class="col-md-5">
                             <label for="country" class="form-label">Country</label>
-                            <select class="form-select" id="country" required>
+                            <select class="form-select" name="country" required>
                                 <option value="">Choose...</option>
                                 <option>Denmark</option>
                             </select>
@@ -112,7 +143,7 @@ Util::Navbar();
 
                         <div class="col-md-4">
                             <label for="state" class="form-label">State</label>
-                            <select class="form-select" id="state" required>
+                            <select class="form-select" name="state" required>
                                 <option value="">Choose...</option>
                                 <option>Esbjerg</option>
                             </select>
@@ -123,7 +154,7 @@ Util::Navbar();
 
                         <div class="col-md-3">
                             <label for="zip" class="form-label">Zip</label>
-                            <input type="text" class="form-control" id="zip" placeholder="" required>
+                            <input type="text" class="form-control" name="zip" placeholder="" required>
                             <div class="invalid-feedback">
                                 Zip code required.
                             </div>
@@ -199,8 +230,11 @@ Util::Navbar();
                     </div>
 
                     <hr class="my-4">
-                    <a href="/order" class="w-100 btn btn-primary btn-lg">Continue to checkout</a>
-                    <!-- <button class="w-100 btn btn-primary btn-lg" href="/order" type="submit">Continue to checkout</button> -->
+                    <!-- <a href="/order" class="w-100 btn btn-primary btn-lg">Continue to checkout</a> -->
+                    <button class="w-100 btn btn-primary btn-lg" name="createorder" type="submit"
+                        value="submit">Continue to
+                        checkout
+                    </button>
                 </form>
             </div>
         </div>

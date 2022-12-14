@@ -9,7 +9,7 @@ class BlogModel extends Database
     {
         $this->prepare('SELECT * FROM `blog` ORDER BY `id` ASC');
         $this->statement->execute();
-        return $this->statement->fetchAll();
+        return $this->fetchAll();
     }
 
     public function CreateBlogPost($title, $content, $image): bool
@@ -19,9 +19,9 @@ class BlogModel extends Database
             $this->connect()->beginTransaction();
             $this->prepare('INSERT INTO `blog` (`title`, `content`, `image`) VALUES (?, ?, ?)');
             $this->statement->execute([$title, $content, $image]);
-            $this->connect()->commit();
+            $this->commit();
         } catch (Throwable $error) {
-            $this->connect()->rollBack();
+            $this->rollBack();
             print_r("Error: " . $error->getMessage());
             return false;
         } finally {
