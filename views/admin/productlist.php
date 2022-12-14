@@ -104,8 +104,12 @@ Util::Navbar();
                                             name="itemPrice" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="number" class="form-control form-control-sm" placeholder="Filter"
-                                            name="filterId" min="1" max="3" required>
+                                        <select class="form-select" aria-label="Default select example" name="filterId">
+                                            <option selected>Filter Selection</option>
+                                            <option value="1">Meals</option>
+                                            <option value="2">Drinks</option>
+                                            <option value="3">Other</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-sm" placeholder="Item Image"

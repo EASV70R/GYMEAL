@@ -195,7 +195,7 @@ INSERT INTO `customer` (`customerId`, `firstName`, `lastName`, `phone`, `address
 INSERT INTO `customer` (`customerId`, `firstName`, `lastName`, `phone`, `addressId`, `uid`) VALUE
 ('2', 'test', 'test', '12345678', '1', '2');
 
-INSERT INTO `order` (`orderId`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
+/*INSERT INTO `order` (`orderId`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
 (1, '420', 1, current_timestamp(), 1);
 INSERT INTO `order` (`orderId`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
 (2, '420', 1, current_timestamp(), 1);
@@ -215,7 +215,7 @@ INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `product
 INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
 ('6', '2', '12', '3','2');
 INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
-('7', '9', '151', '3','3');
+('7', '9', '151', '3','3');*/
 
 INSERT INTO `employee` (`employeeId`, `firstName`, `lastName`, `email`, `phone`, `addressId`, `uid`) VALUE
 ('1', 'John', 'Doe', 'asdas', '123' '12345678', '1', '1');
