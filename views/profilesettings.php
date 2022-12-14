@@ -29,9 +29,10 @@ Util::Navbar();
             </div>
             <aside class="col-lg-3 col-xl-3">
                 <nav class="nav flex-lg-column nav-pills mb-4">
-                    <a class="nav-link" href="<?= (SITE_URL); ?>/profile">Account</a>
-                    <a class="nav-link active" href="#">Setting</a>
-                    <a class="nav-link" href="<?= (SITE_URL); ?>/logout">Logout</a>
+                <a class="nav-link" href="/profile">Account</a>
+                    <a class="nav-link active" href="/profilesettings">Settings</a>
+                    <a class="nav-link" href="/orders">Orders</a>
+                    <a class="nav-link" href="/logout">Logout</a>
                 </nav>
             </aside>
             <div class="col-lg-9 col-xl-9">

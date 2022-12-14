@@ -211,7 +211,7 @@ INSERT INTO `order` (`orderId`, `orderCode`, `totalprice`, `status`, `orderDate`
 INSERT INTO `order` (`orderId`, `orderCode`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
 (2, 'shit', '420', 1, current_timestamp(), 1);
 INSERT INTO `order` (`orderId`, `orderCode`, `totalprice`, `status`, `orderDate`, `customerId`) VALUE
-(3, 'lol', '420', 2, current_timestamp(), 1);
+(3, 'lol', '420', 2, current_timestamp(), 2);
 
 INSERT INTO `purchases` (`purchasesId`, `quantity`, `price`, `orderId`, `productId`) VALUE
 ('1', '2', '69', '1', '1');

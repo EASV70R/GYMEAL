@@ -38,12 +38,19 @@ class Util
         }
     }
 
+    public static function IsOrderFromUser($uid): void
+    {
+        if (!Session::Get('login') || Session::Get('uid') != $uid) {
+            Util::Redirect('/../home');
+        }
+    }
+
     public static function Redirect(string $location): void
     {
         exit(header("Location: ${location}"));
     }
 
-    public static function Print(string $string): string
+    public static function SafePrint(string $string): string
     {
         return htmlspecialchars($string);
     }

@@ -22,6 +22,12 @@ class Invoices
         return $Invoice->InvoiceFromCurrentUID();
     }
 
+    public function GetInvoiceFromOrderId($orderId)
+    {
+        $Invoice = new InvoiceModel();
+        return $Invoice->InvoiceFromOrderId($orderId);
+    }
+
     public function DeleteInvoice($invoiceID, $userID)
     {
         $Invoice = new InvoiceModel();
@@ -32,5 +38,17 @@ class Invoices
     {
         $Invoice = new InvoiceModel();
         return $Invoice->InvoiceStatus($invoiceID, $userID);
+    }
+
+    public function GetCustomerInfo()
+    {
+        $Invoice = new InvoiceModel();
+        return $Invoice->CustomerInfo();
+    }
+
+    public function GetProductData($orderId)
+    {
+        $Invoice = new InvoiceModel();
+        return $Invoice->ProductData($orderId);
     }
 }

@@ -45,10 +45,35 @@ Util::Navbar();
                         </figcaption>
                         <hr>
                         <h4 class="card-title text-center">Invoices</h4>
-                        <?php /*foreach ($invoices as $row) :*/foreach ($invoices as $k => $v) : ?>
-                            <?php var_dump($k); ?>
-                        <?php var_dump($v); ?>
-                        
+                        <?php foreach ($invoices as $row) : ?>
+                        <article class="card border-primary mb-4">
+                            <div class="card-body">
+                                <header class="d-lg-flex">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">Invoice ID: <?= $row->orderId; ?><i class="dot"></i>
+                                            <?php if ($row->status == 0) : ?>
+                                            <span
+                                                class="text-danger"><?= $invoice->GetInvoiceStatus($row->orderId, $row->uid)->status; ?></span>
+                                            <?php else : ?>
+                                            <span
+                                                class="text-success"><?= $invoice->GetInvoiceStatus($row->orderId, $row->uid)->status; ?></span>
+                                            <?php endif; ?>
+                                        </h6>
+                                        <span class="text-muted">Total Price: <?= $row->totalprice; ?></span>
+                                        </br>
+                                        <span class="text-muted">Date: <?= $row->orderDate; ?></span>
+                                    </div>
+                                    <div>
+                                        <a href="<?= (BASE_PATH); ?>invoices.php?cancel=&invoiceId=<?= $row->orderId; ?>"
+                                            class="btn btn-sm btn-outline-danger">Cancel order</a>
+                                            
+                                        <a href="/vieworder/<?= Session::Get("uid"); ?>/<?= $row->orderId; ?>" class="btn btn-sm btn-primary">View order</a>
+                                        <a href="#" class="btn btn-sm btn-secondary">Track order</a>
+                                    </div>
+                                </header>
+                                <hr>
+                            </div>
+                        </article>
                         <?php endforeach; ?>
                     </div>
                 </div>

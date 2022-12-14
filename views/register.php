@@ -23,7 +23,7 @@ Util::Navbar();
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title text-center">Register</h4>
-                        <form method="POST" action="<?= Util::Print($_SERVER['REQUEST_URI']); ?>">
+                        <form method="POST" action="<?= Util::SafePrint($_SERVER['REQUEST_URI']); ?>">
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-sm" placeholder="Username"
                                     name="username" minlength="3" required>
