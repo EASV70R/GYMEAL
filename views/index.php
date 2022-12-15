@@ -76,10 +76,10 @@ Util::Navbar();
                                 <div class="col-md-3">
                                     <div class="card">
                                         <div class="img-wrapper"><img src="<?= $row->image; ?>"
-                                                class="img-wrapper" alt="<?= $row->title; ?>"> </div>
+                                                class="img-wrapper" alt="<?= substr($row->title, 0, 9); ?>"> </div>
                                         <div class="card-body">
-                                            <h5 class="card-title"><?= $row->title; ?></h5>
-                                            <p class="card-text"><?= $row->desc; ?></p>
+                                            <h5 class="card-title"><?= substr($row->title, 0, 30); ?></h5>
+                                            <p class="card-text"><?= substr($row->desc, 0, 5); ?>...</p>
                                             <a href="<?= (SITE_URL); ?>/productview/<?= $row->productId; ?>"
                                                 class="btn btn-primary">View product</a>
                                         </div>
@@ -92,10 +92,10 @@ Util::Navbar();
                                 <div class="col-md-3">
                                     <div class="card">
                                         <div class="img-wrapper"><img src="<?= $row->image; ?>"
-                                                class="img-wrapper" alt="<?= $row->title; ?>"> </div>
+                                                class="img-wrapper" alt="<?= substr($row->title, 0, 5); ?>"> </div>
                                         <div class="card-body">
-                                            <h5 class="card-title"><?= $row->title; ?></h5>
-                                            <p class="card-text"><?= $row->desc; ?></p>
+                                            <h5 class="card-title"><?= substr($row->title, 0, 15); ?></h5>
+                                            <p class="card-text"><?= substr($row->desc, 0, 35); ?>...</p>
                                             <a href="<?= (SITE_URL); ?>/productview/<?= $row->productId; ?>"
                                                 class="btn btn-primary">View product</a>
                                         </div>
@@ -131,10 +131,10 @@ Util::Navbar();
             <div class="col-lg-6">
                 <h1 class="display-5 mb-4"><?= $row->name; ?></h1>
                 <p class="mb-4"><?= $row->desc; ?></p>
-                <p><i class="fa fa-check text-primary me-3"></i>Tempor erat elitr rebum at clita
+                <p><i class="fa fa-check text-primary me-3"></i>Easy to make
                 </p>
-                <p><i class="fa fa-check text-primary me-3"></i>Aliqu diam amet diam et eos</p>
-                <p><i class="fa fa-check text-primary me-3"></i>Clita duo justo magna dolore
+                <p><i class="fa fa-check text-primary me-3"></i>Good to go</p>
+                <p><i class="fa fa-check text-primary me-3"></i>Instant meal
                     erat amet</p>
                 <a class="btn btn-primary rounded-pill py-3 px-5 mt-3" href="">Read More</a>
             </div>
