@@ -22,13 +22,17 @@ class ImgResizeModel extends Database
     public function load($filename){
         $image_info = getimagesize($filename);
         $this->image_type = $image_info[2];
-        if($this->image_type == IMAGETYPE_JPEG){
+       /* if($this->image_type == IMAGETYPE_JPEG){
             $this->image = imagecreatefromjpeg($filename);
         }elseif ($this->image_type = IMAGETYPE_GIF){
             $this->image = imagecreatefromgif($filename);
         }elseif ($this->image_type = IMAGETYPE_PNG){
             $this->image = imagecreatefrompng($filename);
-        }
+        }*/
+        $this->image = @imagecreatefromstring(file_get_contents($filename));    
+    if ($this->image === false) {
+        throw new Exception ('Image is corrupted');
+    }
     }
 
     public function save($filename, $image_type = IMAGETYPE_JPEG, $compression = 100){
