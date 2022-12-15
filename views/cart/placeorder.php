@@ -2,6 +2,8 @@
 require_once './cms/require.php';
 require_once './cms/controllers/company.php';
 
+unset($_SESSION['cart_item']);
+
 Util::Header();
 Util::Navbar();
 ?>
