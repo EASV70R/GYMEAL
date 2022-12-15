@@ -63,7 +63,6 @@ Util::Navbar();
                     <li class="list-group-item d-flex justify-content-between lh-sm">
                         <div>
                             <h6 class="my-0"><?= $v["name"]; ?></h6>
-                            <small class="text-muted"><?= $v["desc"]; ?></small>
                         </div>
                         <span class="text-muted"><?= ($v["price"]*$v["quantity"])." DKK"; ?></span>
                     </li>
